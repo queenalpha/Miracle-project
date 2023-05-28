@@ -1,3 +1,35 @@
+<?php
+
+include 'connection.php';
+session_start();
+if (isset($_SESSION['logged_in'])) {
+    $email_akun = $_SESSION['email_akun'];
+    $query = "SELECT * FROM akun WHERE email_akun = '$email_akun'";
+    $result = mysqli_query($conn, $query);
+}
+
+
+if (!isset($_SESSION['logged_in'])) {
+    header('location: login.php');
+    exit;
+}
+
+
+if (isset($_GET['logout'])) {
+    if (isset($_SESSION['logged_in'])) {
+        unset($_SESSION['logged_in']);
+        unset($_SESSION['email_akun']);
+        header('location: login.php');
+        exit;
+    } else {
+        echo "Session logged_in tidak ditemukan.";
+    }
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +72,7 @@
           </li>
         </ul>
       </div>
-      <a href="login.html">
+      <a href="login.php">
         <button type="button" class="btn btn-yellow  rounded-1 me-5">Masuk</button>
       </a>
       
