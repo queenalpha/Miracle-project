@@ -1,3 +1,20 @@
+<?php
+include('server/connection.php');
+
+if (isset($_POST['btn_register'])) {
+    $nama = $_POST['nama_akun'];
+    $email = $_POST['email_akun'];
+    $pass = $_POST['pass_akun'];
+    $telp = $_POST['Telephone'];
+
+    $query = "INSERT INTO akun (nama_akun, email_akun, pass_akun, Telephone)values ('','$nama','$email','$pass','$telp','')";
+    mysqli_query($conn, $query);
+
+    header("Location:Register.php");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,21 +36,21 @@
         <div class="form-content">
             <div class="form-text register">
             <h3>Register to Miracle</h3>
-            <form methode="post" action="actionRegister.php" class="form-login">
+            <form methode="POST" action="Register.php" class="form-login">
                 <div>
-                    <input type="text" name="" value="" placeholder="Masukan Nama">
+                    <input type="username" name="nama_akun" value="" placeholder="Masukan Nama">
                 </div>
                 <div>
-                    <input type="email" name="" value="" placeholder="Masukan Email">
+                    <input type="email" name="email_akun" value="" placeholder="Masukan Email">
                 </div>
                 <div>
-                    <input type="password" name="" value="" placeholder="Masukan Password">
+                    <input type="password" name="pass_akun" value="" placeholder="Masukan Password">
                 </div>
                 <div>
-                    <input type="text" name="" value="" placeholder="Masukan Telephone">
+                    <input type="tel" name="Telephone" value="" placeholder="Masukan Telephone">
                 </div>
                 <div>
-                    <input type="submit" value="Login">
+                    <input type="submit" name="btn_register" value="Register">
                 </div>
                 Sudah punyak akun? <a href="login.php" class=""> Login</a>
             </form>

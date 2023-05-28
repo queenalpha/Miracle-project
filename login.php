@@ -1,45 +1,45 @@
 <?php 
-    session_start();
-    include('server/connection.php');
+    // session_start();
+    // include('server/connection.php');
 
-    if(isset($_SESSION['logged_in'])){
-        header('location: index.php');
-        exit;
-    }
+    // if(isset($_SESSION['logged_in'])){
+    //     header('location: profilePage .php');
+    //     exit;
+    // }
 
-    if(isset($_POST['login_btn'])){
-        $email_akun = $_POST['email_akun'];
-        $pass_akun = ($_POST['pass_akun']);
+    // if(isset($_POST['login_btn'])){
+    //     $email_akun = $_POST['email_akun'];
+    //     $pass_akun = ($_POST['pass_akun']);
 
-        $query = "SELECT id_akun, nama_akun, email_akun, pass_akun, pict_akun FROM akun 
-        WHERE email_akun = ? AND pass_akun = ? LIMIT 1";
+    //     $query = "SELECT id_akun, nama_akun, email_akun, pass_akun, pict_akun FROM akun 
+    //     WHERE email_akun = ? AND pass_akun = ? LIMIT 1";
 
-        $stmt_login = $conn->prepare($query);
-        $stmt_login->bind_param('ss', $email_akun, $pass_akun);
+    //     $stmt_login = $conn->prepare($query);
+    //     $stmt_login->bind_param('ss', $email_akun, $pass_akun);
 
-        if($stmt_login->execute()){
-            $stmt_login->bind_result($id_akun, $nama_akun, $email_akun, $pass_akun,
-            $pict_akun);
-            $stmt_login->store_result();
+    //     if($stmt_login->execute()){
+    //         $stmt_login->bind_result($id_akun, $nama_akun, $email_akun, $pass_akun,
+    //         $pict_akun);
+    //         $stmt_login->store_result();
 
-            if($stmt_login->num_rows() == 1){
-                $stmt_login->fetch();
+    //         if($stmt_login->num_rows() == 1){
+    //             $stmt_login->fetch();
 
-                $_SESSION['id_akun'] = $id_akun;
-                $_SESSION['nama_akun'] = $nama_akun;
-                $_SESSION['email_akun'] = $email_akun;
-                $_SESSION['pict_akun'] = $pict_akun;
-                $_SESSION['logged_in'] = true;
+    //             $_SESSION['id_akun'] = $id_akun;
+    //             $_SESSION['nama_akun'] = $nama_akun;
+    //             $_SESSION['email_akun'] = $email_akun;
+    //             $_SESSION['pict_akun'] = $pict_akun;
+    //             $_SESSION['logged_in'] = true;
 
-                header('location: index.php?messege=Logged in successfully');
-            } else {
-                header('location: login.php?error=Could no verify your account');
-            }
-        } else{
-            //error
-            header('location: login.php?error=Something went wrong!');
-        }
-    }
+    //             header('location: profilePage.php?messege=Logged in successfully');
+    //         } else {
+    //             header('location: login.php?error=Could no verify your account');
+    //         }
+    //     } else{
+    //         //error
+    //         header('location: login.php?error=Something went wrong!');
+    //     }
+    // }
 ?>
 
 
@@ -78,7 +78,7 @@
                     <input type="password" name="pass_akun" placeholder="Masukan password">
                 </div>
                 <div>
-                    <input type="submit" value="Login">
+                    <input type="submit" name="login_btn" value="Login">
                 </div>
                 Belum punya akun? <a href="Register.php" class=""> Register</a>
             </form>
