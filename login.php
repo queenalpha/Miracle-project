@@ -2,33 +2,34 @@
     session_start();
     include('server/connection.php');
 
-    if(isset($_SESSION['logged_in'])){
+    if(!isset($_SESSION['logged_in'])){
         header('location: index.php');
         exit;
     }
 
     if(isset($_POST['login_btn'])){
         $email_akun = $_POST['email_akun'];
-        $pass_akun = ($_POST['pass_akun']);
+        $pass_akun = $_POST['pass_akun'];
 
-        $query = "SELECT id_akun, nama_akun, email_akun, pass_akun, pict_akun FROM akun 
+        $query = "SELECT * FROM akun 
         WHERE email_akun = ? AND pass_akun = ? LIMIT 1";
 
         $stmt_login = $conn->prepare($query);
         $stmt_login->bind_param('ss', $email_akun, $pass_akun);
 
         if($stmt_login->execute()){
-            $stmt_login->bind_result($id_akun, $nama_akun, $email_akun, $pass_akun,
-            $pict_akun);
+            $stmt_login->bind_result($ID_akun, $nama_akun, $email_akun, $pass_akun,
+            $pict_akun, $telepon);
             $stmt_login->store_result();
 
             if($stmt_login->num_rows() == 1){
                 $stmt_login->fetch();
 
-                $_SESSION['id_akun'] = $id_akun;
+                $_SESSION['ID_akun'] = $ID_akun;
                 $_SESSION['nama_akun'] = $nama_akun;
                 $_SESSION['email_akun'] = $email_akun;
                 $_SESSION['pict_akun'] = $pict_akun;
+                $_SESSION['telepon'] = $telepon;
                 $_SESSION['logged_in'] = true;
 
                 header('location: index.php?messege=Logged in successfully');
@@ -64,7 +65,7 @@
         <div class="form-content">
             <div class="form-text">
             <h3>Login to Miracle</h3>
-            <form methode="post" action="login.php" id="form-login">
+            <form method="POST" action="login.php" id="form-login">
                 <div class="alert" role="alert">
                     <?php if (isset($_GET['error'])) {
                         echo $_GET['error'];
@@ -72,13 +73,13 @@
                     ?>
                 </div>
                 <div>
-                    <input type="email" name="email_akun" placeholder="Masukan email">
+                    <input type="text" name="email_akun" placeholder="Masukan email">
                 </div>
                 <div>
                     <input type="password" name="pass_akun" placeholder="Masukan password">
                 </div>
                 <div>
-                    <input type="submit" value="Login">
+                    <input type="submit" name="login_btn" value="Login">
                 </div>
                 Belum punya akun? <a href="Register.php" class=""> Register</a>
             </form>
