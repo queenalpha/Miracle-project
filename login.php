@@ -1,46 +1,57 @@
 <?php 
-    // session_start();
-    // include('server/connection.php');
+    session_start();
+    include('server/connection.php');
 
     // if(isset($_SESSION['logged_in'])){
-    //     header('location: profilePage .php');
-    //     exit;
-    // }
-
-    // if(isset($_POST['login_btn'])){
-    //     $email_akun = $_POST['email_akun'];
-    //     $pass_akun = ($_POST['pass_akun']);
-
-    //     $query = "SELECT id_akun, nama_akun, email_akun, pass_akun, pict_akun FROM akun 
-    //     WHERE email_akun = ? AND pass_akun = ? LIMIT 1";
-
-    //     $stmt_login = $conn->prepare($query);
-    //     $stmt_login->bind_param('ss', $email_akun, $pass_akun);
-
-    //     if($stmt_login->execute()){
-    //         $stmt_login->bind_result($id_akun, $nama_akun, $email_akun, $pass_akun,
-    //         $pict_akun);
-    //         $stmt_login->store_result();
-
-    //         if($stmt_login->num_rows() == 1){
-    //             $stmt_login->fetch();
-
-    //             $_SESSION['id_akun'] = $id_akun;
-    //             $_SESSION['nama_akun'] = $nama_akun;
-    //             $_SESSION['email_akun'] = $email_akun;
-    //             $_SESSION['pict_akun'] = $pict_akun;
-    //             $_SESSION['logged_in'] = true;
-
-    //             header('location: profilePage.php?messege=Logged in successfully');
-    //         } else {
-    //             header('location: login.php?error=Could no verify your account');
-    //         }
-    //     } else{
-    //         //error
-    //         header('location: login.php?error=Something went wrong!');
+    //     if($_SESSION['status'] == 'admin'){
+    //         header('location: managemen.php');
+    //         exit;
+    //     } else if ($_SESSION['status'] == 'user'){
+    //         header('location: profilePage.php');
     //     }
     // }
+
+    if(isset($_POST['login_btn'])){
+        $email_akun = $_POST['email_akun'];
+        $pass_akun = $_POST['pass_akun'];
+
+        $query = "SELECT * FROM akun 
+        WHERE email_akun = ? AND pass_akun = ? LIMIT 1";
+
+        $stmt_login = $conn->prepare($query);
+        $stmt_login->bind_param('ss', $email_akun, $pass_akun);
+
+        if($stmt_login->execute()){
+            $stmt_login->bind_result($ID_akun, $nama_akun, $email_akun, $pass_akun,
+            $pict_akun, $telepon);
+            $stmt_login->store_result();
+
+            if($stmt_login->num_rows() == 1){
+                $stmt_login->fetch();
+
+                $_SESSION['ID_akun'] = $ID_akun;
+                $_SESSION['nama_akun'] = $nama_akun;
+                $_SESSION['email_akun'] = $email_akun;
+                $_SESSION['pict_akun'] = $pict_akun;
+                $_SESSION['telephone'] = $telepon;
+                $_SESSION['logged_in'] = true;
+
+                // if($_SESSION['status'] == 'admin'){
+                //     $_SESSION['link'] == 'managemen';
+                // } else if($_SESSION['status'] == 'user'){
+                //     $_SESSION['link'] = 'profilePage';
+                // }
+                header("location: profilePage.php?message=Login berhasil sebagai");
+            } else {
+                header('location: login.php?error=Could no verify your account');
+            }
+        } else{
+            //error
+            header('location: login.php?error=Something went wrong!');
+        }
+    }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -64,7 +75,7 @@
         <div class="form-content">
             <div class="form-text">
             <h3>Login to Miracle</h3>
-            <form methode="post" action="login.php" id="form-login">
+            <form method="post" action="login.php" id="form-login">
                 <div class="alert" role="alert">
                     <?php if (isset($_GET['error'])) {
                         echo $_GET['error'];

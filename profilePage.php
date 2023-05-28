@@ -1,10 +1,38 @@
 <?php
-
 include 'server/connection.php';
+session_start();
 
-$kolom = 3;
 $from_campaign = "SELECT * FROM campaign";
 $result_camp = mysqli_query($conn, $from_campaign);
+
+//nampilin card donasi//
+if (isset($_SESSION['logged_in'])) {
+    $email_akun = $_SESSION['email_akun'];
+    $query = "SELECT * FROM akun WHERE email_akun = '$email_akun'";
+    $result = mysqli_query($conn, $query);
+}
+//
+
+if (!isset($_SESSION['logged_in'])) {
+    header('location: index.php');
+    exit;
+}
+
+if (isset($_GET['logout'])) {
+    if (isset($_SESSION['logged_in'])) {
+        unset($_SESSION['logged_in']);
+        unset($_SESSION['email_akun']);
+        header('location: index.php');
+        exit;
+    } else {
+        echo "Session logged_in tidak ditemukan.";
+    }
+}
+
+// if ($_SESSION['user_status'] == 'Admin') {
+//   header('location: index.php');
+//   exit;
+// }
 
 
 ?>

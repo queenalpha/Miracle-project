@@ -1,17 +1,31 @@
 <?php
-include('server/connection.php');
+// session_start();
+include 'server/connection.php';
 
-if (isset($_POST['btn_register'])) {
-    $nama = $_POST['nama_akun'];
-    $email = $_POST['email_akun'];
-    $pass = $_POST['pass_akun'];
-    $telp = $_POST['Telephone'];
+// if (isset($_SESSION['logged_in'])) {
+//     if ($_SESSION['status'] == 'admin') {
+//         header('location: managemen.php');
+//         exit;
+//     } else if ($_SESSION['status'] == 'user') {
+//         header('location: profilePage.php');
+//         exit;
+//     }
+// }
 
-    $query = "INSERT INTO akun (nama_akun, email_akun, pass_akun, Telephone)values ('','$nama','$email','$pass','$telp','')";
+if(isset($_POST['btn_regist'])){
+    $nama_akun = $_POST['nama_akun'];
+    $email_akun = $_POST['email_akun'];
+    $pass_akun = $_POST['pass_akun'];
+    $telepon = $_POST['Telephone'];
+    
+    $query = "INSERT INTO akun (nama_akun, email_akun, pass_akun,Telephone)
+    values ('$nama_akun','$email_akun','$pass_akun','$telepon')";
     mysqli_query($conn, $query);
 
-    header("Location:Register.php");
+    header("location:Register.php");
 }
+
+
 ?>
 
 
@@ -36,7 +50,7 @@ if (isset($_POST['btn_register'])) {
         <div class="form-content">
             <div class="form-text register">
             <h3>Register to Miracle</h3>
-            <form methode="POST" action="Register.php" class="form-login">
+            <form method="POST" action="Register.php" class="form-login">
                 <div>
                     <input type="username" name="nama_akun" value="" placeholder="Masukan Nama">
                 </div>
@@ -50,7 +64,7 @@ if (isset($_POST['btn_register'])) {
                     <input type="tel" name="Telephone" value="" placeholder="Masukan Telephone">
                 </div>
                 <div>
-                    <input type="submit" name="btn_register" value="Register">
+                    <input type="submit" name="btn_regist" value="Register">
                 </div>
                 Sudah punyak akun? <a href="login.php" class=""> Login</a>
             </form>
