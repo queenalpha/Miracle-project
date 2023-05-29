@@ -1,59 +1,59 @@
-<!-- <?php
-
+<?php
+session_start();
 include 'server/connection.php';
 
-$kolom = 3;
-$from_campaign = "SELECT * FROM campaign";
+$from_campaign = "SELECT * FROM campaign ORDER BY ID_campaign desc LIMIT 3";
 $result_camp = mysqli_query($conn, $from_campaign);
 
-// session_start();
-// if (isset($_SESSION['logged_in'])) {
-//     $email_akun = $_SESSION['email_akun'];
-//     $query = "SELECT * FROM akun WHERE email_akun = '$email_akun'";
-//     $result = mysqli_query($conn, $query);
+
+if (isset($_SESSION['logged_in'])) {
+    $email_akun = $_SESSION['email_akun'];
+    $query = "SELECT * FROM akun WHERE email_akun = '$email_akun'";
+    $result = mysqli_query($conn, $query);
+}
+
+
+if (!isset($_SESSION['logged_in'])) {
+    header('location: login.php');
+    exit;   
+}
+
+if (isset($_GET['logout'])) {
+    if (isset($_SESSION['logged_in'])) {
+        unset($_SESSION['logged_in']);
+        unset($_SESSION['email_akun']);
+        header('location: landingPage.php');
+        exit;
+    } else {
+        echo "Session logged_in tidak ditemukan.";
+    }
+  session_destroy();
+  exit;
+}
+
+// if ($_SESSION['user_status'] == 'Admin') {
+//   header('location: index.php');
+//   exit;
 // }
 
 
-// if (!isset($_SESSION['logged_in'])) {
-//     header('location: login.php');
-//     exit;
-// }
-
-
-// if (isset($_GET['logout'])) {
-//     if (isset($_SESSION['logged_in'])) {
-//         unset($_SESSION['logged_in']);
-//         unset($_SESSION['email_akun']);
-//         header('location: login.php');
-//         exit;
-//     } else {
-//         echo "Session logged_in tidak ditemukan.";
-//     }
-// }
-
-
-?> -->
-
-
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="CSS/style.css">
-  <link rel="stylesheet" href="CSS/main.css">
-  <link rel="stylesheet" href="CSS/bootstrap-5.3.0-alpha3-dist/js/style.js">
-  <link rel="icon" type="image/png" href="Assets/icon/icon.png">
-  <title>Miracle - Menjadi orang baik</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <script src="CSS/bootstrap-5.3.0-alpha3-dis/dist/js/bootstrap.bundle.min.js"></script> 
+    <link rel="icon" type="image/png" href="Assets/icon/icon.png">
+    <title>Document</title>
 </head>
-
 <body>
- 
-  <!-- NavBar section -->
+    <!-- NavBar section -->
   <header>
     <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
       <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
@@ -70,25 +70,38 @@ $result_camp = mysqli_query($conn, $from_campaign);
             <a class="nav-link" href="#donasi ">Donation</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Team</a>
+            <a class="nav-link" href="#donasi ">Fundraising</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About us</a>
+            <a class="nav-link" href="#donasi ">your donation</a>
           </li>
         </ul>
       </div>
-      <a href="login.php">
-        <button type="button" class="btn btn-yellow  rounded-1 me-5">Masuk</button>
+      <ul class="navbar-nav me-5">
+      <li class="nav-but dropdown">
+      <a class="nav-link dropdown-toggle me-5" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+        <img src="Assets/image/Login form img.jpg" class="object-fit-cover rounded-4" width="30px" height="30px" alt="">
       </a>
-      
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="profilePage.html">Profile</a>
+            <a class="dropdown-item" href="#">Edit profile</a>
+            <a class="dropdown-item" href="#">Dasbord</a>
+            <a class="dropdown-item" href="index.php?logout=1" onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
+          </li>
+        </ul>
+      </li>
+        <li class="nav-but">
+            <a class="nav-link" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
+        </li>
+      </ul>
     </nav>
-    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
 
+    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
       </div>
- 
       <div class="carousel-inner">
         <div class="carousel-item active c-item">
           <img src="Assets/image/ds1.jpg" class="d-block w-100 c-img" alt="...">
@@ -119,7 +132,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
             <p>Be a miracle foreach others</p>
           </div>
         </div>
-
+    
         <div class="row align-items-center ms-4" id="donasi">
         <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
           <div class="col-12 col-md-12 col-lg-4 mb-5">
@@ -128,7 +141,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
               <div class="card-body">
                 <h5 class="card-tittle"><?php echo $row['nama_campaign']?></h5>
                 <p class="card-text"><?php echo $row['deskripsi']?></p>
-                <p class="card-text">Membutuhkan Rp.<?php echo $row['target']?></p>
+                <p class="card-text">Membutuhkan Rp<?php echo number_format($row['target']) ?></p>
                 <button class="btn-donasi">Donate</button>
               </div>
             </div>
@@ -184,7 +197,6 @@ $result_camp = mysqli_query($conn, $from_campaign);
 
   </main>
 
-
   <!-- footer -->
   <footer>
     <div class="footer-copy">
@@ -192,7 +204,6 @@ $result_camp = mysqli_query($conn, $from_campaign);
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script> 
   <script>
     var nav = document.querySelector('nav');
     window.addEventListener('scroll', function(){
@@ -203,6 +214,9 @@ $result_camp = mysqli_query($conn, $from_campaign);
     } 
     })
   </script>
-</body>
 
+  <script src="js/bootstrap.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

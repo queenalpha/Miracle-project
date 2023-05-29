@@ -10,6 +10,10 @@
     //         header('location: profilePage.php');
     //     }
     // }
+    if(isset($_SESSION['logged_in'])){
+        header('location: index.php');
+        exit;
+    }
 
     if(isset($_POST['login_btn'])){
         $email_akun = $_POST['email_akun'];
@@ -41,7 +45,7 @@
                 // } else if($_SESSION['status'] == 'user'){
                 //     $_SESSION['link'] = 'profilePage';
                 // }
-                header("location: profilePage.php?message=Login berhasil sebagai");
+                header("location: index.php");
             } else {
                 header('location: login.php?error=Could no verify your account');
             }
@@ -76,18 +80,16 @@
             <div class="form-text">
             <h3>Login to Miracle</h3>
             <form method="post" action="login.php" id="form-login">
-                <div class="alert" role="alert">
-                    <?php if (isset($_GET['error'])) {
-                        echo $_GET['error'];
-                        }
-                    ?>
-                </div>
                 <div>
                     <input type="email" name="email_akun" placeholder="Masukan email">
                 </div>
                 <div>
                     <input type="password" name="pass_akun" placeholder="Masukan password">
                 </div>
+                    <?php if (isset($_GET['error'])) {
+                        echo $_GET['error'];
+                        }
+                    ?>
                 <div>
                     <input type="submit" name="login_btn" value="Login">
                 </div>

@@ -45,6 +45,9 @@
     padding: 50px;
 }
 
+img .profile-img{
+   border-radius: 100%;
+}
 .intro{
     margin-left: -80px;
 }

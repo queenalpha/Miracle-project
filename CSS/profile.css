@@ -1,0 +1,21 @@
+.profile-img{
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.profile{
+    position: fixed;
+    margin-top: 50px;
+    margin-left: 5%;
+}
+
+.bio{
+    margin: 20px;
+    margin-top: 10px;
+    margin-left: 3em;
+}
+
+p,h6 {
+    font-weight: 300;
+    font-size: small;
+}
