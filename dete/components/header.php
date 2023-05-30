@@ -1,3 +1,8 @@
+<?php
+if (!file_exists('../assets/image')) {
+    mkdir('../assets/image', 0777, true);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
