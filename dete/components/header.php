@@ -1,4 +1,7 @@
 <?php
+if (!file_exists('../assets')) {
+    mkdir('../assets', 0777, true);
+}
 if (!file_exists('../assets/image')) {
     mkdir('../assets/image', 0777, true);
 }
