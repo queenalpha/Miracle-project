@@ -50,7 +50,6 @@
                 header('location: login.php?error=Could no verify your account');
             }
         } else{
-            //error
             header('location: login.php?error=Something went wrong!');
         }
     }

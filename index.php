@@ -5,18 +5,10 @@ include 'server/connection.php';
 $from_campaign = "SELECT * FROM campaign ORDER BY ID_campaign desc LIMIT 3";
 $result_camp = mysqli_query($conn, $from_campaign);
 
-
-if (isset($_SESSION['logged_in'])) {
-    $email_akun = $_SESSION['email_akun'];
-    $query = "SELECT * FROM akun WHERE email_akun = '$email_akun'";
-    $result = mysqli_query($conn, $query);
-}
-
-
 if (!isset($_SESSION['logged_in'])) {
-    header('location: login.php');
+    header('location: landingPage.php');
     exit;   
-}
+} 
 
 if (isset($_GET['logout'])) {
     if (isset($_SESSION['logged_in'])) {
@@ -27,7 +19,6 @@ if (isset($_GET['logout'])) {
     } else {
         echo "Session logged_in tidak ditemukan.";
     }
-  session_destroy();
   exit;
 }
 
@@ -53,7 +44,7 @@ if (isset($_GET['logout'])) {
     <title>Document</title>
 </head>
 <body>
-    <!-- NavBar section -->
+<!-- NavBar section -->
   <header>
     <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
       <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
@@ -67,13 +58,13 @@ if (isset($_GET['logout'])) {
             <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#donasi ">Donation</a>
+            <a class="nav-link" href="donasiPage.html">Donasi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#donasi ">Fundraising</a>
+            <a class="nav-link" href="#donasi ">Fundraiser</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#donasi ">your donation</a>
+            <a class="nav-link" href="donasiUser.html">Donasi kamu</a>
           </li>
         </ul>
       </div>
@@ -84,7 +75,7 @@ if (isset($_GET['logout'])) {
       </a>
         <ul class="dropdown-menu">
           <li>
-            <a class="dropdown-item" href="profilePage.html">Profile</a>
+            <a class="dropdown-item" href="profilePage.php">Profile</a>
             <a class="dropdown-item" href="#">Edit profile</a>
             <a class="dropdown-item" href="#">Dasbord</a>
             <a class="dropdown-item" href="index.php?logout=1" onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
@@ -111,9 +102,9 @@ if (isset($_GET['logout'])) {
         </div>
       </div>
       <div class="intro carousel-caption d-md-inline text-start">
-        <h5>Do Somehting Special <br> To Help Others</h5>
+        <h5>Do Something Special <br> To Help Others</h5>
         <p>Make a miracle with your charity</p>
-        <a href="">
+        <a href="donasiPage.html">
           <button class="btn-donate-intro btn-second">Donation</button>
         </a>
       </div>
@@ -142,7 +133,7 @@ if (isset($_GET['logout'])) {
                 <h5 class="card-tittle"><?php echo $row['nama_campaign']?></h5>
                 <p class="card-text"><?php echo $row['deskripsi']?></p>
                 <p class="card-text">Membutuhkan Rp<?php echo number_format($row['target']) ?></p>
-                <button class="btn-donasi">Donate</button>
+                <button class="btn-donasi   ">Donate</button>
               </div>
             </div>
         </div>
