@@ -27,7 +27,7 @@ if (isset($_GET['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="CSS/profilePages.css">
+    <link rel="stylesheet" href="CSS/user.css">
     <link rel="stylesheet" href="CSS/main.css">
     <script src="CSS/bootstrap-5.3.0-alpha3-dis/dist/js/bootstrap.bundle.min.js"></script> 
     <link rel="icon" type="image/png" href="Assets/icon/icon.png">
@@ -45,10 +45,10 @@ if (isset($_GET['logout'])) {
                     <a href="">Profile</a>
                 </li>
                 <li>
-                    <a href="donasiUser.html">Riwayat Donasi</a>
+                    <a href="riwayatDonasi.php">Riwayat Donasi</a>
                 </li>
                 <li>
-                    <a href="">Program  Campaign</a>
+                    <a href="campaign.php">Program  Campaign</a>
                 </li>
             </ul>
 

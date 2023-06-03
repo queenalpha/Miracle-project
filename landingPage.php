@@ -70,7 +70,7 @@ if(isset($_SESSION['logged_in'])){
             <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#donasi ">Donation</a>
+            <a class="nav-link" href="#donasi">Donation</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Team</a>
@@ -103,7 +103,7 @@ if(isset($_SESSION['logged_in'])){
       <div class="intro carousel-caption d-md-inline text-start">
         <h5>Do Somehting Special <br> To Help Others</h5>
         <p>Make a miracle with your charity</p>
-        <a href="">
+        <a href="donasiPage.php">
           <button class="btn-donate-intro btn-second">Donation</button>
         </a>
       </div>
@@ -160,10 +160,10 @@ if(isset($_SESSION['logged_in'])){
       <p>
         Create a miracle for someone who still wants to keep fighting
       </p>
-      <a href="" type="button" class="btn btn-outline-light">
+      <a href="donasiPage.php" type="button" class="btn btn-outline-light">
         Donation
       </a>
-      <a href="" type="button" class="btn btn-outline-light">
+      <a href="campaign.php" type="button" class="btn btn-outline-light">
         Buat Campaign
       </a>
     </div>

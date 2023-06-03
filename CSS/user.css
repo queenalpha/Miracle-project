@@ -87,3 +87,16 @@ li{
     margin-left: 15%;
     margin-top: 10em;
 }
+
+/* Campaign user */
+
+.btn-campaign{
+    display: flex;
+    margin-top: -10%;
+    margin-left: 18em;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #e6b573;
+}

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="CSS/donasiPage.css">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/main.css">
-    <script src="CSS/bootstrap-5.3.0-alpha3-dis/dist/js/bootstrap.bundle.min.js"></script> 
+    <script src="../CSS/bootstrap-5.3.0-alpha3-dis/dist/js/bootstrap.bundle.min.js"></script> 
     <link rel="icon" type="image/png" href="Assets/icon/icon.png">
     <title>Document</title>
 </head>
@@ -27,13 +28,13 @@
                 <a class="nav-link" href="index.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#donasi ">Donasi</a>
+                <a class="nav-link" href="#donasi">Donasi</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#donasi ">Fundraiser</a>
+                <a class="nav-link" href="campaign.php">Fundraiser</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="donasiUser.html">Donasi kamu</a>
+                <a class="nav-link" href="riwayatDonasi.php">Riwayat Donasi</a>
               </li>
             </ul>
           </div>
@@ -68,8 +69,7 @@
           </div>
       
         
-        <div class="row align-items-center" id="donasi">
-            <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
+          <div class="row align-items-center" id="donasi">
               <div class="col-12 col-md-12 col-lg-4 mb-5">
                 <div class="card p-1 h-100">
                   <img src="Assets/image/cancer.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
@@ -77,10 +77,10 @@
                     <h5 class="card-tittle">Donasi untuk ariel</h5>
                     <p class="card-text">Ariel, gadis kecil 12 tahun sedang berjuang untuk kesembuhannya</p>
                     <p class="card-text">Membutuhkan Rp500,000</p>
-                    <button class="btn-donasi   ">Donate</button>
+                    <button class="btn-donasi">Donate</button>
                   </div>
                 </div>
-            </div>
+              </div>
               <div class="col-12 col-md-12 col-lg-4 mb-5">
                 <div class="card p-1 h-100">
                   <img src="Assets/image/cancer.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
@@ -88,10 +88,10 @@
                     <h5 class="card-tittle">Donasi untuk ariel</h5>
                     <p class="card-text">Ariel, gadis kecil 12 tahun sedang berjuang untuk kesembuhannya</p>
                     <p class="card-text">Membutuhkan Rp500,000</p>
-                    <button class="btn-donasi   ">Donate</button>
+                    <button class="btn-donasi">Donate</button>
                   </div>
                 </div>
-            </div>
+              </div>
               <div class="col-12 col-md-12 col-lg-4 mb-5">
                 <div class="card p-1 h-100">
                   <img src="Assets/image/cancer.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
@@ -99,35 +99,12 @@
                     <h5 class="card-tittle">Donasi untuk ariel</h5>
                     <p class="card-text">Ariel, gadis kecil 12 tahun sedang berjuang untuk kesembuhannya</p>
                     <p class="card-text">Membutuhkan Rp500,000</p>
-                    <button class="btn-donasi   ">Donate</button>
+                    <button class="btn-donasi">Donate</button>
                   </div>
                 </div>
-            </div>
-              <div class="col-12 col-md-12 col-lg-4 mb-5">
-                <div class="card p-1 h-100">
-                  <img src="Assets/image/cancer.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
-                  <div class="card-body">
-                    <h5 class="card-tittle">Donasi untuk ariel</h5>
-                    <p class="card-text">Ariel, gadis kecil 12 tahun sedang berjuang untuk kesembuhannya</p>
-                    <p class="card-text">Membutuhkan Rp500,000</p>
-                    <button class="btn-donasi   ">Donate</button>
-                  </div>
-                </div>
-            </div>
-              <div class="col-12 col-md-12 col-lg-4 mb-5">
-                <div class="card p-1 h-100">
-                  <img src="Assets/image/cancer.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
-                  <div class="card-body">
-                    <h5 class="card-tittle">Donasi untuk ariel</h5>
-                    <p class="card-text">Ariel, gadis kecil 12 tahun sedang berjuang untuk kesembuhannya</p>
-                    <p class="card-text">Membutuhkan Rp500,000</p>
-                    <button class="btn-donasi   ">Donate</button>
-                  </div>
-                </div>
-            </div>
-        </div>
+              </div>
+          </div>
     </div>
-     
     </section>
   
     <script src="js/bootstrap.js"></script>
