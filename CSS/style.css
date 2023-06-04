@@ -6,6 +6,7 @@
 .navbar {
     z-index: 10;
 }
+
 /* 
 .nav-scrolled{
     background-color: #fff;
@@ -26,6 +27,7 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+
 .open-donation{
     margin-top: 30px;
     margin-right: 40px;
@@ -44,6 +46,9 @@
     padding: 50px;
 }
 
+img .profile-img{
+   border-radius: 100%;
+}
 .intro{
     margin-left: -80px;
 }
@@ -143,10 +148,10 @@ section .heart{
     border-bottom: 2px solid black;
 }
 
-input[type=text],
+input[type=username],
 input[type=email],
 input[type=password],
-input[type=text],
+input[type=tel],
 input[type=submit]{
     width: 120%;
     padding: 10px;

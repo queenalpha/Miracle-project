@@ -1,33 +1,41 @@
-<?php
-
-include 'server/connection.php';
+<!-- <?php
 session_start();
-if (isset($_SESSION['logged_in'])) {
-    $email_akun = $_SESSION['email_akun'];
-    $query = "SELECT * FROM akun WHERE email_akun = '$email_akun'";
-    $result = mysqli_query($conn, $query);
+include 'server/connection.php';
+
+$from_campaign = "SELECT * FROM campaign ORDER BY ID_campaign desc LIMIT 3";
+$result_camp = mysqli_query($conn, $from_campaign);
+
+if(isset($_SESSION['logged_in'])){
+  header('location: index.php');
+  exit;
 }
+// session_start();
+// if (isset($_SESSION['logged_in'])) {
+//     $email_akun = $_SESSION['email_akun'];
+//     $query = "SELECT * FROM akun WHERE email_akun = '$email_akun'";
+//     $result = mysqli_query($conn, $query);
+// }
 
 
-if (!isset($_SESSION['logged_in'])) {
-    header('location: login.php');
-    exit;
-}
+// if (!isset($_SESSION['logged_in'])) {
+//     header('location: login.php');
+//     exit;
+// }
 
 
-if (isset($_GET['logout'])) {
-    if (isset($_SESSION['logged_in'])) {
-        unset($_SESSION['logged_in']);
-        unset($_SESSION['email_akun']);
-        header('location: login.php');
-        exit;
-    } else {
-        echo "Session logged_in tidak ditemukan.";
-    }
-}
+// if (isset($_GET['logout'])) {
+//     if (isset($_SESSION['logged_in'])) {
+//         unset($_SESSION['logged_in']);
+//         unset($_SESSION['email_akun']);
+//         header('location: login.php');
+//         exit;
+//     } else {
+//         echo "Session logged_in tidak ditemukan.";
+//     }
+// }
 
 
-?>
+?> -->
 
 
 <!DOCTYPE html>
@@ -62,7 +70,7 @@ if (isset($_GET['logout'])) {
             <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#donasi ">Donation</a>
+            <a class="nav-link" href="#donasi">Donation</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Team</a>
@@ -95,7 +103,7 @@ if (isset($_GET['logout'])) {
       <div class="intro carousel-caption d-md-inline text-start">
         <h5>Do Somehting Special <br> To Help Others</h5>
         <p>Make a miracle with your charity</p>
-        <a href="">
+        <a href="donasiPage.php">
           <button class="btn-donate-intro btn-second">Donation</button>
         </a>
       </div>
@@ -115,39 +123,22 @@ if (isset($_GET['logout'])) {
           </div>
         </div>
 
+             
         <div class="row align-items-center ms-4" id="donasi">
+        <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
           <div class="col-12 col-md-12 col-lg-4 mb-5">
-            <div class="card p-1">
-              <img src="Assets/image/ds1.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
+            <div class="card p-1 h-100">
+              <img src="Assets/image/<?php echo $row['foto']?>"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
               <div class="card-body">
-                <h4>Bantu anak berkebutuhan</h4>
-                <p>Keterangan</p>
+                <h5 class="card-tittle"><?php echo $row['nama_campaign']?></h5>
+                <p class="card-text"><?php echo $row['deskripsi']?></p>
+                <p class="card-text">Membutuhkan Rp.<?php echo number_format($row['target']) ?></p>
                 <button class="btn-donasi">Donate</button>
               </div>
             </div>
-          </div>
-          <div class="col-12 col-md-12 col-lg-4 mb-5">
-            <div class="card p-1">
-              <img src="Assets/image/ds1.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
-              <div class="card-body">
-                <h4>Bantu anak berkebutuhan</h4>
-                <p>Keterangan</p>
-                <button class="btn-donasi">Donate</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-12 col-lg-4 mb-5">
-            <div class="card p-1">
-              <img src="Assets/image/ds1.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
-              <div class="card-body">
-                <h4>Bantu anak berkebutuhan</h4>
-                <p>Keterangan</p>
-                <button class="btn-donasi">Donate</button>
-              </div>
-            </div>
-          </div>
         </div>
-        
+        <?php endwhile; ?>
+
       </div>  
     </section>
   
@@ -169,11 +160,11 @@ if (isset($_GET['logout'])) {
       <p>
         Create a miracle for someone who still wants to keep fighting
       </p>
-      <a href="">
-        <button class="btn-second-line">Donation</button>
+      <a href="donasiPage.php" type="button" class="btn btn-outline-light">
+        Donation
       </a>
-      <a href="">
-        <button class="btn-second-line">Fundraising</button>
+      <a href="login.php" type="button" class="btn btn-outline-light">
+        Buat Campaign
       </a>
     </div>
 

@@ -1,3 +1,34 @@
+<?php
+// session_start();
+include 'server/connection.php';
+
+// if (isset($_SESSION['logged_in'])) {
+//     if ($_SESSION['status'] == 'admin') {
+//         header('location: managemen.php');
+//         exit;
+//     } else if ($_SESSION['status'] == 'user') {
+//         header('location: profilePage.php');
+//         exit;
+//     }
+// }
+
+if(isset($_POST['btn_regist'])){
+    $nama_akun = $_POST['nama_akun'];
+    $email_akun = $_POST['email_akun'];
+    $pass_akun = $_POST['pass_akun'];
+    $telepon = $_POST['Telephone'];
+    
+    $query = "INSERT INTO akun (nama_akun, email_akun, pass_akun,Telephone)
+    values ('$nama_akun','$email_akun','$pass_akun','$telepon')";
+    mysqli_query($conn, $query);
+
+    header("location:Register.php");
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,21 +50,21 @@
         <div class="form-content">
             <div class="form-text register">
             <h3>Register to Miracle</h3>
-            <form method="POST" action="actionRegister.php" class="form-login">
+            <form methode="post" action="actionRegister.php" class="form-login">
                 <div>
-                    <input type="text" name="nama_akun"  placeholder="Masukan Nama">
+                    <input type="text" name="" value="" placeholder="Masukan Nama">
                 </div>
                 <div>
-                    <input type="text" name="email_akun" placeholder="Masukan Email">
+                    <input type="email" name="" value="" placeholder="Masukan Email">
                 </div>
                 <div>
-                    <input type="password" name="pass_akun" placeholder="Masukan Password">
+                    <input type="password" name="" value="" placeholder="Masukan Password">
                 </div>
                 <div>
-                    <input type="text" name="telepon" placeholder="Masukan Telephone">
+                    <input type="text" name="" value="" placeholder="Masukan Telephone">
                 </div>
                 <div>
-                    <input type="submit"  value="Login">
+                    <input type="submit" value="Login">
                 </div>
                 Sudah punyak akun? <a href="login.php" class=""> Login</a>
             </form>

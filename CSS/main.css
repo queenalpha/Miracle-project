@@ -43,15 +43,6 @@ body{
     border-radius: 5px;
 }
 
-.btn-second-line{
-    background: none;
-    width: 10%;
-    border: 1px solid #fff;
-    color: #ffff;
-    padding: 5px;
-    border-radius: 5px;
-}
-
 .btn-donasi{
     color: #fff;
     background-color: #E5BA73;
