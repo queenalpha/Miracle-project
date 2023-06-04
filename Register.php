@@ -50,21 +50,21 @@ if(isset($_POST['btn_regist'])){
         <div class="form-content">
             <div class="form-text register">
             <h3>Register to Miracle</h3>
-            <form method="POST" action="Register.php" class="form-login">
+            <form method="POST" action="actionRegister.php" class="form-login">
                 <div>
-                    <input type="username" name="nama_akun" value="" placeholder="Masukan Nama">
+                    <input type="text" name="nama_akun"  placeholder="Masukan Nama">
                 </div>
                 <div>
-                    <input type="email" name="email_akun" value="" placeholder="Masukan Email">
+                    <input type="text" name="email_akun" placeholder="Masukan Email">
                 </div>
                 <div>
-                    <input type="password" name="pass_akun" value="" placeholder="Masukan Password">
+                    <input type="password" name="pass_akun" placeholder="Masukan Password">
                 </div>
                 <div>
-                    <input type="tel" name="Telephone" value="" placeholder="Masukan Telephone">
+                    <input type="text" name="telepon" placeholder="Masukan Telephone">
                 </div>
                 <div>
-                    <input type="submit" name="btn_regist" value="Register">
+                    <input type="submit"  value="Login">
                 </div>
                 Sudah punyak akun? <a href="login.php" class=""> Login</a>
             </form>
