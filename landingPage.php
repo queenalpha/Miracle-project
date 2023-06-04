@@ -163,7 +163,7 @@ if(isset($_SESSION['logged_in'])){
       <a href="donasiPage.php" type="button" class="btn btn-outline-light">
         Donation
       </a>
-      <a href="campaign.php" type="button" class="btn btn-outline-light">
+      <a href="login.php" type="button" class="btn btn-outline-light">
         Buat Campaign
       </a>
     </div>

@@ -61,7 +61,7 @@ if (isset($_GET['logout'])) {
             <a class="nav-link" href="donasiPage.php">Donasi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#donasi ">Fundraiser</a>
+            <a class="nav-link" href="campaign.php">Campaign</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="riwayatDonasi.php">Riwayat Donasi</a>
@@ -77,7 +77,7 @@ if (isset($_GET['logout'])) {
           <li>
             <a class="dropdown-item" href="profilePage.php">Profile</a>
             <a class="dropdown-item" href="riwayatDonasi.php">Riwayat Donasi</a>
-            <a class="dropdown-item" href="campaign.php">Daftar Campaign</a>
+            <a class="dropdown-item" href="campaign.php">Buat Campaign</a>
             <a class="dropdown-item" href="index.php?logout=1" onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
           </li>
         </ul>
@@ -172,44 +172,6 @@ if (isset($_GET['logout'])) {
                       </div>
                     </div>
                   </div>
-                  <!-- End modal -->
-
-                  <!-- Modal Donate Data Donatur -->
-                  <!-- <div class="modal fade" id="transaksi " tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Ayo berdonasi</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form method="POST" enctype="multipart/form-data" action="#">
-                            <div class="form-group row">
-                              <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama</label>
-                              <div class="col-sm-20">
-                                <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="judul"
-                                  placeholder="Masukan nama">
-                              </div>
-                              <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Email</label>
-                              <div class="col-sm-20">
-                                <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="harga"
-                                  placeholder="Masukan Email">
-                              </div>
-                              <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Telphone</label>
-                              <div class="col-sm-20 mb-2">
-                                <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="harga"
-                                    placeholder="Masukan Telephone">
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <input type="submit" class="btn-donasi mt-3" id="transaksi" value="Save">
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-                  <!-- End modal -->
               </div>
             </div>
           </div>

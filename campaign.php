@@ -1,3 +1,27 @@
+<?php
+include('server/connection.php');
+
+if(isset($_POST['btn_campaign'])){
+    $nama_campaign = $_POST['nama_campaign'];
+    $keterangan = $_POST['deskripspi'];
+    $target_donasi = $_POST['target'];
+    $foto_campaign = $_POST['foto']['name'];
+
+    $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$target_donasi','$foto_campaign')";
+    mysqli_query($conn, $buat_campaign);
+
+    if (mysqli_query($conn, $q)) {
+        $success = true;
+    } else {
+        $success = false;
+    }
+
+    header('location: campaign.php');
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,6 +71,22 @@
         </div>
     </div>
 
+    <!-- alert -->
+    <?php
+  if (isset($_GET["created"]) && $_GET["created"] == true) {
+    ?>
+    <div id="alert" class="alert alert-success alert-dismissible fade show mt-3 " role="alert">
+      Yeay! portofolio kamu berhasil ditambahkan!
+      <a href="campaign.php" class="btn-close"></a>
+    </div>
+  <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
+      <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        Yah, Portofolio kamu gagal ditambahkan..
+        <a href="campaign.php" class="btn-close"></a>
+      </div>
+    <?php }
+    ?>
+
     <div class="container">
         <div class="intro-judul">
             <h3>Daftar Campaign</h3>
@@ -89,8 +129,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="submit" class="btn-donasi mt-3" data-bs-toggle="modal"
-                                        data-bs-target="#transaksi" value="Save">
+                                    <input type="submit" class="btn-donasi mt-3" name="btn-campaign" value="buat campaign">
                                 </div>
                             </form>
                         </div>
