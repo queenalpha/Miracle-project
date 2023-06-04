@@ -1,23 +1,24 @@
 <?php
-// include('server/connection.php');
+include('server/connection.php');
 
-// if(isset($_POST['btn_campaign'])){
-//     $nama_campaign = $_POST['nama_campaign'];
-//     $keterangan = $_POST['deskripspi'];
-//     $target_donasi = $_POST['target'];
-//     $foto_campaign = $_POST['foto']['name'];
 
-//     $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$target_donasi','$foto_campaign')";
-//     mysqli_query($conn, $buat_campaign);
+if(isset($_POST['btn-campaign'])){
+    $nama_campaign = $_POST['nama_campaign'];
+    $keterangan = $_POST['deskripsi'];
+    $target_donasi = $_POST['target'];
+    $path = "Assets/image" . basename($_FILES['foto']['name']);
+    $foto_campaign = $_POST['foto']['name'];
 
-//     if (mysqli_query($conn, $q)) {
-//         $success = true;
-//     } else {
-//         $success = false;
-//     }
+    $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$foto_campaign','$target_donasi')";
 
-//     header('location: campaign.php');
-// }
+    if (mysqli_query($conn, $buat_campaign)) {
+        $success = true;
+    } else {
+        $success = false;
+    }
+
+    header("location: campaign.php?created=$success");
+}
 
 ?>
 
@@ -70,16 +71,15 @@
             </div>
         </div>
     </div>
-
     <!-- alert -->
     <?php
-  if (isset($_GET["created"]) && $_GET["created"] == true) {
+     if (isset($_GET["created"]) && $_GET["created"] == true) {
     ?>
     <div id="alert" class="alert alert-success alert-dismissible fade show mt-3 " role="alert">
       Yeay! Campaign kamu berhasil dibuat!
       <a href="campaign.php" class="btn-close"></a>
     </div>
-  <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
+     <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
       <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
         Yah, Campaign kamu gagal ditambahkan..
         <a href="campaign.php" class="btn-close"></a>
@@ -103,7 +103,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" enctype="multipart/form-data" action="#">
+                            <form method="POST" enctype="multipart/form-data" action="campaign.php">
                                 <div class="form-group row">
                                     <label for="colFormLabelSm"
                                         class="col-sm-20 col-form-label col-form-label-sm">Nama Campaign</label>
