@@ -1,22 +1,29 @@
 <?php
 include('server/connection.php');
 
-if(isset($_POST['btn_campaign'])){
+
+$tampil_campaign = "SELECT * FROM campaign";
+$result_campaign = mysqli_query($conn, $tampil_campaign);
+
+if(isset($_POST['btn-campaign'])){
     $nama_campaign = $_POST['nama_campaign'];
-    $keterangan = $_POST['deskripspi'];
+    $keterangan = $_POST['deskripsi'];
     $target_donasi = $_POST['target'];
-    $foto_campaign = $_POST['foto']['name'];
 
-    $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$target_donasi','$foto_campaign')";
-    mysqli_query($conn, $buat_campaign);
+    $path = "Assets/image/" . basename($_FILES['foto']['name']);
+    $foto_campaign = $_FILES['foto']['name'];
 
-    if (mysqli_query($conn, $q)) {
+    move_uploaded_file($_FILES['foto']['tmp_name'], $path);
+
+    $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$foto_campaign','$target_donasi')";
+
+    if (mysqli_query($conn, $buat_campaign)) {
         $success = true;
     } else {
         $success = false;
     }
 
-    header('location: campaign.php');
+    header("location: campaign.php?created=$success");
 }
 
 ?>
@@ -70,23 +77,24 @@ if(isset($_POST['btn_campaign'])){
             </div>
         </div>
     </div>
-
     <!-- alert -->
     <?php
-  if (isset($_GET["created"]) && $_GET["created"] == true) {
+     if (isset($_GET["created"]) && $_GET["created"] == true) {
     ?>
     <div id="alert" class="alert alert-success alert-dismissible fade show mt-3 " role="alert">
-      Yeay! portofolio kamu berhasil ditambahkan!
+      Yeay! Campaign kamu berhasil dibuat!
       <a href="campaign.php" class="btn-close"></a>
     </div>
-  <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
+     <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
       <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-        Yah, Portofolio kamu gagal ditambahkan..
+        Yah, Campaign kamu gagal ditambahkan..
         <a href="campaign.php" class="btn-close"></a>
       </div>
     <?php }
     ?>
 
+
+    <!-- Bikin campaign disini -->
     <div class="container">
         <div class="intro-judul">
             <h3>Daftar Campaign</h3>
@@ -101,7 +109,7 @@ if(isset($_POST['btn_campaign'])){
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" enctype="multipart/form-data" action="#">
+                            <form method="POST" enctype="multipart/form-data" action="campaign.php">
                                 <div class="form-group row">
                                     <label for="colFormLabelSm"
                                         class="col-sm-20 col-form-label col-form-label-sm">Nama Campaign</label>
@@ -138,43 +146,27 @@ if(isset($_POST['btn_campaign'])){
             </div>
             <!-- End modal -->
         </div>
+        
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Campaign</th>
-                    <th scope="col">Tanggal</th>
                     <th scope="col">Target</th>
-                    <th scope="col">Terkumpul</th>
                     <th scope="col">Hapus Campaign</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Nama kegiatan</td>
-                    <td>11-12-2023</td>
-                    <td>Rp1,000,000</td>
-                    <td>Rp50,000</td>
+                <?php while ($row = mysqli_fetch_assoc($result_campaign)): ?>
+                    <th scope="row"><?php echo $row['ID_campaign']?></th>
+                    <td><?php echo $row['nama_campaign']?></td>
+                    <td><?php echo $row['target']?></td>
                     <td><button>Hapus</button></td>
                 </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Nama kegiatan</td>
-                    <td>11-12-2023</td>
-                    <td>Rp1,000,000</td>
-                    <td>Rp50,000</td>
-                    <td><button>Hapus</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Nama kegiatan</td>
-                    <td>11-12-2023</td>
-                    <td>Rp1,000,000</td>
-                    <td>Rp50,000</td>
-                    <td><button>Hapus</button></td>
-                </tr>
+                <?php endwhile;?>
             </tbody>
+
         </table>
     </div>
 

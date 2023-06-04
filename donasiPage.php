@@ -1,4 +1,11 @@
+<?php
+include 'server/connection.php';
 
+$from_campaign = "SELECT * FROM campaign ORDER BY ID_campaign desc";
+$result_camp = mysqli_query($conn, $from_campaign);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,51 +36,29 @@
 
 
     <div class="container">
-          <div class="row">
-            <div class="text-center my-4 mb-5">
-              <h2>Give Your Charity For Donation</h2>
-              <p>Be a miracle foreach others</p>
+      <div class="row">
+         <div class="text-center my-4 mb-5">
+            <h2>Give Your Charity For Donation</h2>
+            <p>Be a miracle foreach others</p>
+          </div>
+      </div>
+
+      <div class="row align-items-center" id="donasi">
+        <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
+          <div class="col-12 col-md-12 col-lg-4 mb-5">
+            <div class="card p-1 h-100">
+              <img src="Assets/image/<?php echo $row['foto']?>"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
+              <div class="card-body">
+                <h5 class="card-tittle"><?php echo $row['nama_campaign']?></h5>
+                <p class="card-text"><?php echo $row['deskripsi']?></p>
+                <p class="card-text">Membutuhkan Rp<?php echo number_format($row['target']) ?></p>
+                <button type="button" class="btn-donasi">Donate</button>
+              </div>
             </div>
           </div>
-      
-        
-          <div class="row align-items-center" id="donasi">
-              <div class="col-12 col-md-12 col-lg-4 mb-5">
-                <div class="card p-1 h-100">
-                  <img src="Assets/image/cancer.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
-                  <div class="card-body">
-                    <h5 class="card-tittle">Donasi untuk ariel</h5>
-                    <p class="card-text">Ariel, gadis kecil 12 tahun sedang berjuang untuk kesembuhannya</p>
-                    <p class="card-text">Membutuhkan Rp500,000</p>
-                    <button class="btn-donasi">Donate</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-12 col-lg-4 mb-5">
-                <div class="card p-1 h-100">
-                  <img src="Assets/image/cancer.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
-                  <div class="card-body">
-                    <h5 class="card-tittle">Donasi untuk ariel</h5>
-                    <p class="card-text">Ariel, gadis kecil 12 tahun sedang berjuang untuk kesembuhannya</p>
-                    <p class="card-text">Membutuhkan Rp500,000</p>
-                    <button class="btn-donasi">Donate</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-12 col-lg-4 mb-5">
-                <div class="card p-1 h-100">
-                  <img src="Assets/image/cancer.jpg"class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
-                  <div class="card-body">
-                    <h5 class="card-tittle">Donasi untuk ariel</h5>
-                    <p class="card-text">Ariel, gadis kecil 12 tahun sedang berjuang untuk kesembuhannya</p>
-                    <p class="card-text">Membutuhkan Rp500,000</p>
-                    <button class="btn-donasi">Donate</button>
-                  </div>
-                </div>
-              </div>
-          </div>
+          <?php endwhile; ?>
+      </div>
     </div>
-    </section>
   
     <script src="js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
