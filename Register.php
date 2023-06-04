@@ -50,7 +50,7 @@ if(isset($_POST['btn_regist'])){
         <div class="form-content">
             <div class="form-text register">
             <h3>Register to Miracle</h3>
-            <form methode="post" action="actionRegister.php" class="form-login">
+            <form method="POST" action="actionRegister.php" class="form-login">
                 <div>
                     <input type="text" name="" value="" placeholder="Masukan Nama">
                 </div>
@@ -64,7 +64,7 @@ if(isset($_POST['btn_regist'])){
                     <input type="text" name="" value="" placeholder="Masukan Telephone">
                 </div>
                 <div>
-                    <input type="submit" value="Login">
+                    <input type="submit"  value="Login">
                 </div>
                 Sudah punyak akun? <a href="login.php" class=""> Login</a>
             </form>

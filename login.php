@@ -2,15 +2,7 @@
     session_start();
     include('server/connection.php');
 
-    // if(isset($_SESSION['logged_in'])){
-    //     if($_SESSION['status'] == 'admin'){
-    //         header('location: managemen.php');
-    //         exit;
-    //     } else if ($_SESSION['status'] == 'user'){
-    //         header('location: profilePage.php');
-    //     }
-    // }
-    if(isset($_SESSION['logged_in'])){
+    if(!isset($_SESSION['logged_in'])){
         header('location: index.php');
         exit;
     }
@@ -37,7 +29,7 @@
                 $_SESSION['nama_akun'] = $nama_akun;
                 $_SESSION['email_akun'] = $email_akun;
                 $_SESSION['pict_akun'] = $pict_akun;
-                $_SESSION['telephone'] = $telepon;
+                $_SESSION['telepon'] = $telepon;
                 $_SESSION['logged_in'] = true;
 
                 // if($_SESSION['status'] == 'admin'){
@@ -78,7 +70,13 @@
         <div class="form-content">
             <div class="form-text">
             <h3>Login to Miracle</h3>
-            <form method="post" action="login.php" id="form-login">
+            <form method="POST" action="login.php" id="form-login">
+                <div class="alert" role="alert">
+                    <?php if (isset($_GET['error'])) {
+                        echo $_GET['error'];
+                        }
+                    ?>
+                </div>
                 <div>
                     <input type="text" name="email_akun" placeholder="Masukan email">
                 </div>
