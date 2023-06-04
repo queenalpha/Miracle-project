@@ -1,23 +1,23 @@
 <?php
-include('server/connection.php');
+// include('server/connection.php');
 
-if(isset($_POST['btn_campaign'])){
-    $nama_campaign = $_POST['nama_campaign'];
-    $keterangan = $_POST['deskripspi'];
-    $target_donasi = $_POST['target'];
-    $foto_campaign = $_POST['foto']['name'];
+// if(isset($_POST['btn_campaign'])){
+//     $nama_campaign = $_POST['nama_campaign'];
+//     $keterangan = $_POST['deskripspi'];
+//     $target_donasi = $_POST['target'];
+//     $foto_campaign = $_POST['foto']['name'];
 
-    $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$target_donasi','$foto_campaign')";
-    mysqli_query($conn, $buat_campaign);
+//     $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$target_donasi','$foto_campaign')";
+//     mysqli_query($conn, $buat_campaign);
 
-    if (mysqli_query($conn, $q)) {
-        $success = true;
-    } else {
-        $success = false;
-    }
+//     if (mysqli_query($conn, $q)) {
+//         $success = true;
+//     } else {
+//         $success = false;
+//     }
 
-    header('location: campaign.php');
-}
+//     header('location: campaign.php');
+// }
 
 ?>
 
@@ -76,17 +76,19 @@ if(isset($_POST['btn_campaign'])){
   if (isset($_GET["created"]) && $_GET["created"] == true) {
     ?>
     <div id="alert" class="alert alert-success alert-dismissible fade show mt-3 " role="alert">
-      Yeay! portofolio kamu berhasil ditambahkan!
+      Yeay! Campaign kamu berhasil dibuat!
       <a href="campaign.php" class="btn-close"></a>
     </div>
   <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
       <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-        Yah, Portofolio kamu gagal ditambahkan..
+        Yah, Campaign kamu gagal ditambahkan..
         <a href="campaign.php" class="btn-close"></a>
       </div>
     <?php }
     ?>
 
+
+    <!-- Bikin campaign disini -->
     <div class="container">
         <div class="intro-judul">
             <h3>Daftar Campaign</h3>
