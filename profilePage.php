@@ -20,9 +20,8 @@ if (isset($_GET['logout'])) {
 }
 
 if (isset($_POST['up'])) {
-    echo 'Hello';
-    die();
-    $ID_akun = $_GET['ID_akun'];
+
+    $ID_akun = $_POST['ID_akun'];
 
 $nama_akun = $_POST['nama_akun'];
 $email_akun = $_POST['email_akun'];
@@ -37,6 +36,7 @@ move_uploaded_file($_FILES['pict_akun']['name'], $path);
 $query = "UPDATE akun SET nama_akun = '$nama_akun', email_akun = '$email_akun', Telephone = '$Telephone', pict_akun = '$image' WHERE ID_akun = '$ID_akun'";
 $y_hasil = mysqli_query($conn, $query);
 }
+
 
 
 $x_akun = 'SELECT * FROM akun';
@@ -101,6 +101,7 @@ $row = mysqli_fetch_assoc($y_akun);
 
         <div class="container">
             <form method="post" action="" enctype="multipart/form-data">
+                <input type="hidden" name="ID_akun" value="<?php echo $row['ID_akun']; ?>">
                 <div class="form-row my-3 ">
                   <div class="col-4">
                     <label for="Email">Name</label>
@@ -117,10 +118,11 @@ $row = mysqli_fetch_assoc($y_akun);
                   <div class="form-photo col-4 ms-5">
                     <label for="Email">Photo</label>
                     <input type="file" name="pict_akun" class="form-control">
+                    <img src="<?php echo $row['pict_akun'];?>" alt="">
                   </div>
                 </div>
+                <input type="submit" value="Submit" name="up" class="edit-btn btn-second">
               </form>
-              <input type="submit" value="Save Edit" name="up" class="edit-btn btn-second">
         </div>
     </div>
 </body>
