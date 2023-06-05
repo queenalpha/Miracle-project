@@ -18,6 +18,30 @@ if (isset($_GET['logout'])) {
     }
   exit;
 }
+
+if (isset($_POST['up'])) {
+    echo 'Hello';
+    die();
+    $ID_akun = $_GET['ID_akun'];
+
+$nama_akun = $_POST['nama_akun'];
+$email_akun = $_POST['email_akun'];
+$Telephone = $_POST['Telephone'];
+$path = "../images/" . basename($_FILES['pict_akun']['name']);
+$image = $_FILES['pict_akun']['name'];
+
+// if (!empty($_FILES['skill_image']['name'])) {
+// }
+move_uploaded_file($_FILES['pict_akun']['name'], $path);
+
+$query = "UPDATE akun SET nama_akun = '$nama_akun', email_akun = '$email_akun', Telephone = '$Telephone', pict_akun = '$image' WHERE ID_akun = '$ID_akun'";
+$y_hasil = mysqli_query($conn, $query);
+}
+
+
+$x_akun = 'SELECT * FROM akun';
+$y_akun = mysqli_query($conn, $x_akun);
+$row = mysqli_fetch_assoc($y_akun);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,36 +91,36 @@ if (isset($_GET['logout'])) {
    
     <div class="container profile">
         <div class="profile-content d-flex">
-            <img src="Assets/image/profile/team-2.jpg" class="profile-img" width="120px" height="120px" alt="">
+        <?php echo "<img src='images/" . $row['pict_akun'] . "'>"; ?>
             <div class="bio">
-                <h4>Fahri aqila putra</h4>
-                <h6>0859321324</h6>
+            <input type="text" name="nama_akun" class="" value="<?php echo $row['nama_akun'] ?>" readonly>
+            <input type="text" name="Telephone" class="" value="<?php echo $row['Telephone'] ?>" readonly>
                 <p>#temanbaik #BeMiracle</p>
             </div>
         </div>
 
         <div class="container">
-            <form>
+            <form method="post" action="" enctype="multipart/form-data">
                 <div class="form-row my-3 ">
                   <div class="col-4">
                     <label for="Email">Name</label>
-                    <input type="username" class="form-control" placeholder="Name">
+                    <input type="username" name="nama_akun" class="form-control" placeholder="Name" value="<?php echo $row['nama_akun']; ?>">
                   </div>
                   <div class="form-email col-4 ms-5">
                     <label for="Email">Email</label>
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="email" name="email_akun" class="form-control" placeholder="Email" value="<?php echo $row['email_akun']; ?>">
                   </div>
                   <div class="form-tel col-4">
                     <label for="tel">Telephone</label>
-                    <input type="tel" class="form-control" placeholder="Telephone">
+                    <input type="tel" name="Telephone" class="form-control"  value="<?php echo $row['Telephone']; ?>">
                   </div>
                   <div class="form-photo col-4 ms-5">
                     <label for="Email">Photo</label>
-                    <input type="file" class="form-control" placeholder="Email">
+                    <input type="file" name="pict_akun" class="form-control">
                   </div>
                 </div>
               </form>
-              <button class="edit-btn btn-second">Edit Profile</button>
+              <input type="submit" value="Save Edit" name="up" class="edit-btn btn-second">
         </div>
     </div>
 </body>
