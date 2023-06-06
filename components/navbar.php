@@ -1,3 +1,4 @@
+
 <?php
 if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin') {
     ?>
@@ -29,8 +30,7 @@ if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin') {
                 <li class="nav-but dropdown">
                     <a class="nav-link dropdown-toggle me-5" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                         href="#">
-                        <img src="Assets/image/Login form img.jpg" class="object-fit-cover rounded-4" width="30px"
-                            height="30px" alt="">
+                        <img src="../assets/image/Login form img.jpg" class="object-fit-cover rounded-4 " width="30px" height="30px" alt="">
                     </a>
                     <ul class="dropdown-menu">
                         <li>

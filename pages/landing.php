@@ -1,10 +1,12 @@
-<?php $title = "Miracle - Landing Page"; ?>
+<?php $title = "Miracle - Tebar Kebaikan"; ?>
 <?php include('../server/connection.php');
 $from_campaign = "SELECT * FROM campaign ORDER BY campaign_id desc LIMIT 3";
 $result_camp = mysqli_query($conn, $from_campaign);
 
 ?>
+
 <?php include('../components/header.php'); ?>
+<?php include('../components/navbar.php'); ?>
 <main>
 
     <!-- Home donation -->
@@ -16,7 +18,6 @@ $result_camp = mysqli_query($conn, $from_campaign);
                     <p>Be a miracle foreach others</p>
                 </div>
             </div>
-
 
             <div class="row align-items-center ms-4" id="donasi">
                 <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
@@ -31,15 +32,63 @@ $result_camp = mysqli_query($conn, $from_campaign);
                                 <p class="card-text">
                                     <?php echo $row['deskripsi'] ?>
                                 </p>
-                                <p class="card-text">Membutuhkan Rp.
+                                <p class="card-text">Membutuhkan Rp
                                     <?php echo number_format($row['target']) ?>
                                 </p>
-                                <button class="btn-donasi">Donate</button>
+                                <button type="button" class="btn-donasi" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Donate
+                                </button>
+
+                                <!-- Modal Donate Data Donatur -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-center justify-content-center"
+                                                    id="exampleModalLabel">Ayo berdonasi
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" enctype="multipart/form-data" action="#">
+                                                    <div class="form-group row">
+                                                        <label for="colFormLabelSm"
+                                                            class="col-sm-20 col-form-label col-form-label-sm">Nama</label>
+                                                        <div class="col-sm-20">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                id="colFormLabelSm" name="judul" placeholder="Masukan nama">
+                                                        </div>
+                                                        <label for="colFormLabelSm"
+                                                            class="col-sm-20 col-form-label col-form-label-sm">Email</label>
+                                                        <div class="col-sm-20">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                id="colFormLabelSm" name="harga"
+                                                                placeholder="Masukan Email">
+                                                        </div>
+                                                        <label for="colFormLabelSm"
+                                                            class="col-sm-20 col-form-label col-form-label-sm">Telphone</label>
+                                                        <div class="col-sm-20 mb-2">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                id="colFormLabelSm" name="harga"
+                                                                placeholder="Masukan Telephone">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="submit" class="btn-donasi mt-3" data-bs-toggle="modal"
+                                                            data-bs-target="#transaksi" value="Save">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 <?php endwhile; ?>
-
             </div>
     </section>
 

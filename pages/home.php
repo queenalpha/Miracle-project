@@ -6,6 +6,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
 ?>
 <?php include('../components/header.php'); ?>
 <?php include('../components/navbar.php'); ?>
+
 <header>
   <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
     <a href="landingPage.php">
@@ -19,6 +20,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
 </header>
 
 
+<main>
 <div class="container">
   <div class="row">
     <div class="text-center my-4 mb-5">
@@ -50,7 +52,20 @@ $result_camp = mysqli_query($conn, $from_campaign);
     <?php endwhile; ?>
   </div>
 </div>
+</main>
+
 
 
 <?php include('../components/js.php'); ?>
+
+<script>
+    var nav = document.querySelector('nav');
+    window.addEventListener('scroll', function () {
+        if (window.pageYOffset > 100) {
+            nav.classList.add('bg-white', 'shadow');
+        } else {
+            nav.classList.remove('bg-white', 'shadow');
+        }
+    })
+</script>
 <?php include('../components/footer.php'); ?>

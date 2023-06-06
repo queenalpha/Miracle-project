@@ -18,7 +18,7 @@ if (isset($_POST['btn_regist'])) {
 <?php include('../components/header.php'); ?>
 
 <div class="container login-form m">
-    <img src="Assets/image/Login form img.jpg" class="form-img" alt="">
+    <img src="../assets/image/Login form img.jpg" class="form-img" alt="">
     <div class="form-content">
         <div class="form-text register">
             <h3>Register to Miracle</h3>

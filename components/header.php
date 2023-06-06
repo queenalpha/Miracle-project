@@ -20,6 +20,7 @@ if (!file_exists('../assets/image')) {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" href="../assets/icon/icon.png" type="image/icon type">
     <title>
         <?= $title; ?>
     </title>

@@ -1,4 +1,4 @@
-<?php $title = "Miracle - Landing Page"; ?>
+<?php $title = "Miracle - Selamat Datang"; ?>
 <?php include('../server/connection.php');
 
 if (isset($_POST['login_btn'])) {
@@ -42,7 +42,7 @@ if (isset($_POST['login_btn'])) {
 <?php include('../components/header.php'); ?>
 
 <div class="container login-form">
-    <img src="Assets/image/Login form img.jpg" class="form-img" alt="">
+    <img src="../assets/image/Login form img.jpg" class="form-img" alt="">
     <div class="form-content">
         <div class="form-text">
             <h3>Login to Miracle</h3>
@@ -67,4 +67,3 @@ if (isset($_POST['login_btn'])) {
 </div>
 
 <?php include('../components/js.php'); ?>
-<?php include('../components/footer.php'); ?>
