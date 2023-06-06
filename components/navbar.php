@@ -1,6 +1,7 @@
 <?php
 if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin') {
     ?>
+    <!-- Navbar Admin -->
     <header>
         <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
             <img src="../assets/icon/typograph.png" class="ms-5" width="100px" alt="">
@@ -73,6 +74,7 @@ if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin') {
     <?php
 } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'fundraiser') {
     ?>
+        <!-- Navbar Fundraiser  -->
         <header>
             <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
                 <img src="../assets/icon/typograph.png" class="ms-5" width="100px" alt="">
@@ -145,6 +147,7 @@ if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin') {
     <?php
 } else {
     ?>
+        <!-- Navbar Belum Login  -->
         <header>
             <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
                 <img src="../assets/icon/typograph.png" class="ms-5" width="100px" alt="">
