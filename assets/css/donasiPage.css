@@ -1,0 +1,13 @@
+.navbar {
+    background-color: #fff;
+    z-index: 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+}
+
+.container{
+    border-radius: 8px;
+    width: 90%;
+    height: 90%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+    margin-top: 10em;
+}
