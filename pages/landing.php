@@ -47,7 +47,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
     <section class="advertise">
         <div class="container">
             <video width="100%" class="video rounded-4" autoplay="true" loop="true">
-                <source src="../assets/" type="video/mp4">
+                <source src="../assets/videoAdvertise.mov" type="video/mp4">
             </video>
         </div>
     </section>
