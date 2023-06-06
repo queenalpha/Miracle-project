@@ -1,36 +1,11 @@
 <?php $title = "Miracle - Landing Page"; ?>
 <?php include('../server/connection.php');
-
+$from_campaign = "SELECT * FROM campaign ORDER BY campaign_id desc LIMIT 3";
+$result_camp = mysqli_query($conn, $from_campaign);
 ?>
 <?php include('../components/header.php'); ?>
-<!-- NavBar section -->
-<header>
 
-
-    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active c-item">
-                <img src="Assets/image/ds1.jpg" class="d-block w-100 c-img" alt="...">
-            </div>
-            <div class="carousel-item c-item">
-                <img src="Assets/image/pr1.jpg" class="d-block w-100 c-img" alt="...">
-            </div>
-        </div>
-        <div class="intro carousel-caption d-md-inline text-start">
-            <h5>Do Something Special <br> To Help Others</h5>
-            <p>Make a miracle with your charity</p>
-            <a href="donasiPage.php">
-                <button class="btn-donate-intro btn-second">Donation</button>
-            </a>
-        </div>
-    </div>
-</header>
-
+<?php include('../components/navbar.php'); ?>
 
 <main>
 
@@ -121,7 +96,7 @@
     <section class="advertise">
         <div class="container">
             <video width="100%" class="video rounded-4" autoplay="true" loop="true">
-                <source src="Assets/videoAdvertise.mov" type="video/mp4">
+                <source src="../assets/videoAdvertise.mov" type="video/mp4">
             </video>
         </div>
     </section>
@@ -163,12 +138,8 @@
 
 </main>
 
-<!-- footer -->
-<footer>
-    <div class="footer-copy">
-        <i class="fa-sharp fa-regular fa-copyright"></i> Copryright 2023
-    </div>
-</footer>
+
+<?php include('../components/js.php'); ?>
 
 <script>
     var nav = document.querySelector('nav');
@@ -180,7 +151,4 @@
         }
     })
 </script>
-
-
-<?php include('../components/js.php'); ?>
 <?php include('../components/footer.php'); ?>

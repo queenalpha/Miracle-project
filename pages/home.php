@@ -3,9 +3,11 @@
 
 $from_campaign = "SELECT * FROM campaign ORDER BY campaign_id desc";
 $result_camp = mysqli_query($conn, $from_campaign);
-
+var_dump($_SESSION);
+die();
 ?>
 <?php include('../components/header.php'); ?>
+<?php include('../components/navbar.php'); ?>
 <header>
   <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
     <a href="landingPage.php">
@@ -31,7 +33,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
     <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
       <div class="col-12 col-md-12 col-lg-4 mb-5">
         <div class="card p-1 h-100">
-          <img src="Assets/image/<?php echo $row['foto'] ?>" class="card-img-top object-fit-cover" width="100%"
+          <img src="../assets/image/<?php echo $row['foto'] ?>" class="card-img-top object-fit-cover" width="100%"
             height="201px" alt="">
           <div class="card-body">
             <h5 class="card-tittle">

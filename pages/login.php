@@ -26,19 +26,16 @@ if (isset($_POST['login_btn'])) {
         if ($stmt_login->num_rows() == 1) {
             $stmt_login->fetch();
 
-            $_SESSION['ID_akun'] = $ID_akun;
-            $_SESSION['nama_akun'] = $nama_akun;
-            $_SESSION['email_akun'] = $email_akun;
-            $_SESSION['pict_akun'] = $pict_akun;
-            $_SESSION['telephone'] = $telepon;
+            $_SESSION['id'] = $ID_akun;
+            $_SESSION['level'] = $status;
             $_SESSION['logged_in'] = true;
 
-            // if($_SESSION['status'] == 'admin'){
+            // if($_SESSION['level'] == 'admin'){
             //     $_SESSION['link'] == 'managemen';
-            // } else if($_SESSION['status'] == 'user'){
+            // } else if($_SESSION['level'] == 'user'){
             //     $_SESSION['link'] = 'profilePage';
             // }
-            header("location: index.php");
+            header("location: home.php");
         } else {
             header('location: login.php?error=Could no verify your account');
         }
