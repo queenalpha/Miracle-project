@@ -2,6 +2,8 @@
 session_start();
 include ('server/connection.php');
 
+$id = $_POST['ID_akun'];
+
 if (!isset($_SESSION['logged_in'])) {
     header('location: profilePage.php');
     exit;   

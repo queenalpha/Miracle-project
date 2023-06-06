@@ -161,7 +161,7 @@ if(isset($_POST['btn-campaign'])){
                 <?php while ($row = mysqli_fetch_assoc($result_campaign)): ?>
                     <th scope="row"><?php echo $row['ID_campaign']?></th>
                     <td><?php echo $row['nama_campaign']?></td>
-                    <td><?php echo $row['target']?></td>
+                    <td>Rp<?php echo number_format($row['target']) ?></td>
                     <td><button>Hapus</button></td>
                 </tr>
                 <?php endwhile;?>
