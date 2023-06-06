@@ -53,4 +53,5 @@ $result_camp = mysqli_query($conn, $from_campaign);
 
 
 <?php include('../components/js.php'); ?>
+
 <?php include('../components/footer.php'); ?>
