@@ -1,5 +1,6 @@
 <?php $title = "Miracle - Landing Page"; ?>
 <?php include('../server/connection.php');
+include('../server/auth.php');
 $from_campaign = "SELECT * FROM campaign ORDER BY campaign_id desc LIMIT 3";
 $result_camp = mysqli_query($conn, $from_campaign);
 ?>

@@ -1,6 +1,6 @@
 <?php $title = "Miracle - Landing Page"; ?>
 <?php include('../server/connection.php');
-
+include('../server/auth.php');
 ?>
 <?php include('../components/header.php'); ?>
 <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">

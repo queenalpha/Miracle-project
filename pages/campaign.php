@@ -28,7 +28,7 @@ if (isset($_POST['btn-campaign'])) {
 ?>
 <?php include('../components/header.php'); ?>
 <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
-    <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
+    <img src="../assets/icon/typograph.png" class="ms-5" width="100px" alt="">
 </nav>
 
 <div class="side-bar">

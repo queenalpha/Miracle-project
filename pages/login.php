@@ -30,11 +30,6 @@ if (isset($_POST['login_btn'])) {
             $_SESSION['level'] = $status;
             $_SESSION['logged_in'] = true;
 
-            // if($_SESSION['level'] == 'admin'){
-            //     $_SESSION['link'] == 'managemen';
-            // } else if($_SESSION['level'] == 'user'){
-            //     $_SESSION['link'] = 'profilePage';
-            // }
             header("location: home.php");
         } else {
             header('location: login.php?error=Could no verify your account');
