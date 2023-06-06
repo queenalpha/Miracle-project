@@ -3,8 +3,6 @@
 
 $from_campaign = "SELECT * FROM campaign ORDER BY campaign_id desc";
 $result_camp = mysqli_query($conn, $from_campaign);
-var_dump($_SESSION);
-die();
 ?>
 <?php include('../components/header.php'); ?>
 <?php include('../components/navbar.php'); ?>
