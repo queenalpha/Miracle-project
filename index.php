@@ -1,5 +1,5 @@
 <?php
 
-header('Location: pages/landing-page.php');
+header('Location: pages/landing.php');
 
 ?>

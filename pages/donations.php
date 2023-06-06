@@ -1,7 +1,7 @@
-<?php $title = "Miracle - Landing Page"; ?>
+<?php $title = "Miracle - Donasi"; ?>
 <?php include('../server/connection.php');
 
-$from_campaign = "SELECT * FROM campaign ORDER BY ID_campaign desc";
+$from_campaign = "SELECT * FROM campaign ORDER BY campaign_id desc";
 $result_camp = mysqli_query($conn, $from_campaign);
 
 ?>

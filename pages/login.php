@@ -18,7 +18,8 @@ if (isset($_POST['login_btn'])) {
             $email_akun,
             $pass_akun,
             $pict_akun,
-            $telepon
+            $telepon,
+            $status
         );
         $stmt_login->store_result();
 
