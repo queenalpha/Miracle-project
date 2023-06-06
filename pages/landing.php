@@ -1,7 +1,7 @@
 <?php $title = "Miracle - Landing Page"; ?>
 <?php include('../server/connection.php');
-// $from_campaign = "SELECT * FROM campaign ORDER BY ID_campaign desc LIMIT 3";
-// $result_camp = mysqli_query($conn, $from_campaign);
+$from_campaign = "SELECT * FROM campaign ORDER BY campaign_id desc LIMIT 3";
+$result_camp = mysqli_query($conn, $from_campaign);
 
 ?>
 <?php include('../components/header.php'); ?>
@@ -47,7 +47,7 @@
     <section class="advertise">
         <div class="container">
             <video width="100%" class="video rounded-4" autoplay="true" loop="true">
-                <source src="Assets/videoAdvertise.mov" type="video/mp4">
+                <source src="../assets/" type="video/mp4">
             </video>
         </div>
     </section>
