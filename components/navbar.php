@@ -37,7 +37,7 @@ if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin') {
                             <a class="dropdown-item" href="profilePage.php">Profile</a>
                             <a class="dropdown-item" href="riwayatDonasi.php">Riwayat Donasi</a>
                             <a class="dropdown-item" href="campaign.php">Buat Campaign</a>
-                            <a class="dropdown-item" href="index.php?logout=1"
+                            <a class="dropdown-item" href="../server/logout.php"
                                 onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
                         </li>
                     </ul>
@@ -110,7 +110,7 @@ if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin') {
                                 <a class="dropdown-item" href="profilePage.php">Profile</a>
                                 <a class="dropdown-item" href="riwayatDonasi.php">Riwayat Donasi</a>
                                 <a class="dropdown-item" href="campaign.php">Buat Campaign</a>
-                                <a class="dropdown-item" href="index.php?logout=1"
+                                <a class="dropdown-item" href="../server/logout.php"
                                     onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
                             </li>
                         </ul>

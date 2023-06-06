@@ -5,6 +5,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
 
 ?>
 <?php include('../components/header.php'); ?>
+<?php include('../components/navbar.php'); ?>
 <main>
 
     <!-- Home donation -->
