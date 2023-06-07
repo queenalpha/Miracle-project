@@ -1,4 +1,4 @@
-<div id="carouselExampleCaptions" class="carousel slide">
+<div id="carouselExampleCaptions" class="carousel slide carousel-dark slide">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
             aria-current="true" aria-label="Slide 1"></button>
@@ -9,25 +9,27 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="../assets/image/2.jpg" class="d-block w-100 object-fit-cover" alt="..." style="height: 100vh;">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
-                <a href="#" class="btn btn-primary">Test</a>
+            <img src="../assets/image/2.jpg" class="d-block w-100 object-fit-cover our-intro-image" alt="...">
+            <div class="carousel-caption h-100 d-flex justify-content-center align-items-center flex-column">
+                <h1 class="lh-lg">First slide label</h1>
+                <h5 class="lh-lg mb-4">Some representative placeholder content for the first slide.</h5>
+                <a href="#" class="btn btn-primary">Donate</a>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../assets/image/ds1.jpg" class="d-block w-100 object-fit-cover" alt="..." style="height: 100vh;">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
+            <img src="../assets/image/ds1.jpg" class="d-block w-100 object-fit-cover our-intro-image" alt="...">
+            <div class="carousel-caption h-100 d-flex justify-content-center align-items-center flex-column">
+                <h1 class="lh-lg">First slide label</h1>
+                <h5 class="lh-lg mb-4">Some representative placeholder content for the first slide.</h5>
+                <a href="#" class="btn btn-primary">Donate</a>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../assets/image/ds1.jpg" class="d-block w-100 object-fit-cover" alt="..." style="height: 100vh;">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+            <img src="../assets/image/ds1.jpg" class="d-block w-100 object-fit-cover our-intro-image" alt="...">
+            <div class="carousel-caption h-100 d-flex justify-content-center align-items-center flex-column">
+                <h1 class="lh-lg">First slide label</h1>
+                <h5 class="lh-lg mb-4">Some representative placeholder content for the first slide.</h5>
+                <a href="#" class="btn btn-primary">Donate</a>
             </div>
         </div>
     </div>

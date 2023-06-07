@@ -49,22 +49,10 @@
 img .profile-img{
    border-radius: 100%;
 }
-.intro{
-    margin-left: -80px;
-}
-.intro h5{
-    color: #E5BA73;
-    font-size: 40px;
-    font-weight: 700;
-    position: absolute;
-    margin-top: -9em;
-}
 
-.intro p{
-    font-size: 20px;
-    font-weight: 400;
-    position: absolute;
-    margin-top: -15rem;
+.our-intro-image {
+    height: 100vh;
+    filter: blur(6px) opacity(0.25) saturate(1.5) grayscale(0.5);
 }
 
 .btn-donate-intro{
