@@ -1,7 +1,14 @@
-<?php $title = "Miracle - Landing Page"; ?>
-<?php include('../server/connection.php');
-include('../components/auth.php');
+<!-- Konfigurasi -->
+<?php
+$title = "Miracle - Landing Page";
+$prevent = 'guest';
+include('../server/connection.php');
 ?>
+<!-- Logic -->
+<?php
+
+?>
+<!-- UI -->
 <?php include('../components/header.php'); ?>
 <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
     <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">

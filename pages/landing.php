@@ -1,10 +1,15 @@
-<?php $title = "Miracle - Tebar Kebaikan"; ?>
-<?php include('../server/connection.php');
-$from_campaign = "SELECT * FROM campaign ORDER BY campaign_id desc LIMIT 3";
-$result_camp = mysqli_query($conn, $from_campaign);
-
+<!-- Konfigurasi -->
+<?php
+$title = "Miracle - Landing Page";
+$prevent = 'authenticated';
+include('../server/connection.php');
 ?>
-
+<!-- Logic -->
+<?php
+$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
+$result_camp = mysqli_query($conn, $from_campaign);
+?>
+<!-- Logic -->
 <?php include('../components/header.php'); ?>
 <?php include('../components/navbar.php'); ?>
 <main>
@@ -27,13 +32,13 @@ $result_camp = mysqli_query($conn, $from_campaign);
                                 width="100%" height="201px" alt="">
                             <div class="card-body">
                                 <h5 class="card-tittle">
-                                    <?php echo $row['nama_campaign'] ?>
+                                    <?php echo $row['campaign_name'] ?>
                                 </h5>
                                 <p class="card-text">
-                                    <?php echo $row['deskripsi'] ?>
+                                    <?php echo $row['campaign_description'] ?>
                                 </p>
                                 <p class="card-text">Membutuhkan Rp
-                                    <?php echo number_format($row['target']) ?>
+                                    <?php echo number_format($row['campaign_target']) ?>
                                 </p>
                                 <button type="button" class="btn-donasi" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
@@ -137,6 +142,11 @@ $result_camp = mysqli_query($conn, $from_campaign);
     </div>
 
 </main>
+<footer>
+    <div class="footer-copy">
+        <i class="fa-sharp fa-regular fa-copyright"></i> Copryright 2023
+    </div>
+</footer>
 <?php include('../components/js.php'); ?>
 <script>
     var nav = document.querySelector('nav');

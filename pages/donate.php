@@ -1,12 +1,61 @@
-<?php $title = "Miracle - Landing Page"; ?>
-<?php include('../server/connection.php');
-include('../server/auth.php');
-$from_campaign = "SELECT * FROM campaign ORDER BY campaign_id desc LIMIT 3";
+<!-- Konfigurasi -->
+<?php
+$title = "Miracle - Detail";
+include('../server/connection.php');
+?>
+<!-- Logic -->
+<?php
+$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
 $result_camp = mysqli_query($conn, $from_campaign);
 ?>
+<!-- Logic -->
 <?php include('../components/header.php'); ?>
 
-<?php include('../components/navbar.php'); ?>
+<nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
+    <img src="../assets/icon/typograph.png" class="ms-5" width="100px" alt="">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center me-5" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="home.php">Donasi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="managecampaign.php">Campaign</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="riwayatDonasi.php">Riwayat Donasi</a>
+            </li>
+        </ul>
+    </div>
+    <ul class="navbar-nav me-5">
+        <li class="nav-but dropdown">
+            <a class="nav-link dropdown-toggle me-5" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                href="#">
+                <img src="../assets/image/Login form img.jpg" class="object-fit-cover rounded-4 " width="30px"
+                    height="30px" alt="">
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" href="profilePage.php">Profile</a>
+                    <a class="dropdown-item" href="riwayatDonasi.php">Riwayat Donasi</a>
+                    <a class="dropdown-item" href="campaign.php">Buat Campaign</a>
+                    <a class="dropdown-item" href="../server/logout.php"
+                        onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-but">
+            <a class="nav-link" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
+        </li>
+    </ul>
+</nav>
+
 
 <main>
 
@@ -28,13 +77,13 @@ $result_camp = mysqli_query($conn, $from_campaign);
                                 width="100%" height="201px" alt="">
                             <div class="card-body">
                                 <h5 class="card-tittle">
-                                    <?php echo $row['nama_campaign'] ?>
+                                    <?php echo $row['campaign_name'] ?>
                                 </h5>
                                 <p class="card-text">
-                                    <?php echo $row['deskripsi'] ?>
+                                    <?php echo $row['campaign_description'] ?>
                                 </p>
                                 <p class="card-text">Membutuhkan Rp
-                                    <?php echo number_format($row['target']) ?>
+                                    <?php echo number_format($row['campaign_target']) ?>
                                 </p>
                                 <button type="button" class="btn-donasi" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
