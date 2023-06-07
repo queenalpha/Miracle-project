@@ -1,22 +1,14 @@
-<?php $title = "Miracle - Landing Page"; ?>
-<?php include('../server/connection.php');
-if (!isset($_SESSION['logged_in'])) {
-    header('location: profilePage.php');
-    exit;
-}
-
-if (isset($_GET['logout'])) {
-    if (isset($_SESSION['logged_in'])) {
-        unset($_SESSION['logged_in']);
-        unset($_SESSION['email_akun']);
-        header('location: login.php');
-        exit;
-    } else {
-        echo "Session logged_in tidak ditemukan.";
-    }
-    exit;
-}
+<!-- Konfigurasi -->
+<?php
+$title = "Miracle - Landing Page";
+$prevent = 'guest';
+include('../server/connection.php');
 ?>
+<!-- Logic -->
+<?php
+
+?>
+<!-- UI -->
 <?php include('../components/header.php'); ?>
 <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
     <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">

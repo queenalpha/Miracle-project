@@ -1,34 +1,33 @@
-<?php $title = "Miracle - Landing Page"; ?>
-<?php include('../server/connection.php');
-
-$tampil_campaign = "SELECT * FROM campaign";
+<!-- Konfigurasi -->
+<?php
+$title = "Miracle - Create Campaign";
+$prevent = 'guest';
+include('../server/connection.php');
+?>
+<!-- Logic -->
+<?php
+$tampil_campaign = "SELECT * FROM campaigns";
 $result_campaign = mysqli_query($conn, $tampil_campaign);
-
 if (isset($_POST['btn-campaign'])) {
-    $nama_campaign = $_POST['nama_campaign'];
-    $keterangan = $_POST['deskripsi'];
-    $target_donasi = $_POST['target'];
-
-    $path = "Assets/image/" . basename($_FILES['foto']['name']);
+    $campaign_name = $_POST['campaign_name'];
+    $keterangan = $_POST['campaign_description'];
+    $target_donasi = $_POST['campaign_target'];
+    $path = "../assets/image/" . basename($_FILES['foto']['name']);
     $foto_campaign = $_FILES['foto']['name'];
-
     move_uploaded_file($_FILES['foto']['tmp_name'], $path);
-
-    $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$foto_campaign','$target_donasi')";
-
+    $buat_campaign = "INSERT INTO campaign Values (null,'$campaign_name','$keterangan','$foto_campaign','$target_donasi')";
     if (mysqli_query($conn, $buat_campaign)) {
         $success = true;
     } else {
         $success = false;
     }
-
     header("location: campaign.php?created=$success");
 }
-
 ?>
+<!-- Logic -->
 <?php include('../components/header.php'); ?>
 <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
-    <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
+    <img src="../assets/icon/typograph.png" class="ms-5" width="100px" alt="">
 </nav>
 
 <div class="side-bar">
@@ -95,7 +94,7 @@ if (isset($_GET["created"]) && $_GET["created"] == true) {
                                     Campaign</label>
                                 <div class="col-sm-20">
                                     <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                        name="nama_campaign" placeholder="Masukan Nama Campaign">
+                                        name="campaign_name" placeholder="Masukan Nama Campaign">
                                 </div>
                                 <label for="colFormLabelSm"
                                     class="col-sm-20 col-form-label col-form-label-sm">Keterangan</label>
@@ -143,10 +142,10 @@ if (isset($_GET["created"]) && $_GET["created"] == true) {
                         <?php echo $row['ID_campaign'] ?>
                     </th>
                     <td>
-                        <?php echo $row['nama_campaign'] ?>
+                        <?php echo $row['campaign_name'] ?>
                     </td>
                     <td>
-                        <?php echo $row['target'] ?>
+                        <?php echo $row['campaign_target'] ?>
                     </td>
                     <td><button>Hapus</button></td>
                 </tr>
@@ -155,7 +154,6 @@ if (isset($_GET["created"]) && $_GET["created"] == true) {
 
     </table>
 </div>
-
 
 <?php include('../components/js.php'); ?>
 <?php include('../components/footer.php'); ?>

@@ -1,7 +1,14 @@
-<?php $title = "Miracle - Landing Page"; ?>
-<?php include('../server/connection.php');
+<!-- Konfigurasi -->
+<?php
+$title = "Miracle - Donation History";
+$prevent = 'guest';
+include('../server/connection.php');
+?>
+<!-- Logic -->
+<?php
 
 ?>
+<!-- Logic -->
 <?php include('../components/header.php'); ?>
 <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
     <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
@@ -11,7 +18,7 @@
     <div class="side-text">
         <ul>
             <li>
-                <a href="profilePage.php">Profile</a>
+                <a href="`../pages/profile.php">Profile</a>
             </li>
             <li>
                 <a href="">Riwayat Donasi</a>

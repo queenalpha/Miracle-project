@@ -1,78 +1,60 @@
-<?php $title = "Miracle - Landing Page"; ?>
-<?php include('../server/connection.php');
-
+<!-- Konfigurasi -->
+<?php
+$title = "Miracle - Detail";
+include('../server/connection.php');
 ?>
+<!-- Logic -->
+<?php
+$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
+$result_camp = mysqli_query($conn, $from_campaign);
+?>
+<!-- Logic -->
 <?php include('../components/header.php'); ?>
-<!-- NavBar section -->
-<header>
-    <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
-        <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center me-5" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="donasiPage.php">Donasi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="campaign.php">Campaign</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="riwayatDonasi.php">Riwayat Donasi</a>
-                </li>
-            </ul>
-        </div>
-        <ul class="navbar-nav me-5">
-            <li class="nav-but dropdown">
-                <a class="nav-link dropdown-toggle me-5" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                    href="#">
-                    <img src="Assets/image/Login form img.jpg" class="object-fit-cover rounded-4" width="30px"
-                        height="30px" alt="">
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="profilePage.php">Profile</a>
-                        <a class="dropdown-item" href="riwayatDonasi.php">Riwayat Donasi</a>
-                        <a class="dropdown-item" href="campaign.php">Buat Campaign</a>
-                        <a class="dropdown-item" href="index.php?logout=1"
-                            onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
-                    </li>
-                </ul>
+
+<nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
+    <img src="../assets/icon/typograph.png" class="ms-5" width="100px" alt="">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center me-5" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
             </li>
-            <li class="nav-but">
-                <a class="nav-link" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
+            <li class="nav-item">
+                <a class="nav-link" href="home.php">Donasi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="managecampaign.php">Campaign</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="riwayatDonasi.php">Riwayat Donasi</a>
             </li>
         </ul>
-    </nav>
-
-    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active c-item">
-                <img src="Assets/image/ds1.jpg" class="d-block w-100 c-img" alt="...">
-            </div>
-            <div class="carousel-item c-item">
-                <img src="Assets/image/pr1.jpg" class="d-block w-100 c-img" alt="...">
-            </div>
-        </div>
-        <div class="intro carousel-caption d-md-inline text-start">
-            <h5>Do Something Special <br> To Help Others</h5>
-            <p>Make a miracle with your charity</p>
-            <a href="donasiPage.php">
-                <button class="btn-donate-intro btn-second">Donation</button>
-            </a>
-        </div>
     </div>
-</header>
+    <ul class="navbar-nav me-5">
+        <li class="nav-but dropdown">
+            <a class="nav-link dropdown-toggle me-5" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                href="#">
+                <img src="../assets/image/Login form img.jpg" class="object-fit-cover rounded-4 " width="30px"
+                    height="30px" alt="">
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" href="profilePage.php">Profile</a>
+                    <a class="dropdown-item" href="riwayatDonasi.php">Riwayat Donasi</a>
+                    <a class="dropdown-item" href="campaign.php">Buat Campaign</a>
+                    <a class="dropdown-item" href="../server/logout.php"
+                        onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-but">
+            <a class="nav-link" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
+        </li>
+    </ul>
+</nav>
 
 
 <main>
@@ -95,13 +77,13 @@
                                 width="100%" height="201px" alt="">
                             <div class="card-body">
                                 <h5 class="card-tittle">
-                                    <?php echo $row['nama_campaign'] ?>
+                                    <?php echo $row['campaign_name'] ?>
                                 </h5>
                                 <p class="card-text">
-                                    <?php echo $row['deskripsi'] ?>
+                                    <?php echo $row['campaign_description'] ?>
                                 </p>
                                 <p class="card-text">Membutuhkan Rp
-                                    <?php echo number_format($row['target']) ?>
+                                    <?php echo number_format($row['campaign_target']) ?>
                                 </p>
                                 <button type="button" class="btn-donasi" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
@@ -164,7 +146,7 @@
     <section class="advertise">
         <div class="container">
             <video width="100%" class="video rounded-4" autoplay="true" loop="true">
-                <source src="Assets/videoAdvertise.mov" type="video/mp4">
+                <source src="../assets/videoAdvertise.mov" type="video/mp4">
             </video>
         </div>
     </section>
@@ -206,12 +188,8 @@
 
 </main>
 
-<!-- footer -->
-<footer>
-    <div class="footer-copy">
-        <i class="fa-sharp fa-regular fa-copyright"></i> Copryright 2023
-    </div>
-</footer>
+
+<?php include('../components/js.php'); ?>
 
 <script>
     var nav = document.querySelector('nav');
@@ -223,7 +201,4 @@
         }
     })
 </script>
-
-
-<?php include('../components/js.php'); ?>
 <?php include('../components/footer.php'); ?>
