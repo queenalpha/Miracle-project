@@ -12,6 +12,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
 <!-- Logic -->
 <?php include('../components/header.php'); ?>
 <?php include('../components/navbar.php'); ?>
+<?php include('../components/carousel.php'); ?>
 <main>
 
     <!-- Home donation -->
@@ -28,7 +29,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
                 <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
                     <div class="col-12 col-md-12 col-lg-4 mb-5">
                         <div class="card p-1 h-100">
-                            <img src="Assets/image/<?php echo $row['foto'] ?>" class="card-img-top object-fit-cover"
+                            <img src="<?php echo $row['campaign_thumbnail'] ?>" class="card-img-top object-fit-cover"
                                 width="100%" height="201px" alt="">
                             <div class="card-body">
                                 <h5 class="card-tittle">
@@ -108,6 +109,9 @@ $result_camp = mysqli_query($conn, $from_campaign);
 
 
     <!-- inviting -->
+    <div class="container-fluid d-flex flex-row">
+        <h4>Make your life useful to others</h4>
+    </div>
     <div class="inviting">
         <h3>
             Make your life useful to others
@@ -122,25 +126,45 @@ $result_camp = mysqli_query($conn, $from_campaign);
             Buat Campaign
         </a>
     </div>
-
-    <!-- Information donatur dan dana terkumpul -->
-    <div class="container ">
-        <section class="left-content">
-            <i class="fa-solid fa-users user" style="color: #e5ba73;"></i>
-            <div class="left-text">
-                <h5>10.000</h5>
-                <p>#temanbaik telah berdonasi</p>
+    <!-- Section -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col">
+                <div class="card py-4">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-users user" style="font-size:48px;color: #e5ba73;"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">(Kuantitas User)</h5>
+                                <p class="card-text"><small class="text-body-secondary">#temanbaik telah
+                                        berdonasi</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-        <section class="right-content">
-            <i class="fa-solid fa-money-check user" style="color: #e4b673;"></i>
-            <div class="left-text">
-                <h5>Rp10.000.000.00</h5>
-                <p>Dana terkumpul dari #temanbaik</p>
+            <div class="col">
+                <div class="card py-4">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-money-check user" style="font-size:48px;color: #e4b673;"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">(Kuantitas Rp)</h5>
+                                <p class="card-text"><small class="text-body-secondary">Dana terkumpul dari
+                                        #temanbaik</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
     </div>
-
 </main>
 <footer>
     <div class="footer-copy">
