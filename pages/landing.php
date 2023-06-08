@@ -12,6 +12,8 @@ $result_camp = mysqli_query($conn, $from_campaign);
 <!-- Logic -->
 <?php include('../components/header.php'); ?>
 <?php include('../components/navbar.php'); ?>
+<?php include('../components/carousel.php'); ?>
+
 <main>
 
     <!-- Home donation -->
