@@ -108,23 +108,14 @@ $result_camp = mysqli_query($conn, $from_campaign);
     </section>
 
 
-    <!-- inviting -->
-    <div class="container-fluid d-flex flex-row">
-        <h4>Make your life useful to others</h4>
-    </div>
-    <div class="inviting">
-        <h3>
-            Make your life useful to others
-        </h3>
-        <p>
-            Create a miracle for someone who still wants to keep fighting
-        </p>
-        <a href="donasiPage.php" type="button" class="btn btn-outline-light">
-            Donation
-        </a>
-        <a href="login.php" type="button" class="btn btn-outline-light">
-            Buat Campaign
-        </a>
+    <!-- Lead/Inviting -->
+    <div class="container-fluid py-5 text-center" style="background-color: #e5ba73;">
+        <div class="my-5">
+            <h4>Make your life useful to others</h4>
+            <p>Create a miracle for someone who still wants to keep fighting</p>
+            <a class="btn btn-primary" href="#">Donation</a>
+            <a class="btn btn-primary" href="#">Buat Campaign</a>
+        </div>
     </div>
     <!-- Section -->
     <div class="container my-5">
@@ -166,11 +157,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
         </div>
     </div>
 </main>
-<footer>
-    <div class="footer-copy">
-        <i class="fa-sharp fa-regular fa-copyright"></i> Copryright 2023
-    </div>
-</footer>
+<?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
 <script>
     var nav = document.querySelector('nav');
@@ -182,4 +169,4 @@ $result_camp = mysqli_query($conn, $from_campaign);
         }
     })
 </script>
-<?php include('../components/footer.php'); ?>
+<?php include('../components/close.php'); ?>

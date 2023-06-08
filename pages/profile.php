@@ -77,5 +77,6 @@ include('../server/connection.php');
 </div>
 
 
-<?php include('../components/js.php'); ?>
 <?php include('../components/footer.php'); ?>
+<?php include('../components/js.php'); ?>
+<?php include('../components/close.php'); ?>

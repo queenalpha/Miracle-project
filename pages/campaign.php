@@ -157,3 +157,4 @@ if (isset($_GET["created"]) && $_GET["created"] == true) {
 
 <?php include('../components/js.php'); ?>
 <?php include('../components/footer.php'); ?>
+<?php include('../components/close.php'); ?>

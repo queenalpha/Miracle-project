@@ -46,11 +46,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
     </div>
   </div>
 </main>
-<footer>
-  <div class="footer-copy">
-    <i class="fa-sharp fa-regular fa-copyright"></i> Copryright 2023
-  </div>
-</footer>
+
 <?php include('../components/js.php'); ?>
 
 <script>
@@ -65,3 +61,4 @@ $result_camp = mysqli_query($conn, $from_campaign);
 </script>
 
 <?php include('../components/footer.php'); ?>
+<?php include('../components/close.php'); ?>

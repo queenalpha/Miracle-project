@@ -202,3 +202,4 @@ $result_camp = mysqli_query($conn, $from_campaign);
     })
 </script>
 <?php include('../components/footer.php'); ?>
+<?php include('../components/close.php'); ?>
