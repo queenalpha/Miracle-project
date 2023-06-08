@@ -46,9 +46,8 @@ $result_camp = mysqli_query($conn, $from_campaign);
     </div>
   </div>
 </main>
-
+<?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
-
 <script>
   var nav = document.querySelector('nav');
   window.addEventListener('scroll', function () {
@@ -59,6 +58,4 @@ $result_camp = mysqli_query($conn, $from_campaign);
     }
   })
 </script>
-
-<?php include('../components/footer.php'); ?>
 <?php include('../components/close.php'); ?>

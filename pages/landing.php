@@ -17,12 +17,13 @@ $result_camp = mysqli_query($conn, $from_campaign);
 
     <!-- Home donation -->
     <section class="open-donation md-5">
+
         <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h2>Open Donation</h2>
-                    <p>Be a miracle foreach others</p>
-                </div>
+
+            <!-- Title -->
+            <div class="text-center my-5">
+                <h2>Open Donation</h2>
+                <small class="text-muted fst-italic">Be a miracle foreach others</small>
             </div>
 
             <div class="row align-items-center ms-4" id="donasi">
