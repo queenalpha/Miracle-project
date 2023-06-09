@@ -31,17 +31,17 @@ $result_camp = mysqli_query($conn, $from_campaign);
                 <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
                     <div class="col-12 col-md-12 col-lg-4 mb-5">
                         <div class="card p-1 h-100">
-                            <img src="Assets/image/<?php echo $row['foto'] ?>" class="card-img-top object-fit-cover"
-                                width="100%" height="201px" alt="">
+                            <img src="Assets/image/<?= $row['foto'] ?>" class="card-img-top object-fit-cover" width="100%"
+                                height="201px" alt="">
                             <div class="card-body">
                                 <h5 class="card-tittle">
-                                    <?php echo $row['campaign_name'] ?>
+                                    <?= $row['campaign_name'] ?>
                                 </h5>
                                 <p class="card-text">
-                                    <?php echo $row['campaign_description'] ?>
+                                    <?= $row['campaign_description'] ?>
                                 </p>
                                 <p class="card-text">Membutuhkan Rp
-                                    <?php echo number_format($row['campaign_target']) ?>
+                                    <?= number_format($row['campaign_target']) ?>
                                 </p>
                                 <button type="button" class="btn-donasi" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">

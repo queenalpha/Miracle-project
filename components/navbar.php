@@ -75,5 +75,34 @@
                     </ul>
                 </li>
             </ul>
+            <?php
+            if (!isset($_SESSION['logged_in'])) {
+                ?>
+                <a href="../pages/login.php" class="btn btn-outline-primary">
+                    Login
+                </a>
+                <?php
+            } else {
+                ?>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="../assets/image/ds1.jpg" class="object-fit-cover rounded-circle" alt="Avatar"
+                                width="42px" height="42px" />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Riwayat Donasi</a></li>
+                            <li><a class="dropdown-item" href="#">Buat Campaign</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="../server/logout.php">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <?php
+            } ?>
+
         </div>
 </nav> -->
