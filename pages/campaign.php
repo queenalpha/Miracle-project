@@ -139,13 +139,13 @@ if (isset($_GET["created"]) && $_GET["created"] == true) {
             <tr>
                 <?php while ($row = mysqli_fetch_assoc($result_campaign)): ?>
                     <th scope="row">
-                        <?php echo $row['ID_campaign'] ?>
+                        <?= $row['ID_campaign'] ?>
                     </th>
                     <td>
-                        <?php echo $row['campaign_name'] ?>
+                        <?= $row['campaign_name'] ?>
                     </td>
                     <td>
-                        <?php echo $row['campaign_target'] ?>
+                        <?= $row['campaign_target'] ?>
                     </td>
                     <td><button>Hapus</button></td>
                 </tr>

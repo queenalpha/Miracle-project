@@ -27,7 +27,7 @@
             <?php
             if (!isset($_SESSION['logged_in'])) {
                 ?>
-                <a class="btn btn-outline-primary">
+                <a href="../pages/login.php" class="btn btn-outline-primary">
                     Login
                 </a>
                 <?php
