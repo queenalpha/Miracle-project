@@ -59,6 +59,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
+                                                <!-- DATA DONATUR -->
                                                 <form method="POST" enctype="multipart/form-data" action="#">
                                                     <div class="form-group row">
                                                         <label for="colFormLabelSm"
@@ -83,8 +84,44 @@ $result_camp = mysqli_query($conn, $from_campaign);
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <input type="submit" class="btn-donasi mt-3" data-bs-toggle="modal"
-                                                            data-bs-target="#transaksi" value="Save">
+                                                        <a href="" type="submit" name="#"class="text-center btn-donasi text-decoration-none" data-bs-toggle="modal"
+                                                             data-bs-target="#transaksi">
+                                                             Save
+                                                        </a>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Donate Data Donatur -->
+                                <div class="modal fade" id="transaksi" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header ">
+                                                <h5 class="modal-title"
+                                                    id="exampleModalLabel">Bayar Donasimu
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- TRANSAKSI DONASI -->
+                                                <form method="POST" enctype="multipart/form-data" action="#">
+                                                    <div class="form-group row">
+                                                        <div class="payment">
+                                                        <button class="btn-pay">10.000</button>
+                                                        <button class="btn-pay">15.000</button>
+                                                        <button class="btn-pay">20.000</button>
+                                                        <button class="btn-pay">30.000</button>
+                                                        </div>
+                                                        
+                                                        <input type="text" class="pay-input form-control form-control-sm mb-3"
+                                                        id="colFormLabelSm" name="judul" placeholder="Masukan Donasi">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="submit" class="btn-donasi" value="Save">
                                                     </div>
                                                 </form>
                                             </div>
@@ -96,6 +133,14 @@ $result_camp = mysqli_query($conn, $from_campaign);
                     </div>
                 <?php endwhile; ?>
             </div>
+
+            <!-- see more donation page -->
+            <div class="d-flex justify-content-center ">
+                <a href="donate.php">
+                    <button class = "btn-donasi more-btn">Lihat Semua</button>
+                </a>
+            </div>
+
     </section>
 
     <!-- advertise -->
@@ -109,9 +154,6 @@ $result_camp = mysqli_query($conn, $from_campaign);
 
 
     <!-- inviting -->
-    <div class="container-fluid d-flex flex-row">
-        <h4>Make your life useful to others</h4>
-    </div>
     <div class="inviting">
         <h3>
             Make your life useful to others
@@ -126,7 +168,8 @@ $result_camp = mysqli_query($conn, $from_campaign);
             Buat Campaign
         </a>
     </div>
-    <!-- Section -->
+
+    <!-- quantity of user and donatur -->
     <div class="container my-5">
         <div class="row">
             <div class="col">
@@ -166,11 +209,6 @@ $result_camp = mysqli_query($conn, $from_campaign);
         </div>
     </div>
 </main>
-<footer>
-    <div class="footer-copy">
-        <i class="fa-sharp fa-regular fa-copyright"></i> Copryright 2023
-    </div>
-</footer>
 <?php include('../components/js.php'); ?>
 <script>
     var nav = document.querySelector('nav');
