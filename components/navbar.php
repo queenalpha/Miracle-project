@@ -1,4 +1,4 @@
-<!-- navbar untuk landing page -->
+<!-- navbar untuk landing page
 <nav class="fixed-top navbar navbar-expand-lg  px-5">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -29,10 +29,9 @@
         <a href="login.php"  id="navbarNavDropdown">
             <button type="button" class="btn btn-yellow  rounded-1 me-5">Masuk</button>
         </a>
-</nav>
+</nav> -->
 
-<!-- navbar untuk home page -->
-<!-- <nav class="fixed-top navbar navbar-expand-lg  px-5">
+ <nav class="fixed-top navbar navbar-expand-lg  px-5">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="../assets/icon/typograph.png" alt="Brand Image" height="30" />
@@ -58,7 +57,16 @@
                     </li>
                 </ul>
             </div>
-            <ul class="navbar-nav">
+            <?php
+            if (!isset($_SESSION['logged_in'])) {
+                ?>
+                <a href="../pages/login.php"  id="navbarNavDropdown">
+                    <button type="button" class="btn btn-yellow  rounded-1 me-5">Masuk</button>
+                </a>
+                <?php
+            } else {
+                ?>
+                <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="../assets/icon/avatar.jpg" class="object-fit-cover rounded-circle" alt="Avatar"
@@ -71,38 +79,12 @@
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-                        <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+                        <li><a class="dropdown-item text-danger" href="../server/logout.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>
             <?php
-            if (!isset($_SESSION['logged_in'])) {
-                ?>
-                <a href="../pages/login.php" class="btn btn-outline-primary">
-                    Login
-                </a>
-                <?php
-            } else {
-                ?>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../assets/image/ds1.jpg" class="object-fit-cover rounded-circle" alt="Avatar"
-                                width="42px" height="42px" />
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Riwayat Donasi</a></li>
-                            <li><a class="dropdown-item" href="#">Buat Campaign</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item text-danger" href="../server/logout.php">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <?php
             } ?>
 
         </div>
-</nav> -->
+</nav>

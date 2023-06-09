@@ -153,7 +153,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
   </div>
 
   <!-- inviting -->
-  <div class="inviting">
+    <div class="inviting">
         <h3>
             Make your life useful to others
         </h3>
@@ -208,11 +208,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
         </div>
     </div>
 </main>
-<footer>
-  <div class="footer-copy">
-    <i class="fa-sharp fa-regular fa-copyright"></i> Copryright 2023
-  </div>
-</footer>
+<?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
 <script>
   var nav = document.querySelector(' nav'); window.addEventListener('scroll', function () {
