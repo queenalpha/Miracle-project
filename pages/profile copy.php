@@ -2,7 +2,6 @@
 <?php
 $title = "Miracle - Landing Page";
 $prevent = 'guest';
-include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
@@ -77,6 +76,5 @@ include('../server/connection.php');
 </div>
 
 
-<?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
-<?php include('../components/close.php'); ?>
+<?php include('../components/footer.php'); ?>
