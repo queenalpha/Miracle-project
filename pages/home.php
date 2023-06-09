@@ -116,7 +116,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
     </div>
     <!-- Campaigns Card -->
     <div class="col col-12 col-md-9">
-      <div class="row g-4" data-masonry='{"percentPosition": true }'>
+      <div class="row g-4">
         <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
           <div class=" col-12 col-md-6 col-lg-4">
             <div class="card">
