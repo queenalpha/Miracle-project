@@ -209,7 +209,7 @@ $result3 = mysqli_query($conn, $query3);
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body dt-card-limit">
                             <div class="col col-12">
                                 <table class="table table-borderless table-hover">
                                     <thead>
