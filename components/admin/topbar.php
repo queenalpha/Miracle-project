@@ -7,7 +7,7 @@
             <img src="../assets/image/ds1.jpg" class="object-fit-cover rounded-circle" alt="Avatar" width="42px"
                 height="42px" />
         </button>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" style="z-index:10000;">
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li>
