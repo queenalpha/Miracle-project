@@ -21,7 +21,7 @@ $result3 = mysqli_query($conn, $query3);
         <aside class="flex-shrink-1">
             <?php include('../components/admin/sidebar.php'); ?>
         </aside>
-        <article class="w-100">
+        <article id="dt-content" class="w-100">
             <div class="row g-0 p-4">
                 <div class="col col-12 col-md-6 col-lg-3 g-4">
                     <div class="card dt-card-hover py-4">
