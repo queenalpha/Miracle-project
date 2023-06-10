@@ -28,9 +28,24 @@ if (isset($_GET['manage']) && isset($_POST['account'])) {
     $result2 = mysqli_query($conn, $query2);
 }
 
+if (isset($_GET['manage']) && isset($_POST['donation'])) {
+    $target = $_POST['donation'];
+    $query3 = "SELECT donations.donation_date, accounts.account_name, accounts.account_avatar, campaigns.campaign_name, campaigns.campaign_thumbnail, donations.donation_amount
+    FROM donations
+    JOIN accounts ON accounts.account_id = donations.donation_account
+    JOIN campaigns ON campaigns.campaign_id = donations.donation_campaign
+    WHERE accounts.account_name LIKE '%$target%' OR campaigns.campaign_name LIKE '%$target%'
+    ORDER BY donations.donation_date DESC";
+    $result3 = mysqli_query($conn, $query3);
+} else {
+    $query3 = "SELECT donations.donation_date, accounts.account_name, accounts.account_avatar, campaigns.campaign_name, campaigns.campaign_thumbnail, donations.donation_amount
+    FROM donations
+    JOIN accounts ON accounts.account_id=donations.donation_account
+    JOIN campaigns ON campaigns.campaign_id=donations.donation_campaign
+    ORDER BY donations.donation_date desc";
+    $result3 = mysqli_query($conn, $query3);
+}
 
-$query3 = "SELECT * FROM donations ORDER BY donation_id desc";
-$result3 = mysqli_query($conn, $query3);
 ?>
 <!-- View -->
 <?php include('../components/header.php'); ?>
@@ -218,6 +233,7 @@ $result3 = mysqli_query($conn, $query3);
                         <thead>
                             <tr class="align-middle">
                                 <th scope="col" class="ps-5">#</th>
+                                <th scope="col">Tanggal</th>
                                 <th scope="col">Dari</th>
                                 <th scope="col">Untuk</th>
                                 <th scope="col">Jumlah</th>
@@ -234,34 +250,25 @@ $result3 = mysqli_query($conn, $query3);
                                         <?= $i ?>
                                     </th>
                                     <td class="col align-item-center">
-                                        <?php
-                                        $target = $row['donation_account'];
-                                        $query = "SELECT account_name, account_avatar FROM `accounts` WHERE `account_id` = $target";
-                                        $result = mysqli_query($conn, $query);
-                                        $name = mysqli_fetch_object($result);
-                                        ?>
-                                        <a class="me-3 text-decoration-none" target="_blank"
-                                            href="<?= "../assets/image/" . $name->account_avatar ?>">
-                                            <img src="<?= "../assets/image/" . $name->account_avatar ?>"
-                                                class="img-thumbnail object-fit-cover dt-thumbnail"
-                                                alt="<?= $name->account_name ?>">
-                                        </a>
-                                        <?= $name->account_name ?>
+                                        <?= date("d F Y", strtotime($row['donation_date'])); ?>
                                     </td>
                                     <td class="col align-item-center">
-                                        <?php
-                                        $target = $row['donation_campaign'];
-                                        $query = "SELECT campaign_name, campaign_thumbnail FROM `campaigns` WHERE `campaign_id` = $target";
-                                        $result = mysqli_query($conn, $query);
-                                        $name = mysqli_fetch_object($result);
-                                        ?>
                                         <a class="me-3 text-decoration-none" target="_blank"
-                                            href="<?= "../assets/image/" . $name->campaign_thumbnail ?>">
-                                            <img src="<?= "../assets/image/" . $name->campaign_thumbnail ?>"
+                                            href="<?= "../assets/image/" . $row['account_avatar'] ?>">
+                                            <img src="<?= "../assets/image/" . $row['account_avatar'] ?>"
                                                 class="img-thumbnail object-fit-cover dt-thumbnail"
-                                                alt="<?= $name->campaign_name ?>">
+                                                alt="<?= $row['account_name'] ?>">
                                         </a>
-                                        <?= $name->campaign_name ?>
+                                        <?= $row['account_name']; ?>
+                                    </td>
+                                    <td class="col align-item-center">
+                                        <a class="me-3 text-decoration-none" target="_blank"
+                                            href="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>">
+                                            <img src="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>"
+                                                class="img-thumbnail object-fit-cover dt-thumbnail"
+                                                alt="<?= $row['campaign_name'] ?>">
+                                        </a>
+                                        <?= $row['campaign_name']; ?>
                                     </td>
                                     <td class="col align-item-center">
                                         Rp.
