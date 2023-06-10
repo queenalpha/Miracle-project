@@ -154,7 +154,7 @@
 #dt-sidebar {
     width: 4.5rem;
     background-color: #fffcf6;
-    height: 100vh;
+    height: 100%;
     border-right: 1px solid rgba(0,0, 0, 0.1);
     box-shadow: 15px 0px 10px -15px rgba(0,0, 0, 0.1);
     overflow-y: auto;
@@ -207,4 +207,12 @@
   .dt-btn-toggle-nav a:hover,
   .dt-btn-toggle-nav a:focus {
     background-color: #e7d0ab;
+  }
+  .card, .card-hover {
+    box-shadow: 0 6px 10px rgba(189, 143, 67,0.085), 0 0 6px rgba(0,0,0,.01);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  }
+  .card-hover:hover {
+    transform: scale(1.025);
+    box-shadow: 0 10px 20px rgba(229, 186, 115,.25), 0 4px 8px rgba(0,0,0,.03);
   }

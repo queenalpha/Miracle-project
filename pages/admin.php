@@ -23,7 +23,7 @@ $result = mysqli_query($conn, $query);
         <article class="w-100">
             <div class="row g-0 p-4">
                 <div class="col col-12 col-md-6 col-lg-3 g-4">
-                    <div class="card p-4">
+                    <div class="card card-hover p-4">
                         <div class="row g-0">
                             <div class="col col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-users dt-icon"></i>
@@ -40,7 +40,7 @@ $result = mysqli_query($conn, $query);
                     </div>
                 </div>
                 <div class="col col-12 col-md-6 col-lg-3 g-4">
-                    <div class="card py-4">
+                    <div class="card card-hover py-4">
                         <div class="row g-0">
                             <div class="col col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-user-secret dt-icon"></i>
@@ -57,7 +57,7 @@ $result = mysqli_query($conn, $query);
                     </div>
                 </div>
                 <div class="col col-12 col-md-6 col-lg-3 g-4">
-                    <div class="card py-4">
+                    <div class="card card-hover py-4">
                         <div class="row g-0">
                             <div class="col col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-hands-holding-child dt-icon"></i>
@@ -74,7 +74,7 @@ $result = mysqli_query($conn, $query);
                     </div>
                 </div>
                 <div class="col col-12 col-md-6 col-lg-3 g-4">
-                    <div class="card py-4">
+                    <div class="card card-hover py-4">
                         <div class="row g-0">
                             <div class="col col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-money-bill-wave dt-icon"></i>
