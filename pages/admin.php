@@ -9,7 +9,7 @@ include('../server/connection.php');
 ?>
 <!-- Controller -->
 <?php
-$query1 = "SELECT * FROM campaigns ORDER BY campaign_id desc";
+$query1 = "SELECT * FROM campaigns WHERE campaign_approval IS NULL ORDER BY campaign_id desc";
 $result1 = mysqli_query($conn, $query1);
 $query2 = "SELECT * FROM accounts ORDER BY account_id desc";
 $result2 = mysqli_query($conn, $query2);
@@ -27,6 +27,28 @@ $result3 = mysqli_query($conn, $query3);
         <article class="w-100">
             <div class="row g-0 p-4">
                 <div class="col col-12 col-md-6 col-lg-3 g-4">
+                    <div class="card dt-card-hover py-4">
+                        <div class="row g-0">
+                            <div class="col col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-hands-holding-child dt-icon"></i>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">Total Kampanye</h5>
+                                    <p class="card-text">
+                                        <?php
+                                        $query = "SELECT count(campaign_id) FROM `campaigns`";
+                                        $result = mysqli_query($conn, $query);
+                                        $total = mysqli_fetch_array($result);
+                                        echo number_format($total[0]) . " Kampanye";
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-6 col-lg-3 g-4">
                     <div class="card dt-card-hover p-4">
                         <div class="row g-0">
                             <div class="col col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
@@ -34,9 +56,17 @@ $result3 = mysqli_query($conn, $query3);
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title fw-bold">User Terdaftar</h5>
+                                    <h5 class="card-title fw-bold">Member Berdonasi</h5>
                                     <p class="card-text">
-                                        Rp. 10.000,-
+                                        <?php
+                                        $query = "SELECT sum(donation_amount) FROM `donations` WHERE `donation_account` != 2";
+                                        $result = mysqli_query($conn, $query);
+                                        $total = mysqli_fetch_array($result);
+                                        echo
+                                            "Rp." .
+                                            number_format($total[0])
+                                            . ",-";
+                                        ?>
                                     </p>
                                 </div>
                             </div>
@@ -53,24 +83,15 @@ $result3 = mysqli_query($conn, $query3);
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold">Anonim Berdonasi</h5>
                                     <p class="card-text">
-                                        Rp. 10.000,-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-12 col-md-6 col-lg-3 g-4">
-                    <div class="card dt-card-hover py-4">
-                        <div class="row g-0">
-                            <div class="col col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
-                                <i class="fa-solid fa-hands-holding-child dt-icon"></i>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold">Total Kampanye</h5>
-                                    <p class="card-text">
-                                        Rp. 10.000,-
+                                        <?php
+                                        $query = "SELECT sum(donation_amount) FROM `donations` WHERE `donation_account` = 2";
+                                        $result = mysqli_query($conn, $query);
+                                        $total = mysqli_fetch_array($result);
+                                        echo
+                                            "Rp." .
+                                            number_format($total[0])
+                                            . ",-";
+                                        ?>
                                     </p>
                                 </div>
                             </div>
@@ -87,7 +108,15 @@ $result3 = mysqli_query($conn, $query3);
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold">Total Donasi</h5>
                                     <p class="card-text">
-                                        Rp. 10.000,-
+                                        <?php
+                                        $query = "SELECT SUM(donation_amount) FROM `donations`";
+                                        $result = mysqli_query($conn, $query);
+                                        $total = mysqli_fetch_array($result);
+                                        echo
+                                            "Rp." .
+                                            number_format($total[0])
+                                            . ",-";
+                                        ?>
                                     </p>
                                 </div>
                             </div>
@@ -112,11 +141,11 @@ $result3 = mysqli_query($conn, $query3);
                                     <thead>
                                         <tr class="align-middle">
                                             <th scope="col">#</th>
+                                            <th scope="col">Thumbnail</th>
                                             <th scope="col">Judul</th>
                                             <th scope="col">Deskripsi</th>
                                             <th scope="col">Tanggal Mulai</th>
                                             <th scope="col">Tanggal Berakhir</th>
-                                            <th scope="col">Thumbnail</th>
                                             <th scope="col">Target</th>
                                             <th scope="col">Persetujuan</th>
                                         </tr>
@@ -131,6 +160,12 @@ $result3 = mysqli_query($conn, $query3);
                                                     <?= $i ?>
                                                 </th>
                                                 <td>
+                                                    <a target="_blank" href="<?= $row['campaign_thumbnail'] ?>">
+                                                        <img src="<?= $row['campaign_thumbnail'] ?>" class="img-thumbnail"
+                                                            alt="<?= $row['campaign_name'] ?>" width="42px">
+                                                    </a>
+                                                </td>
+                                                <td>
                                                     <?= $row['campaign_name'] ?>
                                                 </td>
                                                 <td>
@@ -143,16 +178,15 @@ $result3 = mysqli_query($conn, $query3);
                                                     <?= $row['campaign_end'] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $row['campaign_thumbnail'] ?>
+                                                    <?= "Rp." .
+                                                        number_format($row['campaign_target'])
+                                                        . ",-" ?>
                                                 </td>
                                                 <td>
-                                                    <?= $row['campaign_target'] ?>
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-primary" href="#">
+                                                    <a class="my-2 btn btn-primary" href="#">
                                                         Approve
                                                     </a>
-                                                    <a class="btn btn-danger" href="#">
+                                                    <a class="my-2 btn btn-danger" href="#">
                                                         Hapus
                                                     </a>
                                                 </td>
@@ -182,6 +216,7 @@ $result3 = mysqli_query($conn, $query3);
                                     <thead>
                                         <tr class="align-middle">
                                             <th scope="col">#</th>
+                                            <th scope="col">Avatar</th>
                                             <th scope="col">Nama</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Phone</th>
@@ -197,6 +232,12 @@ $result3 = mysqli_query($conn, $query3);
                                                 <th scope="row">
                                                     <?= $i ?>
                                                 </th>
+                                                <td>
+                                                    <a target="_blank" href="<?= $row['account_avatar'] ?>">
+                                                        <img src="<?= $row['account_avatar'] ?>" class="img-thumbnail"
+                                                            alt="<?= $row['account_name'] ?>" width="42px">
+                                                    </a>
+                                                </td>
                                                 <td>
                                                     <?= $row['account_name'] ?>
                                                 </td>

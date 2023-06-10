@@ -117,12 +117,13 @@
   --bs-form-invalid-color: #dc3545;
   --bs-form-invalid-border-color: #dc3545;
 }
-
 .nav-pills {
     --bs-nav-pills-link-active-color: #fff;
     --bs-nav-pills-link-active-bg: #BD8F43;
 }
-
+.dropdown-menu {
+    --bs-dropdown-link-active-bg: #E5BA73;
+}
 .btn-primary {
     --bs-btn-color: #FFFAF0;
     --bs-btn-bg: #E5BA73;
@@ -177,6 +178,12 @@
     border-right: 1px solid rgba(0,0, 0, 0.1);
     box-shadow: 15px 0px 10px -15px rgba(0,0, 0, 0.1);
     overflow-y: auto;
+    display: none;
+}
+@media (min-width: 1200px) {
+    #dt-sidebar {
+        display: block;
+    }
 }
 #avatar {
     border: none;
