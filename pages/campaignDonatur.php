@@ -31,7 +31,7 @@ include('../server/connection.php');
                 </tr>
             </thead>
             <tbody>
-                <!-- TODO : LIMIT 3 BARIS AJA -->
+                <!-- TODO : LIMIT 4 BARIS AJA -->
                 <tr>
                     <th scope="row">1</th>
                     <td>Nama kegiatan</td>
@@ -62,6 +62,8 @@ include('../server/connection.php');
             </tbody>
     </table>
 
+
+    <!-- ini biarin static aja -->
     <nav aria-label="Page navigation example" class="nav-pag">
         <ul class="pagination">
             <li class="page-item">

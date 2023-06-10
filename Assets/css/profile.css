@@ -162,6 +162,15 @@ input[type=submit]{
     margin-top: 3%;
 }
 
+/* INI BUAT JAGA TEKS BUAT GA OVERLOAD TAPI BLM BISA */
+.table-campaign{
+    width: 30px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+
 .btn-campaign{
     margin-left: 2%;
     color: #fff;

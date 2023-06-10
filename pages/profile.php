@@ -8,30 +8,27 @@ include('../server/connection.php');
 <!-- Logic -->
 <?php
     // masih ERROR
-    // if (isset($_POST['up'])) {
+//     if (isset($_POST['up'])) {
 
-    // $account_id = $_GET['account_id'];
+//     $account_id = $_POST['account_id'];
     
-    // $nama_akun = $_POST['account_name'];
-    // $email_akun = $_POST['account_email'];
-    // $Telephone = $_POST['account_phone'];
-    // $path = "../Assets/images/" . basename($_FILES['account_pict']['name']);
-    // $image = $_FILES['account_pict']['name'];
+//     $nama_akun = $_POST['account_name'];
+//     $email_akun = $_POST['account_email'];
+//     $Telephone = $_POST['account_phone'];
+//     $path = "../Assets/images/" . basename($_FILES['account_pict']['name']);
+//     $image = $_FILES['account_pict']['name'];
     
-    // // if (!empty($_FILES['skill_image']['name'])) {
-    // // }
-    // move_uploaded_file($_FILES['pict_akun']['name'], $path);
+//     move_uploaded_file($_FILES['pict_akun']['name'], $path);
     
-    // $query = "UPDATE accounts SET account_name= '$nama_akun', account_email = '$email_akun', account_phone = '$Telephone', account_avatar = '$image' WHERE ID_akun = '$ID_akun'";
-    // $edit_profile = mysqli_query($conn, $query);
-    // }
+//     $query = "UPDATE accounts SET account_name = '$nama_akun', account_email = '$email_akun', account_phone = '$Telephone', account_avatar = '$image' WHERE ID_akun = '$account_id'";
+//     $edit_profile = mysqli_query($conn, $query);
     
-    // $info_akun = "SELECT * FROM account";
-    // $result_info = mysqli_query($conn, $info_akun);
-    // $row = mysqli_fetch_assoc($result_info);
+// }
 
-    
-?>
+// $info_akun = "SELECT * FROM accounts";
+// $result_info = mysqli_query($conn, $info_akun);
+// $row = mysqli_fetch_assoc($result_info);
+// ?>
 <!-- UI -->
 <link rel="stylesheet" href="../Assets/css/profile.css">
 <?php include('../components/header.php'); ?>
@@ -51,10 +48,11 @@ include('../server/connection.php');
     </div>
 
     <div class="form-profile">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="account_id" value="<?php echo $_SESSION['account_id']; ?>">
             <div class="form-row">
                 <div class="d-flex px-3 col-5">
-                    <input type="username" class="form-control" name="nama_akun" value="<?php echo $row['nama_akun']; ?>" placeholder="Masukan Nama">
+                    <input type="username" class="form-control" name="nama_akun" value="<?php echo $row['account_name']; ?>" placeholder="Masukan Nama">
                 </div>
                 <div class="d-flex px-3 col-5">
                     <input type="password" class="form-control"  name="email_akun" placeholder="Masukan Email">
@@ -70,8 +68,24 @@ include('../server/connection.php');
             </div>
             <button class="edit-btn" name="up">Edit Profile</button>
         </form>
-      
     </div>
+
+        <!-- alert -->
+    <?php
+    if (isset($_GET["updated"]) && $_GET["updated"] == true) {
+    ?>
+    <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+        Berhasil mengubah profile kamu!
+        <a href="campaign.php" class="btn-close"></a>
+    </div>
+    <?php } else if (isset($_GET["updated"]) && $_GET["updated"] == false) { ?>
+        <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+            Gagal mengubah profile kamu..
+            <a href="campaign.php" class="btn-close"></a>
+        </div>
+    <?php }
+    ?>
+
 </div>
 
 <?php include('../components/js.php'); ?>
