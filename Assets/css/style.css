@@ -28,7 +28,6 @@ body{
     background-size: cover;
 }
 
-
 .carousel-caption{
     margin-top: 40%;
     margin-left: -5%;
@@ -55,21 +54,19 @@ body{
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg:  #E5BA73;
 }
-.btn-second{
-    width: 20vh;
+
+.detail-btn{
+    color: #fff;
     background-color: #E5BA73;
-    color: #ffff;
     border: none;
     border-radius: 5px;
+    width: 20%;
+    padding: 5px;
 }
 
-.btn-second:hover{
-    background-color: #be995f;
-}
-
-.btn-second:active{
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg:  #E5BA73;
+.form-check-input:checked {
+    background-color: #E5BA73;
+    border-color: #E5BA73;
 }
 
 .open-donation{
@@ -107,7 +104,6 @@ body{
 
 .pay-input{
     border: 1px solid #E5BA73;
-    margin-left: 5%;
     width: 70vh;
     padding: 8px;
 }
@@ -239,25 +235,26 @@ footer {
 }
 
 /* dt */
+
+.progress {
+    --bs-progress-height: 1rem;
+    --bs-progress-font-size: 0.75rem;
+    --bs-progress-bg: var(--bs-secondary-bg);
+    --bs-progress-border-radius: var(--bs-border-radius);
+    --bs-progress-box-shadow: var(--bs-box-shadow-inset);
+    --bs-progress-bar-color: #fff;
+    --bs-progress-bar-bg:  #E5BA73;
+    color: white;
+    --bs-progress-bar-transition: width 0.6s ease;
+    display: flex;
+    height: var(--bs-progress-height);
+    overflow: hidden;
+    font-size: var(--bs-progress-font-size);
+    background-color: var(--bs-progress-bg);
+    border-radius: var(--bs-progress-border-radius);
+}
+
 .accordion-button:not(.collapsed) {
     color: #212529;
     background-color: transparent!important;
 }
-
-.link-unstyled, .link-unstyled:visited, .link-unstyled:hover, .link-unstyled:active, .link-unstyled:focus, .link-unstyled:active:hover {
-    font-style: inherit;
-    color: inherit;
-    background-color: transparent;
-    font-size: inherit;
-    text-decoration: none;
-    font-variant: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    font-family: inherit;
-    border-radius: inherit;
-    border: inherit;
-    outline: inherit;
-    box-shadow: inherit;
-    padding: inherit;
-    vertical-align: inherit;
-  }

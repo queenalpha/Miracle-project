@@ -16,6 +16,9 @@
             <a class="d-inline-block btn btn-outline-dark" href="#">
                 <i class="fa-brands fa-youtube"></i>
             </a>
+            <a class="d-inline-block btn btn-outline-dark" href="https://github.com/queenalpha/Miracle-project.git" target="blank">
+                <i class="fa-brands fa-github"></i>
+            </a>
         </div>
         <div class="col col-12 col-lg-3">
             <h4>Menu</h4>
@@ -35,7 +38,7 @@
             </div>
         </div>
         <div class="col col-12 col-lg-3">
-            <h4>Kontak</h4>
+            <h4>Teams</h4>
             <div>
                 <li class="list-group-item mb-1">
                     <a href="#">Link</a>

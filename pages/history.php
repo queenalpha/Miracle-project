@@ -2,6 +2,7 @@
 <?php
 $title = "Miracle - Donation History";
 $prevent = 'guest';
+$pages = basename($_SERVER['PHP_SELF']);
 include('../server/connection.php');
 ?>
 <!-- Logic -->
@@ -9,37 +10,10 @@ include('../server/connection.php');
 
 ?>
 <!-- Logic -->
+<link rel="stylesheet" href="../Assets/css/testt.css">
 <?php include('../components/header.php'); ?>
-<nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
-    <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
-</nav>
+<?php include('../components/sidebar.php');?>
 
-<div class="side-bar">
-    <div class="side-text">
-        <ul>
-            <li>
-                <a href="`../pages/profile.php">Profile</a>
-            </li>
-            <li>
-                <a href="">Riwayat Donasi</a>
-            </li>
-            <li>
-                <a href="campaign.php">Program Campaign</a>
-            </li>
-        </ul>
-
-        <div class="link-bottom">
-            <ul>
-                <li>
-                    <a href="index.php">Home</a>
-                </li>
-                <li>
-                    <a href="profilePage.php?logout=1">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
 
 <div class="container">
     <div class="intro-judul">

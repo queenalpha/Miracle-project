@@ -1,0 +1,179 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.web-header-content{
+    box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e6e6e6;
+    height: 56px;
+    background: #ffffff;   
+}
+
+.web-sidebar{
+    position: fixed;
+    min-height: 100vh;
+    height: 100%;
+    left: 0;
+    top: 0;
+    font-size: 0.875rem;
+    border-right: 1px solid #e7e9ed;
+}
+
+.web-side-content{
+    position: relative;
+    z-index: 10;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 8px 15px;
+    width: 250px;
+    height: 100%;
+}
+
+.main-content{
+    overflow-y: auto;
+    margin-top: 20%;
+    color: #272727;
+   
+}
+
+.footer-content{
+    padding: 0;
+    width: 100%;
+    border-top: 2px solid #b3b3b3;
+}
+
+.li-hov:hover, .a-style:hover{
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #e6b573;
+    color: #fff;
+}
+.a-style{
+    color: #272727;
+}
+
+.click{
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e6b573;
+    color: #fff;
+}
+.li-hov{
+    margin: 2px;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.list-unstyled{
+    font-size: 15px;
+}
+/* profile */
+
+.profile .profile-img{
+    margin-left: 25em;
+    margin-top: 7em;
+    position: relative;
+    border-radius: 100%;
+    margin-bottom: 40px;
+}
+
+.bio{
+    margin: 20px;
+    margin-top: 8em;
+    margin-left: 3em;
+}
+
+
+p,h6 {
+    font-weight: 300;
+    font-size: small;
+}
+
+.form-profile form{
+    marg
+}
+.form-row
+input[type=username],
+input[type=email],
+input[type=password],
+input[type=tel],
+input[type=submit]{
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+
+/* .side-text ul, a{
+    color: #515151;
+    list-style: none;
+    text-decoration: none;
+    margin: 3px;
+    margin-top: 2em;
+}
+
+li{
+    margin-top: 14px;
+} */
+
+.link-bottom{
+    margin-top: 20em;
+}
+.form-row{
+    display: flex;
+    margin-left: 23%;
+}
+
+.form-photo{
+    margin-top: 12%;
+}
+
+.form-tel{
+    margin-top: 12%;
+    margin-left: -38rem;
+}
+
+.edit-btn{
+    border-radius: 8px;
+    width: 10%;
+    color: #fff;
+    background-color: #e6b573;
+    padding: 5px;
+    border: none;
+    margin-top: 16px;
+    margin-left: 25%;
+}
+
+
+/* Riwayat donasi */
+
+.intro-judul {
+    position: absolute;
+    margin-left: 5em;
+    margin-top: 6em;
+}
+
+
+.table{
+    width: 20%;
+    background-color: #fff;
+    position: absolute;
+    border: 1px solid #b9b7b7;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 3px;
+    margin-top: 15%;
+    margin-left: 10%;
+}
+
+/* Campaign user */
+
+/* .btn-campaign{
+    display: flex;
+    margin-top: -10%;
+    margin-left: 18em;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #e6b573;
+} */ 

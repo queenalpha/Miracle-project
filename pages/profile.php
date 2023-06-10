@@ -2,6 +2,7 @@
 <?php
 $title = "Miracle - Landing Page";
 $prevent = 'guest';
+$pages = basename($_SERVER['PHP_SELF']);
 include('../server/connection.php');
 ?>
 <!-- Logic -->
@@ -9,41 +10,16 @@ include('../server/connection.php');
 
 ?>
 <!-- UI -->
+<link rel="stylesheet" href="../Assets/css/testt.css">
 <?php include('../components/header.php'); ?>
-<nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
-    <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
-</nav>
-
-<div class="side-bar">
-    <div class="side-text">
-        <ul>
-            <li>
-                <a href="">Profile</a>
-            </li>
-            <li>
-                <a href="riwayatDonasi.php">Riwayat Donasi</a>
-            </li>
-            <li>
-                <a href="campaign.php">Program Campaign</a>
-            </li>
-        </ul>
-
-        <div class="link-bottom">
-            <ul>
-                <li>
-                    <a href="index.php">Home</a>
-                </li>
-                <li>
-                    <a href="profilePage.php?logout=1">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+<?php include('../components/sidebar.php');?>
 
 <div class="container profile">
     <div class="profile-content d-flex">
-        <img src="Assets/image/profile/team-2.jpg" class="profile-img" width="120px" height="120px" alt="">
+        <div>
+        <img src="../Assets/image/profile/team-2.jpg" class="profile-img object-fit-cover" width="120px" height="120px" alt="">    
+        </div>
+        
         <div class="bio">
             <h4>Fahri aqila putra</h4>
             <h6>0859321324</h6>
@@ -51,32 +27,31 @@ include('../server/connection.php');
         </div>
     </div>
 
-    <div class="container">
+    <div class="form-profile">
         <form>
-            <div class="form-row my-3 ">
-                <div class="col-4">
-                    <label for="Email">Name</label>
-                    <input type="username" class="form-control" placeholder="Name">
+            <div class="form-row">
+                <div class="d-flex px-3 col-5">
+                    <input type="email" class="form-control" name="email" placeholder="Masukan Nama">
                 </div>
-                <div class="form-email col-4 ms-5">
-                    <label for="Email">Email</label>
-                    <input type="email" class="form-control" placeholder="Email">
-                </div>
-                <div class="form-tel col-4">
-                    <label for="tel">Telephone</label>
-                    <input type="tel" class="form-control" placeholder="Telephone">
-                </div>
-                <div class="form-photo col-4 ms-5">
-                    <label for="Email">Photo</label>
-                    <input type="file" class="form-control" placeholder="Email">
+                <div class="d-flex px-3 col-5">
+                    <input type="password" class="form-control"  name="password" placeholder="Masukan Email">
                 </div>
             </div>
+            <div class="form-row mt-3">
+                <div class="d-flex px-3 col-5">
+                    <input type="password" class="form-control" name="password" placeholder="Masukan Telephone">
+                </div>
+                <div class="px-3 mt-2 col-5">
+                <input type="file" class="form-control" name="email" placeholder="Masukan Photo">
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                
+            </div>
         </form>
-        <button class="edit-btn btn-second">Edit Profile</button>
+       <button class="edit-btn">Edit Profile</button>
     </div>
 </div>
 
-
-<?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
 <?php include('../components/close.php'); ?>

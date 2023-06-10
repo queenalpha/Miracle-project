@@ -2,6 +2,7 @@
 <?php
 $title = "Miracle - Create Campaign";
 $prevent = 'guest';
+$pages = basename($_SERVER['PHP_SELF']);
 include('../server/connection.php');
 ?>
 <!-- Logic -->
@@ -25,37 +26,13 @@ if (isset($_POST['btn-campaign'])) {
 }
 ?>
 <!-- Logic -->
+<link rel="stylesheet" href="../Assets/css/testt.css">
 <?php include('../components/header.php'); ?>
+<?php include('../components/sidebar.php');?>
 <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
     <img src="../assets/icon/typograph.png" class="ms-5" width="100px" alt="">
 </nav>
 
-<div class="side-bar">
-    <div class="side-text">
-        <ul>
-            <li>
-                <a href="profilePage.php">Profile</a>
-            </li>
-            <li>
-                <a href="riwayatDonasi.php">Riwayat Donasi</a>
-            </li>
-            <li>
-                <a href="#">Program Campaign</a>
-            </li>
-        </ul>
-
-        <div class="link-bottom">
-            <ul>
-                <li>
-                    <a href="index.php">Home</a>
-                </li>
-                <li>
-                    <a href="profilePage.php?logout=1">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
 <!-- alert -->
 <?php
 if (isset($_GET["created"]) && $_GET["created"] == true) {
@@ -125,36 +102,41 @@ if (isset($_GET["created"]) && $_GET["created"] == true) {
         </div>
         <!-- End modal -->
     </div>
-
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Campaign</th>
-                <th scope="col">Target</th>
-                <th scope="col">Hapus Campaign</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <?php while ($row = mysqli_fetch_assoc($result_campaign)): ?>
-                    <th scope="row">
-                        <?= $row['ID_campaign'] ?>
-                    </th>
-                    <td>
-                        <?= $row['campaign_name'] ?>
-                    </td>
-                    <td>
-                        <?= $row['campaign_target'] ?>
-                    </td>
-                    <td><button>Hapus</button></td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-
-    </table>
 </div>
 
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Campaign</th>
+                    <th scope="col">Tanggal</th>
+                    <th scope="col">Target</th>
+                    <th scope="col">Terkumpul</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row" class="col-1">1</th>
+                    <td class="col-2">Nama kegiatan</td>
+                    <td>11-12-2023</td>
+                    <td>Rp1,000,000</td>
+                    <td>Rp50,000</td>
+                    <td class="col-1">Process</td>
+                    <!-- <td>Approved</td> -->
+                    <td colspan="2" class="col-2">
+                        <button>Hapus</button>
+                        <button>Hapus</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+   
+
+    
+
 <?php include('../components/js.php'); ?>
-<?php include('../components/footer.php'); ?>
 <?php include('../components/close.php'); ?>

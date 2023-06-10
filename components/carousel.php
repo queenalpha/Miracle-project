@@ -17,7 +17,7 @@
     <div class="carousel-caption h-75 text-start d-flex justify-content-startalign-items-center flex-column">
         <h5 class="mb-4">Do Somehting Special <br> To Help Others</h5>
         <p class="mb-4">Make a miracle with your charity</p>
-        <a href="#" class="btn btn-primary btn-second">Donate</a>
+        <a href="#" class="btn btn-primary detail-btn">Donate</a>
     </div>
 </div>
 
