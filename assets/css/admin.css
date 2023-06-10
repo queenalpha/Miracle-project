@@ -189,6 +189,10 @@
     border: none;
     background:none;
 }
+.form-control:focus {
+    border-color: #e5ba73;
+    box-shadow: 0 0 0 0.25rem rgba(229, 186, 115,.25);
+}
 .dt-icon {
     font-size:48px;
     color: #e5ba73;
