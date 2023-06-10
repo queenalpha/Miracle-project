@@ -103,6 +103,10 @@ $result_camp = mysqli_query($conn, $from_campaign);
                             <p class="card-text">
                                 <?= $row['campaign_description'] ?>
                             </p>
+                            <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0"
+                            aria-valuemax="100">
+                            <div class="progress-bar" style="width: 15%"></div>
+                            </div>
                             <p class="card-text">Membutuhkan Rp
                                 <?= number_format($row['campaign_target']) ?>
                             </p>
@@ -176,13 +180,15 @@ $result_camp = mysqli_query($conn, $from_campaign);
 <?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
 <script>
-  var nav = document.querySelector(' nav'); window.addEventListener('scroll', function () {
+  var nav = document.querySelector('nav'); window.addEventListener('scroll', function () {
     if (window.pageYOffset >
       100) {
       nav.classList.add('bg-white', 'shadow');
     } else {
-      nav.classList.remove('bg-white', 'shadow');
+      nav.classList.remove('bg-white', 'shadow', 'text-dark');
     }
   })
+
+
 </script>
 <?php include('../components/close.php'); ?>

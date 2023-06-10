@@ -227,13 +227,15 @@ $result_camp = mysqli_query($conn, $from_campaign);
 <?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
 <script>
-    var nav = document.querySelector('nav');
-    window.addEventListener('scroll', function () {
-        if (window.pageYOffset > 100) {
-            nav.classList.add('bg-white', 'shadow');
-        } else {
-            nav.classList.remove('bg-white', 'shadow');
-        }
-    })
+  var nav = document.querySelector('nav'); window.addEventListener('scroll', function () {
+    if (window.pageYOffset >
+      100) {
+      nav.classList.add('bg-white', 'shadow');
+    } else {
+      nav.classList.remove('bg-white', 'shadow', 'text-dark');
+    }
+  })
+
+
 </script>
 <?php include('../components/close.php'); ?>

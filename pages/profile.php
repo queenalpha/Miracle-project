@@ -7,7 +7,30 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
+    // masih ERROR
+    // if (isset($_POST['up'])) {
 
+    // $account_id = $_GET['account_id'];
+    
+    // $nama_akun = $_POST['account_name'];
+    // $email_akun = $_POST['account_email'];
+    // $Telephone = $_POST['account_phone'];
+    // $path = "../Assets/images/" . basename($_FILES['account_pict']['name']);
+    // $image = $_FILES['account_pict']['name'];
+    
+    // // if (!empty($_FILES['skill_image']['name'])) {
+    // // }
+    // move_uploaded_file($_FILES['pict_akun']['name'], $path);
+    
+    // $query = "UPDATE accounts SET account_name= '$nama_akun', account_email = '$email_akun', account_phone = '$Telephone', account_avatar = '$image' WHERE ID_akun = '$ID_akun'";
+    // $edit_profile = mysqli_query($conn, $query);
+    // }
+    
+    // $info_akun = "SELECT * FROM account";
+    // $result_info = mysqli_query($conn, $info_akun);
+    // $row = mysqli_fetch_assoc($result_info);
+
+    
 ?>
 <!-- UI -->
 <link rel="stylesheet" href="../Assets/css/profile.css">
@@ -28,28 +51,26 @@ include('../server/connection.php');
     </div>
 
     <div class="form-profile">
-        <form>
+        <form method="POST">
             <div class="form-row">
                 <div class="d-flex px-3 col-5">
-                    <input type="email" class="form-control" name="email" placeholder="Masukan Nama">
+                    <input type="username" class="form-control" name="nama_akun" value="<?php echo $row['nama_akun']; ?>" placeholder="Masukan Nama">
                 </div>
                 <div class="d-flex px-3 col-5">
-                    <input type="password" class="form-control"  name="password" placeholder="Masukan Email">
+                    <input type="password" class="form-control"  name="email_akun" placeholder="Masukan Email">
                 </div>
             </div>
             <div class="form-row mt-3">
                 <div class="d-flex px-3 col-5">
-                    <input type="password" class="form-control" name="password" placeholder="Masukan Telephone">
+                    <input type="password" class="form-control" name="Telephone" placeholder="Masukan Telephone">
                 </div>
                 <div class="px-3 mt-2 col-5">
-                <input type="file" class="form-control" name="email" placeholder="Masukan Photo">
+                <input type="file" class="form-control" name="pict_akun" placeholder="Masukan Photo">
                 </div>
             </div>
-            <div class="form-row mt-3">
-                
-            </div>
+            <button class="edit-btn" name="up">Edit Profile</button>
         </form>
-       <button class="edit-btn">Edit Profile</button>
+      
     </div>
 </div>
 

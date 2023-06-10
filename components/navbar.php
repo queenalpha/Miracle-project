@@ -1,4 +1,4 @@
- <nav class="fixed-top navbar navbar-expand-lg  px-5">
+ <nav class="fixed-top navbar navnav navbar-expand-lg  px-5">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="../assets/icon/typograph.png" alt="Brand Image" height="30" />
