@@ -106,6 +106,62 @@ $result3 = mysqli_query($conn, $query3);
                                 </div>
                             </div>
                         </div>
+                        <div class="card-body dt-card-limit">
+                            <div class="col col-12">
+                                <table class="table table-borderless table-hover">
+                                    <thead>
+                                        <tr class="align-middle">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Judul</th>
+                                            <th scope="col">Deskripsi</th>
+                                            <th scope="col">Tanggal Mulai</th>
+                                            <th scope="col">Tanggal Berakhir</th>
+                                            <th scope="col">Thumbnail</th>
+                                            <th scope="col">Target</th>
+                                            <th scope="col">Persetujuan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $i = 0;
+                                        while ($row = mysqli_fetch_assoc($result1)):
+                                            $i++; ?>
+                                            <tr class="align-middle">
+                                                <th scope="row">
+                                                    <?= $i ?>
+                                                </th>
+                                                <td>
+                                                    <?= $row['campaign_name'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $row['campaign_description'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $row['campaign_start'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $row['campaign_end'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $row['campaign_thumbnail'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $row['campaign_target'] ?>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-primary" href="#">
+                                                        Approve
+                                                    </a>
+                                                    <a class="btn btn-danger" href="#">
+                                                        Hapus
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col col-12  col-lg-6 g-4">
@@ -124,11 +180,12 @@ $result3 = mysqli_query($conn, $query3);
                             <div class="col col-12">
                                 <table class="table table-borderless table-hover">
                                     <thead>
-                                        <tr>
+                                        <tr class="align-middle">
                                             <th scope="col">#</th>
                                             <th scope="col">Nama</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Phone</th>
+                                            <th scope="col">Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -136,7 +193,7 @@ $result3 = mysqli_query($conn, $query3);
                                         $i = 0;
                                         while ($row = mysqli_fetch_assoc($result2)):
                                             $i++; ?>
-                                            <tr>
+                                            <tr class="align-middle">
                                                 <th scope="row">
                                                     <?= $i ?>
                                                 </th>
@@ -148,6 +205,11 @@ $result3 = mysqli_query($conn, $query3);
                                                 </td>
                                                 <td>
                                                     <?= $row['account_phone'] ?>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-secondary w-100" href="#">
+                                                        Edit
+                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>
@@ -173,7 +235,7 @@ $result3 = mysqli_query($conn, $query3);
                             <div class="col col-12">
                                 <table class="table table-borderless table-hover">
                                     <thead>
-                                        <tr>
+                                        <tr class="align-middle">
                                             <th scope="col">#</th>
                                             <th scope="col">Dari</th>
                                             <th scope="col">Untuk</th>
@@ -186,7 +248,7 @@ $result3 = mysqli_query($conn, $query3);
                                         $i = 0;
                                         while ($row = mysqli_fetch_assoc($result3)):
                                             $i++; ?>
-                                            <tr>
+                                            <tr class="align-middle">
                                                 <th scope="row">
                                                     <?= $i ?>
                                                 </th>
@@ -214,7 +276,7 @@ $result3 = mysqli_query($conn, $query3);
                                                     ,-
                                                 </td>
                                                 <td>
-                                                    <a href="#">Detail</a>
+                                                    <a class="btn btn-secondary w-100" href="#">Detail</a>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>
