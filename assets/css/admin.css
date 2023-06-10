@@ -219,7 +219,7 @@ input[type=submit]{
     box-shadow: 0 10px 20px rgba(229, 186, 115,.25), 0 4px 8px rgba(0,0,0,.03);
 }
 .dt-card-limit {
-    max-height: 25rem;
+    max-height: 30rem;
     overflow-y: auto;
 }
 .dt-shadow-bottom {

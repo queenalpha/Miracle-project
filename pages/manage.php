@@ -21,10 +21,10 @@ if (isset($_GET['manage']) && isset($_POST['campaign'])) {
 
 if (isset($_GET['manage']) && isset($_POST['account'])) {
     $target = $_POST['account'];
-    $query2 = "SELECT *  FROM `accounts` WHERE `account_name` LIKE '%$target%' OR `account_email` LIKE '%$target%' OR `account_phone` LIKE '%$target%' ORDER BY account_id desc";
+    $query2 = "SELECT *  FROM `accounts` WHERE `account_id` != 1 AND `account_id` != 2 AND (`account_name` LIKE '%$target%' OR `account_email` LIKE '%$target%' OR `account_phone` LIKE '%$target%') ORDER BY account_id desc";
     $result2 = mysqli_query($conn, $query2);
 } else {
-    $query2 = "SELECT * FROM accounts ORDER BY account_id desc";
+    $query2 = "SELECT * FROM accounts WHERE `account_id` != 1 AND `account_id` != 2 ORDER BY account_name asc";
     $result2 = mysqli_query($conn, $query2);
 }
 
@@ -59,7 +59,7 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
             <!-- Accounts Edit -->
             <?php if (isset($_GET['manage']) && $_GET['manage'] == 'accounts') { ?>
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header sticky-top bg-white">
                         <form class="row gy-2" action="" method="post">
                             <div class="col col-12 col-md-12 col-lg-8">
                                 <input name="account" class="form-control" type="text" placeholder="Cari dan tekan enter..."
@@ -125,7 +125,7 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
             <!-- Campaign Edit -->
             <?php if (isset($_GET['manage']) && $_GET['manage'] == 'campaigns') { ?>
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header sticky-top bg-white sticky-top bg-white">
                         <form class="row gy-2" action="" method="post">
                             <div class="col col-12 col-md-12 col-lg-8">
                                 <input name="campaign" class="form-control" type="text"
@@ -213,7 +213,7 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
             <!-- Donation Edit -->
             <?php if (isset($_GET['manage']) && $_GET['manage'] == 'donations') { ?>
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header sticky-top bg-white">
                         <form class="row gy-2" action="" method="post">
                             <div class="col col-12 col-md-12 col-lg-8">
                                 <input name="donation" class="form-control" type="text"
