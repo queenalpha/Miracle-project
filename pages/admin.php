@@ -157,9 +157,11 @@ $result3 = mysqli_query($conn, $query3);
                                                     <?= $i ?>
                                                 </th>
                                                 <td>
-                                                    <a target="_blank" href="<?= $row['campaign_thumbnail'] ?>">
-                                                        <img src="<?= $row['campaign_thumbnail'] ?>" class="img-thumbnail"
-                                                            alt="<?= $row['campaign_name'] ?>" width="42px">
+                                                    <a class="ratio ratio-1x1" target="_blank"
+                                                        href="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>">
+                                                        <img src="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>"
+                                                            class="img-thumbnail object-fit-cover "
+                                                            alt="<?= $row['campaign_thumbnail'] ?>" width="42px">
                                                     </a>
                                                 </td>
                                                 <td>
@@ -230,9 +232,11 @@ $result3 = mysqli_query($conn, $query3);
                                                     <?= $i ?>
                                                 </th>
                                                 <td>
-                                                    <a target="_blank" href="<?= $row['account_avatar'] ?>">
-                                                        <img src="<?= $row['account_avatar'] ?>" class="img-thumbnail"
-                                                            alt="<?= $row['account_name'] ?>" width="42px">
+                                                    <a class="ratio ratio-1x1" target="_blank"
+                                                        href="<?= "../assets/image/" . $row['account_avatar'] ?>">
+                                                        <img src="<?= "../assets/image/" . $row['account_avatar'] ?>"
+                                                            class="img-thumbnail object-fit-cover "
+                                                            alt="<?= $row['account_avatar'] ?>" width="42px">
                                                     </a>
                                                 </td>
                                                 <td>
