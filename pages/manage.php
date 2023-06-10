@@ -42,6 +42,52 @@ $result3 = mysqli_query($conn, $query3);
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-body">
+                                <table class="table table-borderless table-hover">
+                                    <thead>
+                                        <tr class="align-middle">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Avatar</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Phone</th>
+                                            <th scope="col">Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $i = 0;
+                                        while ($row = mysqli_fetch_assoc($result2)):
+                                            $i++; ?>
+                                            <tr class="align-middle">
+                                                <th scope="row">
+                                                    <?= $i ?>
+                                                </th>
+                                                <td>
+                                                    <a target="_blank" href="<?= $row['account_avatar'] ?>">
+                                                        <img src="<?= $row['account_avatar'] ?>" class="img-thumbnail"
+                                                            alt="<?= $row['account_name'] ?>" width="42px">
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <?= $row['account_name'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $row['account_email'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $row['account_phone'] ?>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-secondary w-100" href="#">
+                                                        Edit
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <?php include('../components/admin/footer.php'); ?>
                     <?php } ?>
