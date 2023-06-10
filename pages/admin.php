@@ -1,10 +1,7 @@
-<?php
-//TODO: ADMIN, SETTINGS, MANAGE (ASIGNEE: DETE)
-?>
 <!-- Model -->
 <?php
 $title = "Miracle - Admin Dashboard";
-$prevent = 'guest';
+$prevent = 'user';
 include('../server/connection.php');
 ?>
 <!-- Controller -->
@@ -131,7 +128,7 @@ $result3 = mysqli_query($conn, $query3);
                                     <h5 class="card-title m-0 fw-bold">Approval Kampanye</h5>
                                 </div>
                                 <div class="col col-12 col-md-6 d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="#">Manage</a>
+                                    <a class="btn btn-primary" href="../pages/manage.php?manage=campaigns">Manage</a>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +203,7 @@ $result3 = mysqli_query($conn, $query3);
                                     <h5 class="card-title m-0 fw-bold">Pengguna</h5>
                                 </div>
                                 <div class="col col-12 col-md-6 d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="#">Manage</a>
+                                    <a class="btn btn-primary" href="../pages/manage.php?manage=accounts">Manage</a>
                                 </div>
                             </div>
                         </div>
@@ -268,7 +265,7 @@ $result3 = mysqli_query($conn, $query3);
                                     <h5 class="card-title m-0 fw-bold">Donasi Terkini</h5>
                                 </div>
                                 <div class="col col-12 col-md-6 d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="#">Manage</a>
+                                    <a class="btn btn-primary" href="../pages/manage.php?manage=donations">Manage</a>
                                 </div>
                             </div>
                         </div>
