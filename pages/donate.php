@@ -231,7 +231,6 @@ $result_camp = mysqli_query($conn, $from_campaign);
             </div>          
     </section>
 
-    
     <?php include('../components/footer.php'); ?> 
 </main>
 

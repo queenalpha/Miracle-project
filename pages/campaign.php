@@ -26,14 +26,13 @@ if (isset($_POST['btn-campaign'])) {
 }
 ?>
 <!-- Logic -->
-<link rel="stylesheet" href="../Assets/css/testt.css">
+<link rel="stylesheet" href="../Assets/css/profile.css">
 <?php include('../components/header.php'); ?>
+
 <?php include('../components/sidebar.php');?>
-<nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
-    <img src="../assets/icon/typograph.png" class="ms-5" width="100px" alt="">
-</nav>
 
 <!-- alert -->
+
 <?php
 if (isset($_GET["created"]) && $_GET["created"] == true) {
     ?>
@@ -53,9 +52,10 @@ if (isset($_GET["created"]) && $_GET["created"] == true) {
 <!-- Bikin campaign disini -->
 <div class="container">
     <div class="intro-judul">
-        <h3>Daftar Campaign</h3>
-        <button class="btn-campaign" data-bs-toggle="modal" data-bs-target="#exampleModal">Buat Campaign</button>
-
+        <div class="d-flex">
+            <h3>Daftar Campaign Kamu</h3>
+            <button class="btn-campaign" data-bs-toggle="modal" data-bs-target="#exampleModal">Buat Campaign</button>
+        </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -101,41 +101,71 @@ if (isset($_GET["created"]) && $_GET["created"] == true) {
             </div>
         </div>
         <!-- End modal -->
+      
     </div>
-</div>
-
-
-        <table class="table table-hover">
+    <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Campaign</th>
-                    <th scope="col">Tanggal</th>
+                    <th scope="col">Tanggal Mulai</th>
+                    <th scope="col">Tanggal Akhir</th>
                     <th scope="col">Target</th>
                     <th scope="col">Terkumpul</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
+                <!-- TODO : LIMIT 4 BARIS AJA -->
                 <tr>
-                    <th scope="row" class="col-1">1</th>
-                    <td class="col-2">Nama kegiatan</td>
+                    <th scope="row">1</th>
+                    <td>Nama kegiatan</td>
                     <td>11-12-2023</td>
+                    <td>30-12-2023</td>
                     <td>Rp1,000,000</td>
                     <td>Rp50,000</td>
-                    <td class="col-1">Process</td>
+                    <td>Process</td>
                     <!-- <td>Approved</td> -->
-                    <td colspan="2" class="col-2">
-                        <button>Hapus</button>
-                        <button>Hapus</button>
+                    <td colspan="2" class="col-2 text-center">
+                        <div class="action">
+                            <a href="" class="a-edit text-decoration-none">
+                            Edit
+                            </a>
+                            <a href="" class="a-hapus text-decoration-none">
+                            Hapus
+                            </a>
+                        </div>
                     </td>
                 </tr>
             </tbody>
-        </table>
+    </table>
 
-   
+    <nav aria-label="Page navigation example" class="nav-pag">
+        <ul class="pagination">
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+            </li>
+        </ul>
+    </nav>
 
+</div>
+
+
+
+    
     
 
 <?php include('../components/js.php'); ?>

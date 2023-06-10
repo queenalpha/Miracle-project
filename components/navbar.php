@@ -41,8 +41,8 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Riwayat Donasi</a></li>
-                        <li><a class="dropdown-item" href="#">Buat Campaign</a></li>
+                        <li><a class="dropdown-item" href="history.php">Riwayat Donasi</a></li>
+                        <li><a class="dropdown-item" href="campaign.php">Buat Campaign</a></li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>

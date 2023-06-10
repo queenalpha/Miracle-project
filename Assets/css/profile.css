@@ -3,6 +3,7 @@
     padding: 0;
 }
 
+
 .web-header-content{
     box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid #e6e6e6;
@@ -37,9 +38,14 @@
 }
 
 .footer-content{
+    margin-top: 90%;
     padding: 0;
     width: 100%;
     border-top: 2px solid #b3b3b3;
+}
+
+.list-unstyled{
+    margin-top: 10%;
 }
 
 .li-hov:hover, .a-style:hover{
@@ -68,8 +74,6 @@
 .list-unstyled{
     font-size: 15px;
 }
-/* profile */
-
 .profile .profile-img{
     margin-left: 25em;
     margin-top: 7em;
@@ -85,14 +89,6 @@
 }
 
 
-p,h6 {
-    font-weight: 300;
-    font-size: small;
-}
-
-.form-profile form{
-    marg
-}
 .form-row
 input[type=username],
 input[type=email],
@@ -103,19 +99,6 @@ input[type=submit]{
     margin: 8px 0;
     box-sizing: border-box;
 }
-
-
-/* .side-text ul, a{
-    color: #515151;
-    list-style: none;
-    text-decoration: none;
-    margin: 3px;
-    margin-top: 2em;
-}
-
-li{
-    margin-top: 14px;
-} */
 
 .link-bottom{
     margin-top: 20em;
@@ -145,35 +128,52 @@ li{
     margin-left: 25%;
 }
 
-
-/* Riwayat donasi */
-
 .intro-judul {
-    position: absolute;
-    margin-left: 5em;
-    margin-top: 6em;
+    margin-left: 20%;
+    margin-top: 10%;
+}
+
+.intro-judul-2 {
+    margin-left: 20%;
+    margin-top: 8%;
 }
 
 
+.a-edit{
+    border-radius: 5px;
+    color:#272727;
+    border: 1px solid #272727;
+    padding: 8px;
+    width: 30%;
+}
+
+.a-hapus{
+    border-radius: 5px;
+    background-color: #e6b573;
+    color:#ffffff;
+    padding: 8px;
+    width: 30%;
+}
 .table{
-    width: 20%;
-    background-color: #fff;
-    position: absolute;
     border: 1px solid #b9b7b7;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 3px;
-    margin-top: 15%;
-    margin-left: 10%;
+    width: 85% !important;
+    margin-left: 20%;
+    margin-top: 3%;
 }
 
-/* Campaign user */
-
-/* .btn-campaign{
-    display: flex;
-    margin-top: -10%;
-    margin-left: 18em;
+.btn-campaign{
+    margin-left: 2%;
     color: #fff;
     border: none;
     padding: 5px;
     border-radius: 5px;
     background-color: #e6b573;
-} */ 
+} 
+.nav-pag{
+    margin-left: 50%;
+}
+
+.nav-pag  .page-link{
+    color: #272727;
+}

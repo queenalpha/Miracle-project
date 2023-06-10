@@ -10,7 +10,7 @@ include('../server/connection.php');
 
 ?>
 <!-- UI -->
-<link rel="stylesheet" href="../Assets/css/testt.css">
+<link rel="stylesheet" href="../Assets/css/profile.css">
 <?php include('../components/header.php'); ?>
 <?php include('../components/sidebar.php');?>
 
