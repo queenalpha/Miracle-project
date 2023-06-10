@@ -1,11 +1,5 @@
 <?php
-
-header('Location: pages/landing.php');
-
-?>
-<?php
 include('server/connection.php');
-
 
 
 $tampil_campaign = "SELECT * FROM campaign";
@@ -13,13 +7,9 @@ $result_campaign = mysqli_query($conn, $tampil_campaign);
 
 if(isset($_POST['btn-campaign'])){
     $nama_campaign = $_POST['nama_campaign'];
-    $keterangan = $_POST['deskripspi'];
     $keterangan = $_POST['deskripsi'];
     $target_donasi = $_POST['target'];
-    $foto_campaign = $_POST['foto']['name'];
 
-    $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$target_donasi','$foto_campaign')";
-    mysqli_query($conn, $buat_campaign);
     $path = "Assets/image/" . basename($_FILES['foto']['name']);
     $foto_campaign = $_FILES['foto']['name'];
 
@@ -27,20 +17,21 @@ if(isset($_POST['btn-campaign'])){
 
     $buat_campaign = "INSERT INTO campaign Values (null,'$nama_campaign','$keterangan','$foto_campaign','$target_donasi')";
 
-    if (mysqli_query($conn, $q)) {
     if (mysqli_query($conn, $buat_campaign)) {
         $success = true;
     } else {
         $success = false;
     }
 
-    header('location: campaign.php');
     header("location: campaign.php?created=$success");
 }
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,10 +45,12 @@ if(isset($_POST['btn-campaign'])){
     <link rel="icon" type="image/png" href="Assets/icon/icon.png">
     <title>Document</title>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
         <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
     </nav>
+
     <div class="side-bar">
         <div class="side-text">
             <ul>
@@ -71,6 +64,7 @@ if(isset($_POST['btn-campaign'])){
                     <a href="#">Program Campaign</a>
                 </li>
             </ul>
+
             <div class="link-bottom">
                 <ul>
                     <li>
@@ -83,21 +77,16 @@ if(isset($_POST['btn-campaign'])){
             </div>
         </div>
     </div>
-
     <!-- alert -->
     <?php
-  if (isset($_GET["created"]) && $_GET["created"] == true) {
      if (isset($_GET["created"]) && $_GET["created"] == true) {
     ?>
     <div id="alert" class="alert alert-success alert-dismissible fade show mt-3 " role="alert">
-      Yeay! portofolio kamu berhasil ditambahkan!
       Yeay! Campaign kamu berhasil dibuat!
       <a href="campaign.php" class="btn-close"></a>
     </div>
-  <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
      <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
       <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-        Yah, Portofolio kamu gagal ditambahkan..
         Yah, Campaign kamu gagal ditambahkan..
         <a href="campaign.php" class="btn-close"></a>
       </div>
@@ -110,6 +99,7 @@ if(isset($_POST['btn-campaign'])){
         <div class="intro-judul">
             <h3>Daftar Campaign</h3>
             <button class="btn-campaign" data-bs-toggle="modal" data-bs-target="#exampleModal">Buat Campaign</button>
+
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -119,7 +109,6 @@ if(isset($_POST['btn-campaign'])){
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" enctype="multipart/form-data" action="#">
                             <form method="POST" enctype="multipart/form-data" action="campaign.php">
                                 <div class="form-group row">
                                     <label for="colFormLabelSm"
@@ -157,45 +146,22 @@ if(isset($_POST['btn-campaign'])){
             </div>
             <!-- End modal -->
         </div>
-
+        
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Campaign</th>
-                    <th scope="col">Tanggal</th>
                     <th scope="col">Target</th>
-                    <th scope="col">Terkumpul</th>
                     <th scope="col">Hapus Campaign</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Nama kegiatan</td>
-                    <td>11-12-2023</td>
-                    <td>Rp1,000,000</td>
-                    <td>Rp50,000</td>
-                    <td><button>Hapus</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Nama kegiatan</td>
-                    <td>11-12-2023</td>
-                    <td>Rp1,000,000</td>
-                    <td>Rp50,000</td>
-                    <td><button>Hapus</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Nama kegiatan</td>
-                    <td>11-12-2023</td>
-                    <td>Rp1,000,000</td>
-                    <td>Rp50,000</td>
                 <?php while ($row = mysqli_fetch_assoc($result_campaign)): ?>
                     <th scope="row"><?php echo $row['ID_campaign']?></th>
                     <td><?php echo $row['nama_campaign']?></td>
-                    <td><?php echo $row['target']?></td>
+                    <td>Rp<?php echo number_format($row['target']) ?></td>
                     <td><button>Hapus</button></td>
                 </tr>
                 <?php endwhile;?>
@@ -208,4 +174,5 @@ if(isset($_POST['btn-campaign'])){
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -7,8 +7,6 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
-$tampil_campaign = "SELECT * FROM campaigns";
-$result_campaign = mysqli_query($conn, $tampil_campaign);
 
 if (isset($_POST['btn-campaign'])) {
     $campaign_name = $_POST['campaign_name'];
@@ -23,12 +21,13 @@ if (isset($_POST['btn-campaign'])) {
 
     $buat_campaign = "INSERT INTO campaigns ('campaign_name', 'campaign_description', 'campaign_start', 'campaign_end', 'campaign_thumbnail', 'campaign_target')
                     Values ('$campaign_name','$keterangan','$event_start','$event_end','$foto_campaign','$target_donasi')";
-    $test = mysqli_query($conn, $buat_campaign);
-    // if (mysqli_query($conn, $buat_campaign)) {
-    //     $success = true;
-    // } else {
-    //     $success = false;
-    // }
+    if (mysqli_query($conn, $buat_campaign)) {
+        $success = true;
+    } else {
+        $success = false;
+    }
+
+    header("Location: campaign.php?created=$success");
 }
 ?>
 <!-- Logic -->
@@ -41,10 +40,9 @@ if (isset($_POST['btn-campaign'])) {
 <!-- alert -->
 
 
-
-
 <!-- Bikin campaign disini -->
 <div class="container">
+
     <div class="intro-judul">
         <div class="d-flex">
             <h3>Daftar Campaign Kamu</h3>
@@ -99,7 +97,7 @@ if (isset($_POST['btn-campaign'])) {
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" class="btn-donasi mt-3" name="btn-campaign" value="buat campaign">
+                                <input type="submit" class="btn-donasi mt-3" name="btn-campaign" value="Buat campaign">
                             </div>
                         </form>
                     </div>
@@ -167,21 +165,21 @@ if (isset($_POST['btn-campaign'])) {
         </ul>
     </nav>
 
-
     <?php
 if (isset($_GET["created"]) && $_GET["created"] == true) {
     ?>
-    <div id="alert" class="alert alert-success alert-dismissible fade show mt-3 " role="alert">
+    <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
         Yeay! Campaign kamu berhasil dibuat!
         <a href="campaign.php" class="btn-close"></a>
     </div>
 <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
-        <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
             Yah, Campaign kamu gagal ditambahkan..
             <a href="campaign.php" class="btn-close"></a>
         </div>
 <?php }
 ?>
+
 </div>
 
 

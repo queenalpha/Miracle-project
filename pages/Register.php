@@ -1,7 +1,6 @@
 <!-- Konfigurasi -->
 <?php
-$title = "Miracle - Landing Page";
-$prevent = 'guest';
+$title = "Miracle - Register";
 include('../server/connection.php');
 ?>
 <!-- Logic -->

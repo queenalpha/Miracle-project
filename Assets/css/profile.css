@@ -177,3 +177,10 @@ input[type=submit]{
 .nav-pag  .page-link{
     color: #272727;
 }
+
+.alert{
+    z-index: 5px;
+    margin-top: 5%;
+    margin-left: 35%;
+    width: 50% !important;
+}
