@@ -1,6 +1,17 @@
 /* ADMIN (CAREFULLY) */
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;1,400&display=swap');
 
+input[type=username],
+input[type=email],
+input[type=password],
+input[type=tel],
+input[type=submit]{
+    width: auto;
+    padding: .375rem .75rem;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 :root {
   --bs-blue: #996C21;
   --bs-indigo: #6610f2;
@@ -214,12 +225,13 @@
 .dt-shadow-bottom {
     box-shadow: 0px 15px 10px -15px rgba(105, 66, 0, 0.1);
 }
-th, td {
-    padding: 1em 0.75em!important ;
+.dt-row {
+    height: 4.75rem;
 }
-table {
-    margin-bottom: 0!important;
+.dt-thumbnail {
+    width: 3.75rem;
+    height: 3.75rem;
 }
-tbody {
-    overflow-y: scroll;
+.table {
+    --bs-table-striped-bg: rgba(244, 210, 152, 0.1);
 }

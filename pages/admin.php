@@ -156,12 +156,12 @@ $result3 = mysqli_query($conn, $query3);
                                                 <th scope="row">
                                                     <?= $i ?>
                                                 </th>
-                                                <td>
-                                                    <a class="ratio ratio-1x1" target="_blank"
+                                                <td class="dt-thumbnail">
+                                                    <a target="_blank"
                                                         href="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>">
                                                         <img src="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>"
-                                                            class="img-thumbnail object-fit-cover "
-                                                            alt="<?= $row['campaign_thumbnail'] ?>" width="42px">
+                                                            class="img-thumbnail object-fit-cover"
+                                                            alt="<?= $row['campaign_thumbnail'] ?>">
                                                     </a>
                                                 </td>
                                                 <td>
