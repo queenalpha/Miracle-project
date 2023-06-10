@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -22,19 +28,97 @@
     background-size: cover;
 }
 
-.card{
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+.carousel-caption{
+    margin-top: 40%;
+    margin-left: -5%;
+}
+.carousel-caption h5{
+    color: #fff;
+    font-size: 8vh;
+}
+.carousel-caption p{
+    color: #fff;
+    font-size: 3vh;
+    font-weight: 300;
+}
+.btn-yellow{
+    background-color: #E5BA73;
+    color: white;
 }
 
+.btn-yellow:hover{
+    background-color: #E5BA73;
+    color: white;
+}
+.btn-yellow:active{
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg:  #E5BA73;
+}
+.btn-second{
+    width: 20vh;
+    background-color: #E5BA73;
+    color: #ffff;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-second:hover{
+    background-color: #be995f;
+}
+
+.btn-second:active{
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg:  #E5BA73;
+}
 
 .open-donation{
     margin-top: 30px;
     margin-right: 40px;
     margin-bottom: 30px;
 }
+.card{
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btn-donasi{
+    color: #fff;
+    background-color: #E5BA73;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px;
+}
+
+.payment{
+    margin-left: 15%;
+}
+.btn-pay{
+    border: 1px solid #E5BA73;
+    color:black;
+    background-color: #fff;
+    margin-top: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    width: 50vh;
+    margin-bottom: 10px;
+}
+
+.pay-input{
+    border: 1px solid #E5BA73;
+    margin-left: 5%;
+    width: 70vh;
+    padding: 8px;
+}
+
+.more-btn{
+    width: 50vh;
+}
+
 
 .c-img{
+    height: 100vh;
     filter: brightness(60%);
 }
 
@@ -50,15 +134,6 @@ img .profile-img{
    border-radius: 100%;
 }
 
-.our-intro-image {
-    height: 100vh;
-    filter: blur(6px) opacity(0.25) saturate(1.5) grayscale(0.5);
-}
-
-.btn-donate-intro{
-    position: absolute;
-    margin-top: -20%;
-}
 .video{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 8px 10px;
     margin-bottom: 50px;
@@ -136,6 +211,7 @@ section .heart{
     border-bottom: 2px solid black;
 }
 
+/* ini buat di login form */
 input[type=username],
 input[type=email],
 input[type=password],

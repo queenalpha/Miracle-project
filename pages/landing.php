@@ -85,14 +85,20 @@ $result_camp = mysqli_query($conn, $from_campaign);
             <source src="../assets/videoAdvertise.mov" type="video/mp4">
         </video>
     </section>
-    <section class="container-fluid py-5 text-center" style="background-color: #e5ba73;">
-        <div class="my-5">
-            <h4>Make your life useful to others</h4>
-            <p>Create a miracle for someone who still wants to keep fighting</p>
-            <a class="btn btn-primary" href="#">Donation</a>
-            <a class="btn btn-primary" href="#">Buat Campaign</a>
-        </div>
-    </section>
+    <div class="inviting">
+        <h3>
+            Make your life useful to others
+        </h3>
+        <p>
+            Create a miracle for someone who still wants to keep fighting
+        </p>
+        <a href="donasiPage.php" type="button" class="btn btn-outline-light">
+            Donation
+        </a>
+        <a href="login.php" type="button" class="btn btn-outline-light">
+            Buat Campaign
+        </a>
+    </div>
     <div class="container my-5">
         <div class="row">
             <div class="col">

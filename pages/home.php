@@ -5,9 +5,10 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
-$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc";
+$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
 $result_camp = mysqli_query($conn, $from_campaign);
 ?>
+
 
 <?php include('../components/header.php'); ?>
 <?php include('../components/navbar.php'); ?>
@@ -150,6 +151,62 @@ $result_camp = mysqli_query($conn, $from_campaign);
       </div>
     </div>
   </div>
+
+  <!-- inviting -->
+    <div class="inviting">
+        <h3>
+            Make your life useful to others
+        </h3>
+        <p>
+            Create a miracle for someone who still wants to keep fighting
+        </p>
+        <a href="donasiPage.php" type="button" class="btn btn-outline-light">
+            Donation
+        </a>
+        <a href="login.php" type="button" class="btn btn-outline-light">
+            Buat Campaign
+        </a>
+    </div>
+
+    <!-- quantity of user and donatur -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col">
+                <div class="card py-4">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-users user" style="font-size:48px;color: #e5ba73;"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">(Kuantitas User)</h5>
+                                <p class="card-text"><small class="text-body-secondary">#temanbaik telah
+                                  berdonasi</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card py-4">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-money-check user" style="font-size:48px;color: #e4b673;"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">(Kuantitas Rp)</h5>
+                                <p class="card-text"><small class="text-body-secondary">Dana terkumpul dari
+                                  #temanbaik</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
