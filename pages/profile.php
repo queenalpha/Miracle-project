@@ -20,7 +20,7 @@ if (isset($_POST['edit'])) {
     $avatar = $_FILES['avatar']['name'];
     $temp = explode(".", $avatar);
     $storename = preg_replace('/\s+/', '_', $id . '_' . $name) . '.' . end($temp);
-    $query = "UPDATE `accounts` SET `account_name` = '$name', `account_email` = '$email', `account_password` = '$password', `account_phone` = '$phone', `account_avatar` = '$storename', `account_level` = '$level' WHERE `accounts`.`account_id` = $id";
+    $query = "UPDATE `accounts` SET `account_name` = '$name', `account_email` = '$email', `account_phone` = '$phone', `account_avatar` = '$storename', `account_level` = '$level' WHERE `accounts`.`account_id` = $id";
     if (mysqli_query($conn, $query)) {
         move_uploaded_file($_FILES["avatar"]["tmp_name"], "../assets/image/profile/" . $storename);
         header('Location: ../pages/profile.php?account=' . $id);
