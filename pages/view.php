@@ -156,7 +156,7 @@ if (isset($_POST['edit-campaign'])) {
                                                     ?>
                                                     <a class="btn btn-secondary w-100"
                                                         href="../pages/view.php?account=<?= $row['account_id'] ?>">
-                                                        Kembali
+                                                        Tidak Jadi Ubah
                                                     </a>
                                                     <?php
                                                 } else {
@@ -171,7 +171,7 @@ if (isset($_POST['edit-campaign'])) {
                                             </div>
                                             <div class="col col-12">
                                                 <a class="btn btn-secondary w-100" href="../pages/manage.php?manage=accounts">
-                                                    Kembali
+                                                    Kembali Ke Daftar Akun
                                                 </a>
                                             </div>
                                         </form>
@@ -273,7 +273,7 @@ if (isset($_POST['edit-campaign'])) {
                                                     ?>
                                                     <a class="btn btn-secondary w-100"
                                                         href="../pages/view.php?campaign=<?= $row['campaign_id'] ?>">
-                                                        Kembali
+                                                        Tidak Jadi Ubah
                                                     </a>
                                                     <?php
                                                 } else {
@@ -286,9 +286,9 @@ if (isset($_POST['edit-campaign'])) {
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="col col-12">
+                                            <div class="col">
                                                 <a class="btn btn-secondary w-100" href="../pages/manage.php?manage=campaigns">
-                                                    Kembali
+                                                    Kembali Ke Daftar Campaign
                                                 </a>
                                             </div>
                                         </form>
