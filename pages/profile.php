@@ -56,7 +56,7 @@ include('../server/connection.php');
 <!-- UI -->
 <link rel="stylesheet" href="../Assets/css/profile.css">
 <?php include('../components/header.php'); ?>
-<!-- <?php include('../components/sidebar.php');?> -->
+<?php include('../components/sidebar.php');?>
 
 <div class="container profile">
     <div class="profile-content d-flex">
