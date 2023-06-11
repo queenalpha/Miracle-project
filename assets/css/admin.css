@@ -2,8 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;1,400&display=swap');
 
 input[type=username],
-input[type=email],
-input[type=password],
 input[type=tel],
 input[type=submit]{
     width: auto;

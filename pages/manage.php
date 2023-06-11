@@ -96,8 +96,8 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                         <?= $i ?>
                                     </th>
                                     <td class="col align-item-center">
-                                        <a target="_blank" href="<?= "../assets/image/" . $row['account_avatar'] ?>">
-                                            <img src="<?= "../assets/image/" . $row['account_avatar'] ?>"
+                                        <a target="_blank" href="<?= "../assets/image/profile" . $row['account_avatar'] ?>">
+                                            <img src="<?= "../assets/image/profile/" . $row['account_avatar'] ?>"
                                                 class="img-thumbnail object-fit-cover dt-thumbnail "
                                                 alt="<?= $row['account_avatar'] ?>">
                                         </a>
@@ -165,8 +165,9 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                         <?= $i ?>
                                     </th>
                                     <td class="col align-item-center">
-                                        <a target="_blank" href="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>">
-                                            <img src="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>"
+                                        <a target="_blank"
+                                            href="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>">
+                                            <img src="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>"
                                                 class="img-thumbnail object-fit-cover dt-thumbnail"
                                                 alt="<?= $row['campaign_name'] ?>">
                                         </a>
@@ -200,7 +201,7 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                     <td class="col align-item-center pe-5">
                                         <div class="row">
                                             <div class="col col-12 col-xl-6">
-                                                <a class="btn btn-primary my-1 w-100"
+                                                <a id="approve" class="btn btn-primary my-1 w-100"
                                                     href="../pages/view.php?campaign=<?= $row['campaign_id'] ?>&approve=true">
                                                     Approve
                                                 </a>
@@ -263,8 +264,8 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                     </td>
                                     <td class="col align-item-center">
                                         <a class="me-3 text-decoration-none" target="_blank"
-                                            href="<?= "../assets/image/" . $row['account_avatar'] ?>">
-                                            <img src="<?= "../assets/image/" . $row['account_avatar'] ?>"
+                                            href="<?= "../assets/image/profile/" . $row['account_avatar'] ?>">
+                                            <img src="<?= "../assets/image/profile/" . $row['account_avatar'] ?>"
                                                 class="img-thumbnail object-fit-cover dt-thumbnail"
                                                 alt="<?= $row['account_name'] ?>">
                                         </a>
@@ -272,8 +273,8 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                     </td>
                                     <td class="col align-item-center">
                                         <a class="me-3 text-decoration-none" target="_blank"
-                                            href="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>">
-                                            <img src="<?= "../assets/image/" . $row['campaign_thumbnail'] ?>"
+                                            href="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>">
+                                            <img src="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>"
                                                 class="img-thumbnail object-fit-cover dt-thumbnail"
                                                 alt="<?= $row['campaign_name'] ?>">
                                         </a>
@@ -301,4 +302,9 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
     </div>
 </main>
 <?php include('../components/js.php'); ?>
+<script>
+    $("#approve").click(function () {
+        alert("The paragraph was clicked.");
+    });
+</script>
 <?php include('../components/close.php'); ?>
