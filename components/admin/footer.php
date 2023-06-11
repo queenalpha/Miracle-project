@@ -1,2 +1,3 @@
-<hr noshade>
-<p class="fw-light fst-italic px-4">Miracle Company &copy; 2023</p>
+<div class="border-top p-4 text-center">
+    <small class="fw-light fst-italic text-muted">Miracle Company &copy; 2023</small>
+</div>

@@ -286,9 +286,9 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                     </table>
                 </div>
             <?php } ?>
+            <?php include('../components/admin/footer.php'); ?>
         </article>
     </div>
-    <?php include('../components/admin/footer.php'); ?>
 </main>
 <?php include('../components/js.php'); ?>
 <?php include('../components/close.php'); ?>

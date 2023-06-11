@@ -85,7 +85,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
             <source src="../assets/videoAdvertise.mov" type="video/mp4">
         </video>
     </section>
-    <div class="inviting">
+    <section class="inviting">
         <h3>
             Make your life useful to others
         </h3>
@@ -98,8 +98,9 @@ $result_camp = mysqli_query($conn, $from_campaign);
         <a href="login.php" type="button" class="btn btn-outline-light">
             Buat Campaign
         </a>
-    </div>
-    <div class="container my-5">
+    </section>
+    <!-- quantity of user and donatur -->
+    <section class="container my-5">
         <div class="row">
             <div class="col">
                 <div class="card py-4">
@@ -109,9 +110,18 @@ $result_camp = mysqli_query($conn, $from_campaign);
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">(Kuantitas User)</h5>
-                                <p class="card-text"><small class="text-body-secondary">#temanbaik telah
-                                        berdonasi</small>
+                                <h5 class="card-title">
+                                    <?php
+                                    $query = "SELECT count(donation_id) FROM `donations`";
+                                    $result = mysqli_query($conn, $query);
+                                    $total = mysqli_fetch_array($result);
+                                    echo $total[0] . " donasi";
+                                    ?>
+                                </h5>
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        Telah kami bantu jembatani di Miracle!
+                                    </small>
                                 </p>
                             </div>
                         </div>
@@ -126,9 +136,21 @@ $result_camp = mysqli_query($conn, $from_campaign);
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">(Kuantitas Rp)</h5>
-                                <p class="card-text"><small class="text-body-secondary">Dana terkumpul dari
-                                        #temanbaik</small>
+                                <h5 class="card-title">
+                                    <?php
+                                    $query = "SELECT SUM(donation_amount) FROM `donations`";
+                                    $result = mysqli_query($conn, $query);
+                                    $total = mysqli_fetch_array($result);
+                                    echo
+                                        "Rp." .
+                                        number_format($total[0])
+                                        . ",-";
+                                    ?>
+                                </h5>
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        Dana terkumpul dari <a class="text-decoration-none" href="#">#TemanBaik</a>
+                                    </small>
                                 </p>
                             </div>
                         </div>
@@ -136,7 +158,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </main>
 <?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
