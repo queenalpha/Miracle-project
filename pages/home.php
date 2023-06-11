@@ -6,12 +6,10 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
-$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
-$result_camp = mysqli_query($conn, $from_campaign);
+$query = "SELECT * FROM campaigns ORDER BY campaign_end desc LIMIT 3";
+$result = mysqli_query($conn, $query);
 
 if (isset($_POST['donate'])) {
-  echo 'hello';
-  die();
   $account = $_POST['account'];
   $campaign = $_POST['campaign'];
   if (empty($_POST['amount'])) {
@@ -20,8 +18,8 @@ if (isset($_POST['donate'])) {
     $amount = $_POST['amount'];
   }
   $payment = $_POST['payment'];
-  $query = "INSERT INTO `donations` (`donation_account`, `donation_campaign`, `donation_date`, `donation_amount`, `donation_payment`) VALUES ('$account', '$campaign', now(), '$amount', '$payment')";
-  if (mysqli_query($conn, $query)) {
+  $queryDonate = "INSERT INTO `donations` (`donation_account`, `donation_campaign`, `donation_date`, `donation_amount`, `donation_payment`) VALUES ('$account', '$campaign', now(), '$amount', '$payment')";
+  if (mysqli_query($conn, $queryDonate)) {
     if (isset($_SESSION['logged_in'])) {
       header('Location: ../pages/home.php');
     } else {
@@ -158,7 +156,7 @@ if (isset($_POST['donate'])) {
       <small class="text-muted fst-italic">Be a miracle foreach others</small>
     </div>
     <div class="row align-items-center" id="donasi">
-      <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
+      <?php while ($row = mysqli_fetch_assoc($result)): ?>
         <div class="col-12 col-md-12 col-lg-4 mb-5">
           <div class="card p-1 h-100">
             <img src="<?= '../assets/image/campaign/' . $row['campaign_thumbnail'] ?>"
@@ -167,9 +165,6 @@ if (isset($_POST['donate'])) {
               <h5 class="card-title">
                 <?= $row['campaign_name'] ?>
               </h5>
-              <p class="card-text">
-                <?= $row['campaign_description'] ?>
-              </p>
               <div class="progress" role="progressbar">
                 <div class="progress-bar" style="width:<?php
                 $target = $row['campaign_id'];
@@ -179,9 +174,22 @@ if (isset($_POST['donate'])) {
                 echo round($persentase, 2);
                 ?>%"></div>
               </div>
-              <p class="card-text">Membutuhkan Rp
-                <?= number_format($row['campaign_target']) ?>
-              </p>
+              <div class="row my-3">
+                <small class="fst-italic">Terkumpul
+                  <strong>
+                    Rp.
+                    <?= number_format($terkumpul[0]) ?>
+                    ,-
+                  </strong>
+                </small>
+                <small class="fst-italic">Membutuhkan
+                  <strong>
+                    Rp.
+                    <?= number_format($row['campaign_target']) ?>
+                    ,-
+                  </strong>
+                </small>
+              </div>
               <button type="button" class="donate btn-donasi" data-bs-toggle="modal" data-bs-target="#modal"
                 data-campaign="<?= $row['campaign_id'] ?>" data-account="<?php
                   if (isset($_SESSION['logged_in'])) {

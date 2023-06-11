@@ -6,117 +6,220 @@ include('../server/connection.php');
 ?>
 <!-- Controller -->
 <?php
-$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
+$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_end desc LIMIT 3";
 $result_camp = mysqli_query($conn, $from_campaign);
+
+if (isset($_POST['donate'])) {
+    $account = $_POST['account'];
+    $campaign = $_POST['campaign'];
+    if (empty($_POST['amount'])) {
+        $amount = $_POST['customdigit'];
+    } else {
+        $amount = $_POST['amount'];
+    }
+    $payment = $_POST['payment'];
+    $queryDonate = "INSERT INTO `donations` (`donation_account`, `donation_campaign`, `donation_date`, `donation_amount`, `donation_payment`) VALUES ('$account', '$campaign', now(), '$amount', '$payment')";
+    if (mysqli_query($conn, $queryDonate)) {
+        if (isset($_SESSION['logged_in'])) {
+            header('Location: ../pages/home.php');
+        } else {
+            header('Location: ../pages/landing.php');
+        }
+        exit();
+    }
+}
 ?>
 <!-- View -->
 <?php include('../components/header.php'); ?>
 <?php include('../components/navbar.php'); ?>
 <?php include('../components/carousel.php'); ?>
-<!-- Modal Data Donatur -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Ayo berdonasi
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" enctype="multipart/form-data" action="#">
-                    <div class="form-group row">
-                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama</label>
-                        <div class="col-sm-20">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="judul"
-                                placeholder="Masukan nama">
+<form method="POST" action="">
+    <input id="account" type="hidden" name="account" value="">
+    <input id="campaign" type="hidden" name="campaign" value="">
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">
+                        Jendela Donasi
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php if (isset($_SESSION['logged_in'])) { ?>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row gy-2">
+                                        <div>
+                                            <input type="radio" class="btn-check" name="amount" id="o-1" value="10000"
+                                                autocomplete="off" checked>
+                                            <label class="btn btn-secondary w-100" for="o-1">Rp. 10.000,-</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" class="btn-check" name="amount" id="o-2" value="25000"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="o-2">Rp. 25.000,-</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" class="btn-check" name="amount" id="o-3" value="50000"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="o-3">Rp. 50.000,-</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" class="btn-check" name="amount" id="o-4" value="75000"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="o-4">Rp. 75.000,-</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" class="btn-check" name="amount" id="o-5" value="100000"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="o-5">Rp. 100.000,-</label>
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Rp.</span>
+                                            <input name="customdigit" id="custom" type="number" class="form-control"
+                                                placeholder="Jumlah kustom...">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row gy-2">
+                                        <div class="col col-md-12 col-lg-6">
+                                            <input type="radio" class="btn-check" name="payment" id="p-1" value="GoPay"
+                                                autocomplete="off" checked>
+                                            <label class="btn btn-secondary w-100" for="p-1">GoPay</label>
+                                        </div>
+                                        <div class="col col-md-12 col-lg-6">
+                                            <input type="radio" class="btn-check" name="payment" id="p-2" value="Shopeepay"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="p-2">LinkAja</label>
+                                        </div>
+                                        <div class="col col-md-12 col-lg-6">
+                                            <input type="radio" class="btn-check" name="payment" id="p-3" value="DANA"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="p-3">DANA</label>
+                                        </div>
+                                        <div class="col col-md-12 col-lg-6">
+                                            <input type="radio" class="btn-check" name="payment" id="p-4" value="OVO"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="p-4">OVO</label>
+                                        </div>
+                                        <div class="col col-md-12 col-lg-6">
+                                            <input type="radio" class="btn-check" name="payment" id="p-5" value="BCA"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="p-5">BCA</label>
+                                        </div>
+                                        <div class="col col-md-12 col-lg-6">
+                                            <input type="radio" class="btn-check" name="payment" id="p-6" value="Mandiri"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="p-6">Mandiri</label>
+                                        </div>
+                                        <div class="col col-md-12 col-lg-6">
+                                            <input type="radio" class="btn-check" name="payment" id="p-7" value="Jago"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary w-100" for="p-7">Jago</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Email</label>
-                        <div class="col-sm-20">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="harga"
-                                placeholder="Masukan Email">
+                        <?php
+                    } else { ?>
+                        <div class="form-group">
+                            <div class="row gy-2">
+                                <div>
+                                    <input type="radio" class="btn-check" name="amount" id="o-1" value="10000"
+                                        autocomplete="off" checked>
+                                    <label class="btn btn-secondary w-100" for="o-1">Rp. 10.000,-</label>
+                                </div>
+                                <div>
+                                    <input type="radio" class="btn-check" name="amount" id="o-2" value="25000"
+                                        autocomplete="off">
+                                    <label class="btn btn-secondary w-100" for="o-2">Rp. 25.000,-</label>
+                                </div>
+                                <div>
+                                    <input type="radio" class="btn-check" name="amount" id="o-3" value="50000"
+                                        autocomplete="off">
+                                    <label class="btn btn-secondary w-100" for="o-3">Rp. 50.000,-</label>
+                                </div>
+                                <div>
+                                    <input type="radio" class="btn-check" name="amount" id="o-4" value="75000"
+                                        autocomplete="off">
+                                    <label class="btn btn-secondary w-100" for="o-4">Rp. 75.000,-</label>
+                                </div>
+                                <div>
+                                    <input type="radio" class="btn-check" name="amount" id="o-5" value="100000"
+                                        autocomplete="off">
+                                    <label class="btn btn-secondary w-100" for="o-5">Rp. 100.000,-</label>
+                                </div>
+                            </div>
                         </div>
-                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Telphone</label>
-                        <div class="col-sm-20 mb-2">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="harga"
-                                placeholder="Masukan Telephone">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#transaksi" data-bs-toggle="modal">
-                            <button type="submit" class="btn-donasi" name="add-donatur">Save</button>
-                        </a>
-                    </div>
-                </form>
+                    <?php } ?>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" name="donate" value="Donasikan">
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Modal Transaksi -->
-<div class="modal fade" id="transaksi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Ayo berdonasi
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" enctype="multipart/form-data" action="#">
-                    <div class="payment">
-                        <button class="btn-pay">15.000</button>
-                        <button class="btn-pay">20.000</button>
-                        <button class="btn-pay">25.000</button>
-                        <button class="btn-pay mb-3">30.000</button>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-20 mb-3">
-                            <input type="text" class="form-control form-control-sm pay-input" id="colFormLabelSm"
-                                name="judul" placeholder="Masukan Donasi Anda">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn-donasi mt-3" data-bs-toggle="modal" data-bs-target="#transaksi"
-                            value="Donate">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+</form>
 <main>
     <section class="container">
         <div class="text-center my-5">
             <h2>Open Donation</h2>
             <small class="text-muted fst-italic">Be a miracle foreach others</small>
-            <div class="row align-items-center" id="donasi">
-                <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
-                    <div class="col-12 col-md-12 col-lg-4 mb-5">
-                        <div class="card p-1 h-100">
-                            <img src="<?= '../assets/image/campaign/' . $row['campaign_thumbnail'] ?>"
-                                class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
-                            <div class="card-body">
-                                <h5 class="card-tittle">
-                                    <?= $row['campaign_name'] ?>
-                                </h5>
-                                <p class="card-text">
-                                    <?= $row['campaign_description'] ?>
-                                </p>
-                                <div class="progress my-2" role="progressbar">
-                                    <div class="progress-bar" style="width: 15%"></div>
-                                </div>
-                                <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
-                                        <?= number_format($row['campaign_target']) ?>
-                                    </small></p>
-                                <button type="button" class="btn-donasi" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    Donate
-                                </button>
+        </div>
+        <div class="row align-items-center" id="donasi">
+            <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
+                <div class="col-12 col-md-12 col-lg-4 mb-5">
+                    <div class="card p-1 h-100">
+                        <img src="<?= '../assets/image/campaign/' . $row['campaign_thumbnail'] ?>"
+                            class="card-img-top object-fit-cover" width="100%" height="201px" alt="thumbnail campaign">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <?= $row['campaign_name'] ?>
+                            </h5>
+                            <div class="progress" role="progressbar">
+                                <div class="progress-bar" style="width:<?php
+                                $target = $row['campaign_id'];
+                                $sum = "SELECT sum(donation_amount) FROM `donations` WHERE donations.donation_campaign = $target";
+                                $terkumpul = mysqli_fetch_array(mysqli_query($conn, $sum));
+                                $persentase = ($terkumpul[0] / $row['campaign_target']) * 100;
+                                echo round($persentase, 2);
+                                ?>%"></div>
                             </div>
+                            <div class="row my-3">
+                                <small class="fst-italic">Terkumpul
+                                    <strong>
+                                        Rp.
+                                        <?= number_format($terkumpul[0]) ?>
+                                        ,-
+                                    </strong>
+                                </small>
+                                <small class="fst-italic">Membutuhkan
+                                    <strong>
+                                        Rp.
+                                        <?= number_format($row['campaign_target']) ?>
+                                        ,-
+                                    </strong>
+                                </small>
+                            </div>
+                            <button type="button" class="donate btn-donasi" data-bs-toggle="modal" data-bs-target="#modal"
+                                data-campaign="<?= $row['campaign_id'] ?>" data-account="<?php
+                                  if (isset($_SESSION['logged_in'])) {
+                                      echo $_SESSION['id'];
+                                  } else {
+                                      echo '2';
+                                  } ?>">
+                                Kirim Donasi
+                            </button>
                         </div>
                     </div>
-                <?php endwhile; ?>
-                <a class="btn btn-primary" href="../pages/campaigns.php" role="button">Tampilkan Semua</a>
-            </div>
+                </div>
+            <?php endwhile; ?>
+            <a class="btn btn-primary" href="../pages/campaigns.php" role="button">Tampilkan Semua</a>
+        </div>
         </div>
     </section>
     <section class="container">
@@ -209,5 +312,15 @@ $result_camp = mysqli_query($conn, $from_campaign);
             nav.classList.remove('bg-white', 'shadow', 'text-dark');
         }
     })
+    $('#custom').on('input', function (e) {
+        $('input[name=amount]').prop('checked', false);
+    })
+    $('input[name=amount]').change(function () {
+        $('#custom').val('');
+    })
+    $(".donate").on("click", function () {
+        $('#account').val($(this).data('account'));
+        $('#campaign').val($(this).data('campaign'));
+    });
 </script>
 <?php include('../components/close.php'); ?>
