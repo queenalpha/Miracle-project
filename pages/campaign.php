@@ -35,7 +35,7 @@ if (isset($_POST['btn-campaign'])) {
     header("Location: campaign.php?created=$success");
 }
 if (isset($_POST['edit'])) {
-    $id = $_POST['edit'];
+    $id = $_POST['id'];
     $campaign_name = $_POST['name'];
     $keterangan = $_POST['description'];
     $event_start = $_POST['start'];
@@ -43,11 +43,11 @@ if (isset($_POST['edit'])) {
     $target_donasi = $_POST['target'];
     $thumbnail = $_FILES['thumbnail']['name'];
     $temp = explode(".", $thumbnail);
-    $storename = preg_replace('/\s+/', '_', $me . '_' . $campaign_name) . '.' . end($temp);
+    $storename = preg_replace('/\s+/', '_', $id . '_' . $campaign_name) . '.' . end($temp);
     $query = "UPDATE `campaigns` SET `campaign_name` = '$campaign_name', `campaign_description` = '$keterangan', `campaign_start` = '$event_start', `campaign_end` = '$event_end', `campaign_thumbnail` = '$storename', `campaign_target` = '$target_donasi' WHERE `campaigns`.`campaign_id` = $id";
     if (mysqli_query($conn, $query)) {
         move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "../assets/image/campaign/" . $storename);
-        header('Location: ../pages/view.php?campaign=' . $id);
+        header('Location: ../pages/campaign.php');
     }
 }
 if (isset($_GET['finish'])) {
@@ -78,40 +78,45 @@ if (isset($_GET['finish'])) {
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama
                             Campaign</label>
                         <div class="col-sm-20">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="name"
-                                placeholder="Masukan Nama Campaign">
+                            <input required type="text" class="form-control form-control-sm" id="colFormLabelSm"
+                                name="name" placeholder="Masukan Nama Campaign">
                         </div>
                         <label for="colFormLabelSm"
                             class="col-sm-20 col-form-label col-form-label-sm">Keterangan</label>
                         <div class="col-sm-20">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
+                            <input required type="text" class="form-control form-control-sm" id="colFormLabelSm"
                                 name="description" placeholder="Keterangan Campaign">
                         </div>
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
                             dimulai</label>
                         <div class="col-sm-20">
-                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="start"
-                                placeholder="Keterangan Campaign">
+                            <input required type="date" class="form-control form-control-sm" id="colFormLabelSm"
+                                name="start" placeholder="Keterangan Campaign">
                         </div>
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
                             berakhir</label>
                         <div class="col-sm-20">
-                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="end"
-                                placeholder="Keterangan Campaign">
+                            <input required type="date" class="form-control form-control-sm" id="colFormLabelSm"
+                                name="end" placeholder="Keterangan Campaign">
                         </div>
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Target</label>
                         <div class="col-sm-20 mb-2">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="target"
-                                placeholder="Target Campaign">
+                            <input required type="text" class="form-control form-control-sm" id="colFormLabelSm"
+                                name="target" placeholder="Target Campaign">
+                        </div>
+                        <div class="ratio ratio-1x1">
+                            <img class="img-thumbnail object-fit-cover"
+                                src="<?= "../assets/image/campaign/" . $row['account_avatar'] ?>" alt="Campaign Preview"
+                                id="preview">
                         </div>
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Foto</label>
                         <div class="col-sm-20 mb-2">
-                            <input type="file" class="form-control form-control-sm" id="colFormLabelSm"
-                                name="thumbnail">
+                            <input required id="uploadPicture" type="file" class="form-control form-control-sm"
+                                id="colFormLabelSm" name="thumbnail">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" class="btn-donasi mt-3" name="btn-campaign" value="Buat campaign">
+                        <input required type="submit" class="btn-donasi mt-3" name="btn-campaign" value="Buat campaign">
                     </div>
                 </form>
             </div>
@@ -129,45 +134,51 @@ if (isset($_GET['finish'])) {
             </div>
             <div class="modal-body">
                 <form method="POST" enctype="multipart/form-data" action="">
-                    <input id="campaignEditID" type="hidden" name="id" value="">
+                    <input required id="campaignEditID" type="hidden" name="id" value="">
                     <div class="form-group row">
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama
                             Campaign</label>
                         <div class="col-sm-20">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="name"
-                                placeholder="Masukan Nama Campaign" value="">
+                            <input required id="campaignEditName" type="text" class="form-control form-control-sm"
+                                id="colFormLabelSm" name="name" placeholder="Masukan Nama Campaign" value="">
                         </div>
                         <label for="colFormLabelSm"
                             class="col-sm-20 col-form-label col-form-label-sm">Keterangan</label>
                         <div class="col-sm-20">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                name="description" placeholder="Keterangan Campaign" value="">
+                            <input required id="campaignEditDescription" type="text"
+                                class="form-control form-control-sm" id="colFormLabelSm" name="description"
+                                placeholder="Keterangan Campaign" value="">
                         </div>
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
                             dimulai</label>
                         <div class="col-sm-20">
-                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="start"
-                                placeholder="Keterangan Campaign" value="">
+                            <input required id="campaignEditStart" type="date" class="form-control form-control-sm"
+                                id="colFormLabelSm" name="start" placeholder="Keterangan Campaign" value="">
                         </div>
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
                             berakhir</label>
                         <div class="col-sm-20">
-                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="end"
-                                placeholder="Keterangan Campaign" value="">
+                            <input required id="campaignEditEnd" type="date" class="form-control form-control-sm"
+                                id="colFormLabelSm" name="end" placeholder="Keterangan Campaign" value="">
                         </div>
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Target</label>
                         <div class="col-sm-20 mb-2">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="target"
-                                placeholder="Target Campaign" value="">
+                            <input required id="campaignEditTarget" type="text" class="form-control form-control-sm"
+                                id="colFormLabelSm" name="target" placeholder="Target Campaign" value="">
+                        </div>
+                        <div class="ratio ratio-1x1">
+                            <img class="img-thumbnail object-fit-cover"
+                                src="<?= "../assets/image/campaign/" . $row['account_avatar'] ?>" alt="Campaign Preview"
+                                id="previewEdit">
                         </div>
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Foto</label>
                         <div class="col-sm-20 mb-2">
-                            <input type="file" class="form-control form-control-sm" id="colFormLabelSm" name="thumbnail"
-                                value="">
+                            <input required id="campaignEditThumbnail" type="file" class="form-control form-control-sm"
+                                id="colFormLabelSm" name="thumbnail" value="">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" class="btn-donasi mt-3" name="btn-campaign" value="Buat campaign">
+                        <input required type="submit" class="btn-donasi mt-3" name="edit" value="Simpan Edit">
                     </div>
                 </form>
             </div>
@@ -205,7 +216,8 @@ if (isset($_GET['finish'])) {
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Campaign</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Deskripsi</th>
                 <th scope="col">Tanggal Mulai</th>
                 <th scope="col">Tanggal Akhir</th>
                 <th scope="col">Target</th>
@@ -224,7 +236,17 @@ if (isset($_GET['finish'])) {
                         <?= $i; ?>
                     </th>
                     <td class="table-campaign">
+                        <a target="_blank" href="<?= "../assets/image/campaign" . $row['campaign_thumbnail'] ?>">
+                            <img src="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>"
+                                class="img-thumbnail object-fit-cover dt-thumbnail "
+                                alt="<?= $row['campaign_thumbnail'] ?>">
+                        </a>
+                    </td>
+                    <td class="table-campaign">
                         <?= $row['campaign_name']; ?>
+                    </td>
+                    <td class="table-campaign">
+                        <?= $row['campaign_description']; ?>
                     </td>
                     <td class="table-campaign">
                         <?= date("d F Y", strtotime($row['campaign_start'])); ?>
@@ -258,12 +280,16 @@ if (isset($_GET['finish'])) {
                         <div class="action">
                             <?php if (empty($row['campaign_approval'])) { ?>
                                 <a href="#" class="a-edit text-decoration-none" data-bs-toggle="modal"
-                                    data-bs-target="#updateModal" data-campaign="<?= $row['campaign_id']; ?>">
+                                    data-bs-target="#updateModal" data-id="<?= $row['campaign_id'] ?>"
+                                    data-thumbnail="<?= $row['campaign_thumbnail'] ?>" data-name="<?= $row['campaign_name'] ?>"
+                                    data-description="<?= $row['campaign_description'] ?>"
+                                    data-start="<?= $row['campaign_start'] ?>" data-end="<?= $row['campaign_end'] ?>"
+                                    data-target="<?= $row['campaign_target'] ?>">
                                     Edit
                                 </a>
                             <?php } else if ($row['campaign_approval'] != '2') { ?>
                                     <a href="#" class="a-hapus text-decoration-none" data-bs-toggle="modal"
-                                        data-bs-target="#finishCampaign" data-campaign="<?= $row['campaign_id']; ?>">
+                                        data-bs-target="#finishCampaign" data-campaign="<?= $row['campaign_id'] ?>">
                                         Selesaikan
                                     </a>
                             <?php } ?>
@@ -341,11 +367,31 @@ if (isset($_GET['finish'])) {
 
 <?php include('../components/js.php'); ?>
 <script>
+    $("#preview").hide();
+    uploadPicture.onchange = evt => {
+        const [file] = uploadPicture.files
+        if (file) {
+            $("#preview").show();
+            preview.src = URL.createObjectURL(file)
+        }
+    }
+    campaignEditThumbnail.onchange = evt => {
+        const [file] = campaignEditThumbnail.files
+        if (file) {
+            previewEdit.src = URL.createObjectURL(file)
+        }
+    }
     $(".a-hapus").on("click", function () {
         $("#finishBtn").attr("href", "../pages/campaign.php?finish=" + $(this).data('campaign'));
     });
     $(".a-edit").on("click", function () {
-        $("#campaignEditID").val($(this).data('campaign'));
+        $("#campaignEditID").val($(this).data('id'));
+        $("#campaignEditName").val($(this).data('name'));
+        $("#campaignEditDescription").val($(this).data('description'));
+        $("#campaignEditStart").val($(this).data('start'));
+        $("#campaignEditEnd").val($(this).data('end'));
+        $("#campaignEditTarget").val($(this).data('target'));
+        $("#previewEdit").attr("src", "../assets/image/campaign/" + $(this).data('thumbnail'))
     });
 </script>
 <?php include('../components/close.php'); ?>
