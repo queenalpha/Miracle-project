@@ -48,8 +48,7 @@ if (isset($_POST['btn_regist'])) {
                 <div>
                     <?php if (isset($_GET['alert'])) {
                         echo $_GET['alert'];
-                    }
-                    ?>
+                    } ?>
                     <input class="form-control" type="submit" name="btn_regist" value="Register">
                 </div>
                 <div>
