@@ -15,7 +15,7 @@ if (isset($_GET['manage']) && isset($_POST['campaign'])) {
     $query1 = "SELECT *  FROM `campaigns` WHERE `campaign_name` LIKE '%$target%' OR `campaign_description` LIKE '%$target%' OR `campaign_start` LIKE '%$target%' OR `campaign_end` LIKE '%$target%' ORDER BY campaign_id desc";
     $result1 = mysqli_query($conn, $query1);
 } else {
-    $query1 = "SELECT * FROM campaigns WHERE campaign_approval IS NULL ORDER BY campaign_id desc";
+    $query1 = "SELECT * FROM campaigns ORDER BY campaign_id desc";
     $result1 = mysqli_query($conn, $query1);
 }
 
@@ -45,7 +45,6 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
     ORDER BY donations.donation_date desc";
     $result3 = mysqli_query($conn, $query3);
 }
-
 ?>
 <!-- View -->
 <?php include('../components/header.php'); ?>
@@ -146,6 +145,7 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                         <thead>
                             <tr class="align-middle">
                                 <th scope="col" class="ps-5">#</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Thumbnail</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Deskripsi</th>
@@ -164,6 +164,14 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                     <th class="align-item-center ps-5" scope="row">
                                         <?= $i ?>
                                     </th>
+                                    <td class="col align-item-center">
+                                        <?php
+                                        if (empty($row['campaign_approval'])) {
+                                            echo "Belum Disetujui";
+                                        } else {
+                                            echo "Disetujui";
+                                        } ?>
+                                    </td>
                                     <td class="col align-item-center">
                                         <a target="_blank"
                                             href="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>">
@@ -201,8 +209,9 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                     <td class="col align-item-center pe-5">
                                         <div class="row">
                                             <div class="col col-12 col-xl-6">
-                                                <a id="approve" class="btn btn-primary my-1 w-100"
-                                                    href="../pages/view.php?campaign=<?= $row['campaign_id'] ?>&approve=true">
+                                                <a class="approve btn btn-primary my-1 w-100"
+                                                    data-id="<?= $row['campaign_id'] ?>"
+                                                    data-name="<?= $row['campaign_name'] ?>">
                                                     Approve
                                                 </a>
                                             </div>
@@ -303,8 +312,17 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
 </main>
 <?php include('../components/js.php'); ?>
 <script>
-    $("#approve").click(function () {
-        alert("The paragraph was clicked.");
+    $(".approve").click(function () {
+        Swal.fire({
+            title: 'Approve pengajuan `' + $(this).data("name") + '`?',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../pages/view.php?campaign=" + $(this).data("id") + " & approve=true";
+            }
+        })
     });
 </script>
 <?php include('../components/close.php'); ?>

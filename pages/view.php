@@ -16,6 +16,14 @@ if (isset($_GET['campaign']) && !empty($_GET['campaign'])) {
     $query = "SELECT * FROM campaigns WHERE campaign_id = $target";
     $result = mysqli_query($conn, $query);
 }
+if (isset($_GET['campaign']) && isset($_GET['approve'])) {
+    $target = $_GET['campaign'];
+    $query = "UPDATE `campaigns` SET `campaign_approval` = '1' WHERE `campaigns`.`campaign_id` = $target";
+    if (mysqli_query($conn, $query)) {
+        header('Location: ../pages/view.php?campaign=' . $target);
+        exit();
+    }
+}
 if (isset($_GET['donation']) && !empty($_GET['donation'])) {
     $target = $_GET['donation'];
     $query = "SELECT * FROM donations WHERE donation_id = $target";
@@ -231,7 +239,18 @@ if (isset($_POST['edit-campaign'])) {
                                                 <input id="uploadPicture" name="thumbnail" id="f-5" class="form-control"
                                                     type="file" name="thumbnail" accept="image/*" required>
                                             </div>
-                                            <div class="col col-12 col-md-6">
+                                            <?php
+                                            if (!isset($_GET['editable'])) {
+                                                ?>
+                                                <div class="col col-12 col-md-4">
+                                                    <a class="btn btn-primary w-100"
+                                                        href="../pages/view.php?campaign=<?= $row['campaign_id'] ?>&approve=true">
+                                                        Approve
+                                                    </a>
+                                                </div>
+                                                <?php
+                                            } ?>
+                                            <div class="col col-12 col-md-4">
                                                 <?php
                                                 if (isset($_GET['editable']) && $_GET['editable'] == true) {
                                                     ?>
@@ -248,7 +267,7 @@ if (isset($_POST['edit-campaign'])) {
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="col col-12 col-md-6">
+                                            <div class="col col-12 col-md-4">
                                                 <?php
                                                 if (isset($_GET['editable']) && $_GET['editable'] == true) {
                                                     ?>
