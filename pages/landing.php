@@ -1,3 +1,9 @@
+<!-- Model -->
+<?php
+$title = "Miracle - Landing Page";
+$prevent = 'authenticated';
+include('../server/connection.php');
+?>
 <!-- Controller -->
 <?php
 $from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
@@ -109,20 +115,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
                         </div>
                     </div>
                 </div>
-                <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                    aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar" style="width: 15%"></div>
-                </div>
-                <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
-                        <?= number_format($row['campaign_target']) ?>
-                    </small></p>
-                <button type="button" class="btn-donasi" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Donate
-                </button>
-            </div>
-            </div>
-            </div>
-        <?php endwhile; ?>
+            <?php endwhile; ?>
         </div>
     </section>
     <section class="container">
@@ -202,7 +195,6 @@ $result_camp = mysqli_query($conn, $from_campaign);
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 </main>
 <?php include('../components/footer.php'); ?>
@@ -216,7 +208,5 @@ $result_camp = mysqli_query($conn, $from_campaign);
             nav.classList.remove('bg-white', 'shadow', 'text-dark');
         }
     })
-
-
 </script>
 <?php include('../components/close.php'); ?>

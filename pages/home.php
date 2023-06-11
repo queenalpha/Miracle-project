@@ -1,3 +1,9 @@
+<!-- Konfigurasi -->
+<?php
+$title = "Miracle - Home";
+$prevent = 'guest';
+include('../server/connection.php');
+?>
 <!-- Logic -->
 <?php
 $from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
@@ -202,7 +208,5 @@ $result_camp = mysqli_query($conn, $from_campaign);
       nav.classList.remove('bg-white', 'shadow', 'text-dark');
     }
   })
-
-
 </script>
 <?php include('../components/close.php'); ?>
