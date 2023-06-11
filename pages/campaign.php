@@ -11,8 +11,10 @@ include('../server/connection.php');
 // $id_creator =  $_POST['campaign_creator'];
 // $daftar_campaign = "SELECT * FROM campaigns where campaign_creator = '$id_creator' desc LIMIT 4";
 // $result_list = mysqli_query($conn, $daftar_campaign);
-$daftar_campaign = "SELECT * FROM campaigns order by campaign_id desc LIMIT 4";
+$me = $_SESSION['id'];
+$daftar_campaign = "SELECT * FROM campaigns WHERE `campaign_creator` = '$me' ORDER BY campaign_end desc";
 $result_list = mysqli_query($conn, $daftar_campaign);
+
 if (isset($_POST['btn-campaign'])) {
     $me = $_SESSION['id'];
     $campaign_name = $_POST['name'];
@@ -212,14 +214,14 @@ if (isset($_GET['finish'])) {
             <button class="btn-campaign" data-bs-toggle="modal" data-bs-target="#exampleModal">Buat Campaign</button>
         </div>
     </div>
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered">
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Thumbnail</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Deskripsi</th>
-                <th scope="col">Tanggal Mulai</th>
-                <th scope="col">Tanggal Akhir</th>
+                <th scope="col">Tanggal</th>
                 <th scope="col">Target</th>
                 <th scope="col">Terkumpul</th>
                 <th scope="col">Status</th>
@@ -238,20 +240,19 @@ if (isset($_GET['finish'])) {
                     <td class="table-campaign">
                         <a target="_blank" href="<?= "../assets/image/campaign" . $row['campaign_thumbnail'] ?>">
                             <img src="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>"
-                                class="img-thumbnail object-fit-cover dt-thumbnail "
-                                alt="<?= $row['campaign_thumbnail'] ?>">
+                                class="img-thumbnail object-fit-cover" alt="<?= $row['campaign_thumbnail'] ?>"
+                                style="width:42px;height:42px;">
                         </a>
                     </td>
-                    <td class="table-campaign">
+                    <td class="table-campaign text-wrap">
                         <?= $row['campaign_name']; ?>
                     </td>
-                    <td class="table-campaign">
+                    <td class="table-campaign text-wrap">
                         <?= $row['campaign_description']; ?>
                     </td>
-                    <td class="table-campaign">
+                    <td class="table-campaign text-wrap">
                         <?= date("d F Y", strtotime($row['campaign_start'])); ?>
-                    </td>
-                    <td class="table-campaign">
+                        -
                         <?= date("d F Y", strtotime($row['campaign_end'])); ?>
                     </td>
                     <td class="table-campaign">
@@ -265,7 +266,7 @@ if (isset($_GET['finish'])) {
                         echo 'Rp. ' . number_format($terkumpul[0]) . ',-';
                         ?>
                     </td>
-                    <td class="table-campaign">
+                    <td class="table-campaign text-wrap">
                         <?php
                         if ($row['campaign_approval'] == 2) {
                             echo "Diselesaikan";
@@ -276,7 +277,7 @@ if (isset($_GET['finish'])) {
                         } ?>
                     </td>
                     <!-- <td>Approved</td> -->
-                    <td colspan="2" class="col-2 text-center">
+                    <td class="col text-center">
                         <div class="action">
                             <?php if (empty($row['campaign_approval'])) { ?>
                                 <a href="#" class="a-edit text-decoration-none" data-bs-toggle="modal"
@@ -293,7 +294,6 @@ if (isset($_GET['finish'])) {
                                         Selesaikan
                                     </a>
                             <?php } ?>
-
                         </div>
                     </td>
                 </tr>
