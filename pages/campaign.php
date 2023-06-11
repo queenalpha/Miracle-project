@@ -34,78 +34,172 @@ if (isset($_POST['btn-campaign'])) {
 
     header("Location: campaign.php?created=$success");
 }
+if (isset($_POST['edit-campaign'])) {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $start = $_POST['start'];
+    $end = $_POST['end'];
+    $target = $_POST['target'];
+    $thumbnail = $_FILES['thumbnail']['name'];
+    $temp = explode(".", $thumbnail);
+    $storename = preg_replace('/\s+/', '_', $id . '_' . $name) . '.' . end($temp);
+    $query = "UPDATE `campaigns` SET `campaign_name` = '$name', `campaign_description` = '$description', `campaign_start` = '$start', `campaign_end` = '$end', `campaign_thumbnail` = '$storename', `campaign_target` = '$target' WHERE `campaigns`.`campaign_id` = $id";
+    if (mysqli_query($conn, $query)) {
+        move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "../assets/image/campaign/" . $storename);
+        header('Location: ../pages/view.php?campaign=' . $id);
+    }
+}
+if (isset($_GET['campaign']) && isset($_GET['delete'])) {
+    $target = $_GET['campaign'];
+    $query = "UPDATE `campaigns` SET `campaign_approval` = '2' WHERE `campaigns`.`campaign_id` = $target";
+    if (mysqli_query($conn, $query)) {
+        header('Location: ../pages/manage.php?manage=campaigns');
+        exit();
+    }
+}
 ?>
 <!-- Logic -->
 <link rel="stylesheet" href="../Assets/css/profile.css">
 <?php include('../components/header.php'); ?>
 <?php include('../components/sidebar.php'); ?>
+<!-- add modal campaign -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Buat
+                    Campaignmu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" action="">
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama
+                            Campaign</label>
+                        <div class="col-sm-20">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="name"
+                                placeholder="Masukan Nama Campaign">
+                        </div>
+                        <label for="colFormLabelSm"
+                            class="col-sm-20 col-form-label col-form-label-sm">Keterangan</label>
+                        <div class="col-sm-20">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
+                                name="description" placeholder="Keterangan Campaign">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
+                            dimulai</label>
+                        <div class="col-sm-20">
+                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="start"
+                                placeholder="Keterangan Campaign">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
+                            berakhir</label>
+                        <div class="col-sm-20">
+                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="end"
+                                placeholder="Keterangan Campaign">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Target</label>
+                        <div class="col-sm-20 mb-2">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="target"
+                                placeholder="Target Campaign">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Foto</label>
+                        <div class="col-sm-20 mb-2">
+                            <input type="file" class="form-control form-control-sm" id="colFormLabelSm"
+                                name="thumbnail">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn-donasi mt-3" name="btn-campaign" value="Buat campaign">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- edit modal campaign -->
+<div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Campaign Kamu</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" action="">
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama
+                            Campaign</label>
+                        <div class="col-sm-20">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="name"
+                                placeholder="Masukan Nama Campaign" value="">
+                        </div>
+                        <label for="colFormLabelSm"
+                            class="col-sm-20 col-form-label col-form-label-sm">Keterangan</label>
+                        <div class="col-sm-20">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
+                                name="description" placeholder="Keterangan Campaign" value="">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
+                            dimulai</label>
+                        <div class="col-sm-20">
+                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="start"
+                                placeholder="Keterangan Campaign" value="">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
+                            berakhir</label>
+                        <div class="col-sm-20">
+                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="end"
+                                placeholder="Keterangan Campaign" value="">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Target</label>
+                        <div class="col-sm-20 mb-2">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="target"
+                                placeholder="Target Campaign" value="">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Foto</label>
+                        <div class="col-sm-20 mb-2">
+                            <input type="file" class="form-control form-control-sm" id="colFormLabelSm" name="thumbnail"
+                                value="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn-donasi mt-3" name="btn-campaign" value="Buat campaign">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Mau hapus campaign ini?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a type="submit" class="btn btn-danger" href="#">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Bikin campaign disini -->
 <div class="container">
-
     <div class="intro-judul">
         <div class="d-flex">
             <h3>Daftar Campaign Kamu</h3>
             <button class="btn-campaign" data-bs-toggle="modal" data-bs-target="#exampleModal">Buat Campaign</button>
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Buat
-                            Campaignmu</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" enctype="multipart/form-data" action="">
-                            <div class="form-group row">
-                                <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama
-                                    Campaign</label>
-                                <div class="col-sm-20">
-                                    <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                        name="name" placeholder="Masukan Nama Campaign">
-                                </div>
-                                <label for="colFormLabelSm"
-                                    class="col-sm-20 col-form-label col-form-label-sm">Keterangan</label>
-                                <div class="col-sm-20">
-                                    <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                        name="description" placeholder="Keterangan Campaign">
-                                </div>
-                                <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
-                                    dimulai</label>
-                                <div class="col-sm-20">
-                                    <input type="date" class="form-control form-control-sm" id="colFormLabelSm"
-                                        name="start" placeholder="Keterangan Campaign">
-                                </div>
-                                <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
-                                    berakhir</label>
-                                <div class="col-sm-20">
-                                    <input type="date" class="form-control form-control-sm" id="colFormLabelSm"
-                                        name="end" placeholder="Keterangan Campaign">
-                                </div>
-                                <label for="colFormLabelSm"
-                                    class="col-sm-20 col-form-label col-form-label-sm">Target</label>
-                                <div class="col-sm-20 mb-2">
-                                    <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                        name="target" placeholder="Target Campaign">
-                                </div>
-                                <label for="colFormLabelSm"
-                                    class="col-sm-20 col-form-label col-form-label-sm">Foto</label>
-                                <div class="col-sm-20 mb-2">
-                                    <input type="file" class="form-control form-control-sm" id="colFormLabelSm"
-                                        name="thumbnail">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="submit" class="btn-donasi mt-3" name="btn-campaign" value="Buat campaign">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End modal -->
-
     </div>
     <table class="table table-hover">
         <thead>
@@ -163,7 +257,7 @@ if (isset($_POST['btn-campaign'])) {
                     <td colspan="2" class="col-2 text-center">
                         <div class="action">
                             <a href="" class="a-edit text-decoration-none" data-bs-toggle="modal"
-                                data-bs-target="#updateModal">
+                                data-bs-target="#updateModal" data-campaign="<?= $row['campaign_id']; ?>">
                                 Edit
                             </a>
                             <a href="" class="a-hapus text-decoration-none" data-bs-toggle="modal"
@@ -177,142 +271,66 @@ if (isset($_POST['btn-campaign'])) {
         </tbody>
     </table>
 
-    <!-- edit modal campaign -->
-    <div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Campaign Kamu</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" enctype="multipart/form-data" action="">
-                        <div class="form-group row">
-                            <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama
-                                Campaign</label>
-                            <div class="col-sm-20">
-                                <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="name"
-                                    placeholder="Masukan Nama Campaign" value="">
-                            </div>
-                            <label for="colFormLabelSm"
-                                class="col-sm-20 col-form-label col-form-label-sm">Keterangan</label>
-                            <div class="col-sm-20">
-                                <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                    name="description" placeholder="Keterangan Campaign" value="">
-                            </div>
-                            <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
-                                dimulai</label>
-                            <div class="col-sm-20">
-                                <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="start"
-                                    placeholder="Keterangan Campaign" value="">
-                            </div>
-                            <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Event
-                                berakhir</label>
-                            <div class="col-sm-20">
-                                <input type="date" class="form-control form-control-sm" id="colFormLabelSm" name="end"
-                                    placeholder="Keterangan Campaign" value="">
-                            </div>
-                            <label for="colFormLabelSm"
-                                class="col-sm-20 col-form-label col-form-label-sm">Target</label>
-                            <div class="col-sm-20 mb-2">
-                                <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                    name="target" placeholder="Target Campaign" value="">
-                            </div>
-                            <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Foto</label>
-                            <div class="col-sm-20 mb-2">
-                                <input type="file" class="form-control form-control-sm" id="colFormLabelSm"
-                                    name="thumbnail" value="">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="submit" class="btn-donasi mt-3" name="btn-campaign" value="Buat campaign">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <nav aria-label="Page navigation example" class="nav-pag">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Mau hapus campaign ini?</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a type="submit" class="btn btn-danger" href="#">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<nav aria-label="Page navigation example" class="nav-pag">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-            </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </a>
-        </li>
-    </ul>
-</nav>
-
-<!-- alert -->
-<?php
-if (isset($_GET["created"]) && $_GET["created"] == true) {
-    ?>
-    <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-        Yeay! Campaign kamu berhasil dibuat!
-        <a href="campaign.php" class="btn-close"></a>
-    </div>
-<?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
-        <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
-            Yah, Campaign kamu gagal ditambahkan..
+    <!-- alert -->
+    <?php
+    if (isset($_GET["created"]) && $_GET["created"] == true) {
+        ?>
+        <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+            Yeay! Campaign kamu berhasil dibuat!
             <a href="campaign.php" class="btn-close"></a>
         </div>
-<?php }
+    <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
+            <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                Yah, Campaign kamu gagal ditambahkan..
+                <a href="campaign.php" class="btn-close"></a>
+            </div>
+    <?php }
 
-if (isset($_GET["updated"]) && $_GET["updated"] == true) {
-    ?>
-    <div id="alert" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-        Campaign kamu berhasil di update!
-        <a href="index.php" class="btn-close"></a>
-    </div>
-<?php } else if (isset($_GET["updated"]) && $_GET["updated"] == false) { ?>
-        <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-            Gagal memperbarui campaign kamu..
+    if (isset($_GET["updated"]) && $_GET["updated"] == true) {
+        ?>
+        <div id="alert" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            Campaign kamu berhasil di update!
             <a href="index.php" class="btn-close"></a>
         </div>
-<?php }
-if (isset($_GET["deleted"]) && $_GET["deleted"] == true) {
-    ?>
-    <div id="alert" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-        Campaign berhasil dihapus!!
-        <a href="index.php" class="btn-close"></a>
-    </div>
-<?php } else if (isset($_GET["deleted"]) && $_GET["deleted"] == false) { ?>
-        <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-            Campaign kamu gagal dihapus...
+    <?php } else if (isset($_GET["updated"]) && $_GET["updated"] == false) { ?>
+            <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                Gagal memperbarui campaign kamu..
+                <a href="index.php" class="btn-close"></a>
+            </div>
+    <?php }
+    if (isset($_GET["deleted"]) && $_GET["deleted"] == true) {
+        ?>
+        <div id="alert" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            Campaign berhasil dihapus!!
             <a href="index.php" class="btn-close"></a>
         </div>
-<?php }
-?>
+    <?php } else if (isset($_GET["deleted"]) && $_GET["deleted"] == false) { ?>
+            <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                Campaign kamu gagal dihapus...
+                <a href="index.php" class="btn-close"></a>
+            </div>
+    <?php }
+    ?>
 
 
 </div>
