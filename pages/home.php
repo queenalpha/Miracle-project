@@ -9,7 +9,6 @@ include('../server/connection.php');
 $from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
 $result_camp = mysqli_query($conn, $from_campaign);
 ?>
-
 <link rel="stylesheet" href="../Assets/css/testt.css">
 <?php include('../components/header.php'); ?>
 <?php include('../components/navbar.php'); ?>
