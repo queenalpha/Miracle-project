@@ -145,11 +145,11 @@ if (isset($_POST['btn-campaign'])) {
                     <td colspan="2" class="col-2 text-center">
                         <div class="action">
                             <a href="" class="a-edit text-decoration-none" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal">
+                                data-bs-target="#updateModal">
                                 Edit
                             </a>
                             <a href="" class="a-hapus text-decoration-none" data-bs-toggle="modal"
-                                data-bs-target="#updateModal">
+                                data-bs-target="#deleteModal">
                                 Hapus
                             </a>
                         </div>

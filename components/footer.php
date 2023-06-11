@@ -1,4 +1,4 @@
-<div class="container-fluid p-5" style="background-color:#e5ba73;">
+<div class="container-fluid p-5" style="background-color:#e5ba73;" id="aboutUs">
     <div class="row g-5">
         <div class="col col-12 col-lg-3">
             <h1>PT. Miracle Indonesia</h1>

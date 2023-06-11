@@ -7,27 +7,29 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
-    // masih ERROR
-//     if (isset($_POST['up'])) {
+   
 
-//     $account_id = $_POST['account_id'];
-    
-//     $nama_akun = $_POST['account_name'];
-//     $email_akun = $_POST['account_email'];
-//     $Telephone = $_POST['account_phone'];
-//     $path = "../Assets/images/" . basename($_FILES['account_pict']['name']);
-//     $image = $_FILES['account_pict']['name'];
-    
-//     move_uploaded_file($_FILES['pict_akun']['name'], $path);
-    
-//     $query = "UPDATE accounts SET account_name = '$nama_akun', account_email = '$email_akun', account_phone = '$Telephone', account_avatar = '$image' WHERE ID_akun = '$account_id'";
-//     $edit_profile = mysqli_query($conn, $query);
-    
-// }
+    // if (isset($_POST['up'])) {
 
-// $info_akun = "SELECT * FROM accounts";
-// $result_info = mysqli_query($conn, $info_akun);
-// $row = mysqli_fetch_assoc($result_info);
+    // $id_akun = $_POST['id'];
+    // $nama_akun = $_POST['name'];
+    // $email_akun = $_POST['email'];
+    // $Telephone = $_POST['phone'];
+    // $path = "../Assets/images/" . basename($_FILES['avatar']['name']);
+    // $image = $_FILES['avatar']['name'];
+    
+    // move_uploaded_file($_FILES['avatar']['name'], $path);
+    
+    // $query = "UPDATE accounts SET account_name = '$nama_akun', account_email = '$email_akun', account_phone = '$Telephone', account_avatar = '$image' WHERE ID_akun = '$account_id'";
+    // $edit_profile = mysqli_query($conn, $query);
+
+    // header("location: profile.php");
+    $target = $_SESSION['account_id'];
+    $query = "SELECT * FROM accounts WHERE account_id = $target";
+    $result = mysqli_query($conn, $query);
+    
+
+
 // ?>
 <!-- UI -->
 <link rel="stylesheet" href="../Assets/css/profile.css">
@@ -41,8 +43,11 @@ include('../server/connection.php');
         </div>
         
         <div class="bio">
-            <h4>Fahri aqila putra</h4>
+            <?php while ($row = mysqli_fetch_assoc($result)):?>
+            <h4><?php echo $row['account_name']?></h4>
             <h6>0859321324</h6>
+            <?php endwhile;?>
+
             <p>#temanbaik #BeMiracle</p>
         </div>
     </div>
@@ -52,7 +57,7 @@ include('../server/connection.php');
         <input type="hidden" name="account_id" value="<?php echo $_SESSION['account_id']; ?>">
             <div class="form-row">
                 <div class="d-flex px-3 col-5">
-                    <input type="username" class="form-control" name="nama_akun" value="<?php echo $row['account_name']; ?>" placeholder="Masukan Nama">
+                    <input type="username" class="form-control" name="nama_akun" value="<?php echo $_SESSION['account_name']; ?>" placeholder="Masukan Nama">
                 </div>
                 <div class="d-flex px-3 col-5">
                     <input type="password" class="form-control"  name="email_akun" placeholder="Masukan Email">

@@ -16,22 +16,41 @@
                     <li class="nav-item">
                         <a class="nav-link" href="donate.php">Donation</a>
                     </li>
+                <?php
+                if (!isset($_SESSION['logged_in'])) {
+                ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Campaign</a>
+                        <a class="nav-link" href="login.php">Campaign</a>
                     </li>
+                <?php
+                } else {?>
                     <li class="nav-item">
+                        <a class="nav-link" href="campaign.php">Campaign</a>
+                    </li>
+                <?php }?>
+
+                <?php
+                if (!isset($_SESSION['logged_in'])) {
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#aboutUs">About us</a>
+                    </li>
+                <?php
+                } else {?>
+                     <li class="nav-item">
                         <a class="nav-link" href="#">Riwayat Donasi</a>
                     </li>
+                <?php }?>
                 </ul>
-            </div>
-            <?php
-            if (!isset($_SESSION['logged_in'])) {
+                </div>
+                <?php
+                if (!isset($_SESSION['logged_in'])) {
                 ?>
                 <a href="../pages/login.php"  id="navbarNavDropdown">
                     <button type="button" class="btn btn-yellow  rounded-1 me-5">Masuk</button>
                 </a>
                 <?php
-            } else {
+                } else {
                 ?>
                 <ul class="navbar-nav">
                 <li class="nav-item dropdown">

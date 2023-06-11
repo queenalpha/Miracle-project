@@ -134,48 +134,68 @@ $result_camp = mysqli_query($conn, $from_campaign);
         <a href="donate.php" type="button" class="btn btn-outline-light">
             Donation
         </a>
-        <a href="login.php" type="button" class="btn btn-outline-light">
+        <a href="campaign.php" type="button" class="btn btn-outline-light">
             Buat Campaign
         </a>
     </div>
-    <div class="container my-5">
+    <section class="container my-5">
         <div class="row">
-            <div class="col">
-                <div class="card py-4">
-                    <div class="row g-0">
-                        <div class="col-md-4 d-flex justify-content-center align-items-center">
-                            <i class="fa-solid fa-users user" style="font-size:48px;color: #e5ba73;"></i>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">(Kuantitas User)</h5>
-                                <p class="card-text"><small class="text-body-secondary">#temanbaik telah
-                                        berdonasi</small>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col">
+            <div class="card py-4">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-users user" style="font-size:48px;color: #e5ba73;"></i>
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">
+                    <?php
+                    $query = "SELECT count(donation_id) FROM `donations`";
+                    $result = mysqli_query($conn, $query);
+                    $total = mysqli_fetch_array($result);
+                    echo $total[0] . " donasi";
+                    ?>
+                    </h5>
+                    <p class="card-text">
+                    <small class="text-body-secondary">
+                        Telah kami bantu jembatani di Miracle!
+                    </small>
+                    </p>
+                </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card py-4">
-                    <div class="row g-0">
-                        <div class="col-md-4 d-flex justify-content-center align-items-center">
-                            <i class="fa-solid fa-money-check user" style="font-size:48px;color: #e4b673;"></i>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">(Kuantitas Rp)</h5>
-                                <p class="card-text"><small class="text-body-secondary">Dana terkumpul dari
-                                        #temanbaik</small>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
+        <div class="col">
+            <div class="card py-4">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-money-check user" style="font-size:48px;color: #e4b673;"></i>
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">
+                    <?php
+                    $query = "SELECT SUM(donation_amount) FROM `donations`";
+                    $result = mysqli_query($conn, $query);
+                    $total = mysqli_fetch_array($result);
+                    echo
+                        "Rp." .
+                        number_format($total[0])
+                        . ",-";
+                    ?>
+                    </h5>
+                    <p class="card-text">
+                    <small class="text-body-secondary">
+                        Dana terkumpul dari <a class="text-decoration-none" href="#">#TemanBaik</a>
+                    </small>
+                    </p>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
 </main>
 <?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
