@@ -1,9 +1,3 @@
-<!-- Model -->
-<?php
-$title = "Miracle - Landing Page";
-$prevent = 'authenticated';
-include('../server/connection.php');
-?>
 <!-- Controller -->
 <?php
 $from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
@@ -102,61 +96,13 @@ $result_camp = mysqli_query($conn, $from_campaign);
                             <p class="card-text">
                                 <?= $row['campaign_description'] ?>
                             </p>
-                            <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0"
-                            aria-valuemax="100">
-                            <div class="progress-bar" style="width: 15%"></div>
+                            <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" style="width: 15%"></div>
                             </div>
                             <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
-                                <?= number_format($row['campaign_target']) ?>
-                            </small></p>
-                            <button type="button" class="btn-donasi" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Donate
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-4 mb-5">
-                    <div class="card p-1 h-100">
-                        <img src="<?= $row['campaign_thumbnail'] ?>" class="card-img-top object-fit-cover" width="100%"
-                            height="201px" alt="">
-                        <div class="card-body">
-                            <h5 class="card-tittle">
-                                <?= $row['campaign_name'] ?>
-                            </h5>
-                            <p class="card-text">
-                                <?= $row['campaign_description'] ?>
-                            </p>
-                            <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0"
-                            aria-valuemax="100">
-                            <div class="progress-bar" style="width: 15%"></div>
-                            </div>
-                            <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
-                                <?= number_format($row['campaign_target']) ?>
-                            </small></p>
-                            <button type="button" class="btn-donasi" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Donate
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-4 mb-5">
-                    <div class="card p-1 h-100">
-                        <img src="<?= $row['campaign_thumbnail'] ?>" class="card-img-top object-fit-cover" width="100%"
-                            height="201px" alt="">
-                        <div class="card-body">
-                            <h5 class="card-tittle">
-                                <?= $row['campaign_name'] ?>
-                            </h5>
-                            <p class="card-text">
-                                <?= $row['campaign_description'] ?>
-                            </p>
-                            <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0"
-                            aria-valuemax="100">
-                            <div class="progress-bar" style="width: 15%"></div>
-                            </div>
-                            <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
-                                <?= number_format($row['campaign_target']) ?>
-                            </small></p>
+                                    <?= number_format($row['campaign_target']) ?>
+                                </small></p>
                             <button type="button" class="btn-donasi" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Donate
                             </button>
@@ -185,7 +131,8 @@ $result_camp = mysqli_query($conn, $from_campaign);
             Buat Campaign
         </a>
     </div>
-    <div class="container my-5">
+    <!-- quantity of user and donatur -->
+    <section class="container my-5">
         <div class="row">
             <div class="col">
                 <div class="card py-4">
@@ -195,9 +142,18 @@ $result_camp = mysqli_query($conn, $from_campaign);
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">(Kuantitas User)</h5>
-                                <p class="card-text"><small class="text-body-secondary">#temanbaik telah
-                                        berdonasi</small>
+                                <h5 class="card-title">
+                                    <?php
+                                    $query = "SELECT count(donation_id) FROM `donations`";
+                                    $result = mysqli_query($conn, $query);
+                                    $total = mysqli_fetch_array($result);
+                                    echo $total[0] . " donasi";
+                                    ?>
+                                </h5>
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        Telah kami bantu jembatani di Miracle!
+                                    </small>
                                 </p>
                             </div>
                         </div>
@@ -212,29 +168,40 @@ $result_camp = mysqli_query($conn, $from_campaign);
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">(Kuantitas Rp)</h5>
-                                <p class="card-text"><small class="text-body-secondary">Dana terkumpul dari
-                                        #temanbaik</small>
+                                <h5 class="card-title">
+                                    <?php
+                                    $query = "SELECT SUM(donation_amount) FROM `donations`";
+                                    $result = mysqli_query($conn, $query);
+                                    $total = mysqli_fetch_array($result);
+                                    echo
+                                        "Rp." .
+                                        number_format($total[0])
+                                        . ",-";
+                                    ?>
+                                </h5>
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        Dana terkumpul dari <a class="text-decoration-none" href="#">#TemanBaik</a>
+                                    </small>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+    </section>
 </main>
 <?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
 <script>
-  var nav = document.querySelector('nav'); window.addEventListener('scroll', function () {
-    if (window.pageYOffset >
-      100) {
-      nav.classList.add('bg-white', 'shadow');
-    } else {
-      nav.classList.remove('bg-white', 'shadow', 'text-dark');
-    }
-  })
+    var nav = document.querySelector('nav'); window.addEventListener('scroll', function () {
+        if (window.pageYOffset >
+            100) {
+            nav.classList.add('bg-white', 'shadow');
+        } else {
+            nav.classList.remove('bg-white', 'shadow', 'text-dark');
+        }
+    })
 
 
 </script>
