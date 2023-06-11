@@ -7,7 +7,7 @@ include('../server/connection.php');
 <!-- Controller -->
 <?php
 $from_campaign = "SELECT * FROM campaigns WHERE campaign_approval IS NOT NULL ORDER BY campaign_end desc LIMIT 3";
-$result_camp = mysqli_query($conn, $from_campaign);
+$result = mysqli_query($conn, $from_campaign);
 
 if (isset($_POST['donate'])) {
     $account = $_POST['account'];
@@ -171,7 +171,7 @@ if (isset($_POST['donate'])) {
             <small class="text-muted fst-italic">Be a miracle foreach others</small>
         </div>
         <div class="row align-items-center mt-5" id="donasi">
-            <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
+            <?php while ($row = mysqli_fetch_assoc($result)): ?>
                 <div class="col-12 col-md-12 col-lg-4 mb-5">
                     <div class="card p-1 h-100">
                         <img src="<?= '../assets/image/campaign/' . $row['campaign_thumbnail'] ?>"
@@ -201,7 +201,9 @@ if (isset($_POST['donate'])) {
                                     <strong>
                                         Rp.
                                         <?= number_format($row['campaign_target']) ?>
-                                </small></p>
+                                        ,-
+                                    </strong>
+                                </small>
                             </div>
                             <button type="button" class="donate btn-donasi" data-bs-toggle="modal" data-bs-target="#modal"
                                 data-campaign="<?= $row['campaign_id'] ?>" data-account="<?php
