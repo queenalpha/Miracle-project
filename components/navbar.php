@@ -38,7 +38,7 @@
                 <?php
                 } else {?>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Riwayat Donasi</a>
+                        <a class="nav-link" href="history.php">Riwayat Donasi</a>
                     </li>
                 <?php }?>
                 </ul>
