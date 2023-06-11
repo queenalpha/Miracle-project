@@ -209,7 +209,6 @@ section .heart{
 .form-text h3{
     margin-left: 2em;
     text-align: center;
-    padding: 0 0 20px 0;
     border-bottom: 2px solid black;
 }
 

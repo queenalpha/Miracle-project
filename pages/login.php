@@ -31,25 +31,25 @@ if (isset($_POST['login'])) {
 <div class="container login-form">
     <img src="../assets/image/Login form img.jpg" class="form-img" alt="">
     <div class="form-content">
-        <div class="form-text">
-            <h3>Login to Miracle</h3>
-            <form method="post" action="" id="form-login">
-                <div>
-                    <input type="email" name="email" placeholder="Masukan email">
-                </div>
-                <div>
-                    <input type="password" name="password" placeholder="Masukan password">
-                </div>
-                <?php if (isset($_GET['error'])) {
-                    echo $_GET['error'];
-                }
-                ?>
-                <div>
-                    <input type="submit" name="login" value="Login">
-                </div>
+        <form method="post" action="" id="form-login" class="row gy-3 py-4 w-50">
+            <h3 class="pb-3 mb-4">Login to Miracle</h3>
+            <div>
+                <input class="form-control" type="email" name="email" placeholder="Masukan email">
+            </div>
+            <div>
+                <input class="form-control" type="password" name="password" placeholder="Masukan password">
+            </div>
+            <?php if (isset($_GET['error'])) {
+                echo $_GET['error'];
+            }
+            ?>
+            <div>
+                <input class="form-control" type="submit" name="login" value="Login">
+            </div>
+            <div>
                 Belum punya akun? <a href="Register.php" class=""> Register</a>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 
