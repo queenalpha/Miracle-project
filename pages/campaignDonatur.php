@@ -6,11 +6,20 @@ $pages = basename($_SERVER['PHP_SELF']);
 include('../server/connection.php');
 ?>
 <!-- Logic -->
-
+<?php
+$target = $_SESSION['id'];
+$query3 = "SELECT donations.donation_id, donations.donation_date, accounts.account_name, accounts.account_avatar, campaigns.campaign_name, campaigns.campaign_thumbnail, donations.donation_amount
+    FROM donations
+    JOIN accounts ON accounts.account_id=donations.donation_account
+    JOIN campaigns ON campaigns.campaign_id=donations.donation_campaign
+    WHERE campaigns.campaign_creator = '$target '
+    ORDER BY donations.donation_date desc";
+$result3 = mysqli_query($conn, $query3);
+?>
 <!-- Logic -->
 <link rel="stylesheet" href="../Assets/css/profile.css">
 <?php include('../components/header.php'); ?>
-<?php include('../components/sidebar.php');?>
+<?php include('../components/sidebar.php'); ?>
 
 <div class="container">
     <div class="intro-judul">
@@ -18,68 +27,70 @@ include('../server/connection.php');
             <h3>Daftar Donatur kamu</h3>
         </div>
     </div>
-    <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Campaign</th>
-                    <th scope="col">Nama Donatur</th>
-                    <th scope="col">Tanggal Mulai</th>
-                    <th scope="col">Tanggal Akhir</th>
-                    <th scope="col">Target</th>
-                    <th scope="col">Terkumpul</th>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="align-middle">
+                <th scope="col" class="ps-5">#</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Dari</th>
+                <th scope="col">Untuk</th>
+                <th scope="col" class="pe-5">Jumlah</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($result3)):
+                $i++; ?>
+                <tr class="align-middle">
+                    <th class="align-item-center ps-5" scope="row">
+                        <?= $i ?>
+                    </th>
+                    <td class="col align-item-center">
+                        <?= date("d F Y", strtotime($row['donation_date'])); ?>
+                    </td>
+                    <td class="col align-item-center">
+                        <a class="me-3 text-decoration-none" target="_blank"
+                            href="<?= "../assets/image/profile/" . $row['account_avatar'] ?>">
+                            <img src="<?= "../assets/image/profile/" . $row['account_avatar'] ?>"
+                                class="img-thumbnail object-fit-cover dt-thumbnail" alt="<?= $row['account_name'] ?>">
+                        </a>
+                        <?= $row['account_name']; ?>
+                    </td>
+                    <td class="col align-item-center">
+                        <a class="me-3 text-decoration-none" target="_blank"
+                            href="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>">
+                            <img src="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>"
+                                class="img-thumbnail object-fit-cover dt-thumbnail" alt="<?= $row['campaign_name'] ?>">
+                        </a>
+                        <?= $row['campaign_name']; ?>
+                    </td>
+                    <td class="col align-item-center">
+                        Rp.
+                        <?= number_format($row['donation_amount']) ?>
+                        ,-
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <!-- TODO : LIMIT 4 BARIS AJA -->
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Nama kegiatan</td>
-                    <td>Nama Donatur</td>
-                    <td>11-12-2023</td>
-                    <td>30-12-2023</td>
-                    <td>Rp1,000,000</td>
-                    <td>Rp50,000</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Nama kegiatan</td>
-                    <td>Nama Donatur</td>
-                    <td>11-12-2023</td>
-                    <td>30-12-2023</td>
-                    <td>Rp1,000,000</td>
-                    <td>Rp50,000</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Nama kegiatan</td>
-                    <td>Nama Donatur</td>
-                    <td>11-12-2023</td>
-                    <td>30-12-2023</td>
-                    <td>Rp1,000,000</td>
-                    <td>Rp50,000</td>
-                </tr>
-            </tbody>
+            <?php endwhile; ?>
+        </tbody>
     </table>
-
-
     <!-- ini biarin static aja -->
     <nav aria-label="Page navigation example" class="nav-pag">
         <ul class="pagination">
             <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-            </a>
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
             </li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </a>
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
             </li>
         </ul>
     </nav>
@@ -88,8 +99,8 @@ include('../server/connection.php');
 
 
 
-    
-    
+
+
 
 <?php include('../components/js.php'); ?>
 <?php include('../components/close.php'); ?>
