@@ -1,4 +1,4 @@
-<div class="container-fluid p-5" style="background-color:#e5ba73;">
+<div class="container-fluid p-5" style="background-color:#e5ba73;" id="aboutUs">
     <div class="row g-5">
         <div class="col col-12 col-lg-3">
             <h1>PT. Miracle Indonesia</h1>
@@ -16,56 +16,49 @@
             <a class="d-inline-block btn btn-outline-dark" href="#">
                 <i class="fa-brands fa-youtube"></i>
             </a>
+            <a class="d-inline-block btn btn-outline-dark" href="https://github.com/queenalpha/Miracle-project.git" target="blank">
+                <i class="fa-brands fa-github"></i>
+            </a>
         </div>
         <div class="col col-12 col-lg-3">
             <h4>Menu</h4>
             <div>
                 <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
+                    <a href="Register.php" class="text-decoration-none text-dark">Register</a>
                 </li>
                 <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
+                    <a href="donate.php" class="text-decoration-none text-dark">Donasi</a>
                 </li>
                 <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
+                    <a href="campaign.php" class="text-decoration-none text-dark">Campaign</a>
                 </li>
                 <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
+                    <a href="history.php" class="text-decoration-none text-dark">Riwayat</a>
                 </li>
             </div>
         </div>
         <div class="col col-12 col-lg-3">
-            <h4>Kontak</h4>
-            <div>
+            <h4>Teams</h4>
+            <div class="text-decoration-none">
                 <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
+                    <a href="#" class="text-decoration-none text-dark">M. Aditya</a>
                 </li>
                 <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
+                    <a href="#" class="text-decoration-none text-dark">R. Fahri</a>
                 </li>
                 <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
-                </li>
-                <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
+                    <a href="#" class="text-decoration-none text-dark">Rosa Anugrah</a>
                 </li>
             </div>
         </div>
         <div class="col col-12 col-lg-3">
             <h4>Tentang</h4>
             <div>
-                <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
-                </li>
-                <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
-                </li>
-                <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
-                </li>
-                <li class="list-group-item mb-1">
-                    <a href="#">Link</a>
-                </li>
+                <p class="justify-content-center">
+                    Miracle merupakan platform penggalangan dana yang memungkinkan pengguna untuk
+                    melakukan donasi kepada berbagai program amal dan kampanye sosial yang terkait dengan  
+                    berbagai isu sosial, seperti pendidikan, kesehatan, bencana alam, lingkungan, dan lainnya.
+                </p>
             </div>
         </div>
     </div>

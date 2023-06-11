@@ -1,9 +1,3 @@
-<!-- Model -->
-<?php
-$title = "Miracle - Landing Page";
-$prevent = 'authenticated';
-include('../server/connection.php');
-?>
 <!-- Controller -->
 <?php
 $from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
@@ -13,6 +7,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
 <?php include('../components/header.php'); ?>
 <?php include('../components/navbar.php'); ?>
 <?php include('../components/carousel.php'); ?>
+<!-- Modal Data Donatur -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -41,8 +36,41 @@ $result_camp = mysqli_query($conn, $from_campaign);
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <a href="#transaksi" data-bs-toggle="modal">
+                            <button type="submit" class="btn-donasi" name="add-donatur">Save</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Transaksi -->
+<div class="modal fade" id="transaksi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Ayo berdonasi
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" action="#">
+                    <div class="payment">
+                        <button class="btn-pay">15.000</button>
+                        <button class="btn-pay">20.000</button>
+                        <button class="btn-pay">25.000</button>
+                        <button class="btn-pay mb-3">30.000</button>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-20 mb-3">
+                            <input type="text" class="form-control form-control-sm pay-input" id="colFormLabelSm"
+                                name="judul" placeholder="Masukan Donasi Anda">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
                         <input type="submit" class="btn-donasi mt-3" data-bs-toggle="modal" data-bs-target="#transaksi"
-                            value="Save">
+                            value="Donate">
                     </div>
                 </form>
             </div>
@@ -55,7 +83,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
             <h2>Open Donation</h2>
             <small class="text-muted fst-italic">Be a miracle foreach others</small>
         </div>
-        <div class="row align-items-center ms-4" id="donasi">
+        <div class="row align-items-center" id="donasi">
             <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
                 <div class="col-12 col-md-12 col-lg-4 mb-5">
                     <div class="card p-1 h-100">
@@ -68,16 +96,33 @@ $result_camp = mysqli_query($conn, $from_campaign);
                             <p class="card-text">
                                 <?= $row['campaign_description'] ?>
                             </p>
-                            <p class="card-text">Membutuhkan Rp
-                                <?= number_format($row['campaign_target']) ?>
-                            </p>
+                            <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" style="width: 15%"></div>
+                            </div>
+                            <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
+                                    <?= number_format($row['campaign_target']) ?>
+                                </small></p>
                             <button type="button" class="btn-donasi" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Donate
                             </button>
                         </div>
                     </div>
                 </div>
-            <?php endwhile; ?>
+                <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: 15%"></div>
+                </div>
+                <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
+                        <?= number_format($row['campaign_target']) ?>
+                    </small></p>
+                <button type="button" class="btn-donasi" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Donate
+                </button>
+            </div>
+            </div>
+            </div>
+        <?php endwhile; ?>
         </div>
     </section>
     <section class="container">
@@ -85,20 +130,20 @@ $result_camp = mysqli_query($conn, $from_campaign);
             <source src="../assets/videoAdvertise.mov" type="video/mp4">
         </video>
     </section>
-    <section class="inviting">
+    <div class="inviting">
         <h3>
             Make your life useful to others
         </h3>
         <p>
             Create a miracle for someone who still wants to keep fighting
         </p>
-        <a href="donasiPage.php" type="button" class="btn btn-outline-light">
+        <a href="donate.php" type="button" class="btn btn-outline-light">
             Donation
         </a>
         <a href="login.php" type="button" class="btn btn-outline-light">
             Buat Campaign
         </a>
-    </section>
+    </div>
     <!-- quantity of user and donatur -->
     <section class="container my-5">
         <div class="row">
@@ -163,13 +208,15 @@ $result_camp = mysqli_query($conn, $from_campaign);
 <?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
 <script>
-    var nav = document.querySelector('nav');
-    window.addEventListener('scroll', function () {
-        if (window.pageYOffset > 100) {
+    var nav = document.querySelector('nav'); window.addEventListener('scroll', function () {
+        if (window.pageYOffset >
+            100) {
             nav.classList.add('bg-white', 'shadow');
         } else {
-            nav.classList.remove('bg-white', 'shadow');
+            nav.classList.remove('bg-white', 'shadow', 'text-dark');
         }
     })
+
+
 </script>
 <?php include('../components/close.php'); ?>

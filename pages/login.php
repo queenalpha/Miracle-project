@@ -20,7 +20,7 @@ if (isset($_POST['login'])) {
         }
         header('Location: ../pages/home.php');
     } else {
-        header('Location: ../pages/login.php?error=1');
+        header('Location: ../pages/login.php?error=Akun salah atau tidak ditemukan!');
     }
 }
 ?>

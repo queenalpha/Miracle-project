@@ -34,20 +34,3 @@ body{
     color: white;
 }
 
-.btn-second{
-    width: 10%;
-    background-color: #E5BA73;
-    color: #ffff;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-}
-
-.btn-donasi{
-    color: #fff;
-    background-color: #E5BA73;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    padding: 5px;
-}

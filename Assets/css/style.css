@@ -9,10 +9,16 @@ body{
     padding: 0;
 }
 
-.navbar {
+/* .navbar {
     z-index: 10;
-}
+} */
 
+nav.navnav ul li a{
+    color: #797979;
+}
+nav.navnav ul li a:hover{
+    color: #E5BA73;
+}
 /* 
 .nav-scrolled{
     background-color: #fff;
@@ -27,7 +33,6 @@ body{
     -o-background-size: cover;
     background-size: cover;
 }
-
 
 .carousel-caption{
     margin-top: 40%;
@@ -55,21 +60,19 @@ body{
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg:  #E5BA73;
 }
-.btn-second{
-    width: 20vh;
+
+.detail-btn{
+    color: #fff;
     background-color: #E5BA73;
-    color: #ffff;
     border: none;
     border-radius: 5px;
+    width: 20%;
+    padding: 5px;
 }
 
-.btn-second:hover{
-    background-color: #be995f;
-}
-
-.btn-second:active{
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg:  #E5BA73;
+.form-check-input:checked {
+    background-color: #E5BA73;
+    border-color: #E5BA73;
 }
 
 .open-donation{
@@ -107,7 +110,6 @@ body{
 
 .pay-input{
     border: 1px solid #E5BA73;
-    margin-left: 5%;
     width: 70vh;
     padding: 8px;
 }
@@ -211,6 +213,25 @@ section .heart{
     border-bottom: 2px solid black;
 }
 
+/* ini buat di login form */
+input[type=username],
+input[type=email],
+input[type=password],
+input[type=tel],
+input[type=submit]{
+    width: 120%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=submit]{
+    padding: 5px;
+}
+
+.register{
+    margin-top: -35px;
+}
 footer {
     background-color: #E5BA73;
     color: white;
@@ -218,8 +239,28 @@ footer {
     height: 50%;
     padding: 50px;
 }
+
+/* dt */
+
+.progress {
+    --bs-progress-height: 1rem;
+    --bs-progress-font-size: 0.75rem;
+    --bs-progress-bg: var(--bs-secondary-bg);
+    --bs-progress-border-radius: var(--bs-border-radius);
+    --bs-progress-box-shadow: var(--bs-box-shadow-inset);
+    --bs-progress-bar-color: #fff;
+    --bs-progress-bar-bg:  #E5BA73;
+    color: white;
+    --bs-progress-bar-transition: width 0.6s ease;
+    display: flex;
+    height: var(--bs-progress-height);
+    overflow: hidden;
+    font-size: var(--bs-progress-font-size);
+    background-color: var(--bs-progress-bg);
+    border-radius: var(--bs-progress-border-radius);
+}
+
 .accordion-button:not(.collapsed) {
     color: #212529;
     background-color: transparent!important;
 }
-

@@ -1,7 +1,6 @@
 <!-- Konfigurasi -->
 <?php
-$title = "Miracle - Landing Page";
-$prevent = 'guest';
+$title = "Miracle - Register";
 include('../server/connection.php');
 ?>
 <!-- Logic -->
@@ -12,11 +11,14 @@ if (isset($_POST['btn_regist'])) {
     $pass_akun = $_POST['pass_akun'];
     $telepon = $_POST['Telephone'];
 
-    $query = "INSERT INTO akun (`account_name`, `account_email`, `account_password`, `account_phone`, `account_avatar`, `account_level`)
-    values ('$nama_akun','$email_akun','$pass_akun','$telepon')";
-    mysqli_query($conn, $query);
+    $query = "INSERT INTO `accounts` (`account_name`, `account_email`, `account_password`, `account_phone`, `account_avatar`, `account_level`)
+    values ('$nama_akun','$email_akun','$pass_akun','$telepon',null,null)";
+    if(mysqli_query($conn, $query)){
+        header("location:login.php?alert=Akun berhasil dibuat Silahkan login");
+    } else {
+        header("location:Register.php?alert=Akun gagal dibuat, coba lagi!");
+    }
 
-    header("location:Register.php");
 }
 ?>
 <!-- Logic -->
@@ -29,18 +31,22 @@ if (isset($_POST['btn_regist'])) {
             <h3>Register to Miracle</h3>
             <form method="POST" action="Register.php" class="form-login">
                 <div>
-                    <input type="username" name="nama_akun" value="" placeholder="Masukan Nama">
+                    <input type="username" name="nama_akun" value="" placeholder="Masukan Nama" required>
                 </div>
                 <div>
-                    <input type="email" name="email_akun" value="" placeholder="Masukan Email">
+                    <input type="email" name="email_akun" value="" placeholder="Masukan Email" required>
                 </div>
                 <div>
-                    <input type="password" name="pass_akun" value="" placeholder="Masukan Password">
+                    <input type="password" name="pass_akun" value="" placeholder="Masukan Password" required>
                 </div>
                 <div>
                     <input type="tel" name="Telephone" value="" placeholder="Masukan Telephone">
                 </div>
                 <div>
+                <?php if (isset($_GET['alert'])) {
+                    echo $_GET['alert'];
+                }
+                ?>
                     <input type="submit" name="btn_regist" value="Register">
                 </div>
                 Sudah punyak akun? <a href="login.php" class=""> Login</a>

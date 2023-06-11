@@ -1,82 +1,122 @@
 <!-- Konfigurasi -->
 <?php
-$title = "Miracle - Landing Page";
+$title = "Miracle - Your profile";
 $prevent = 'guest';
+$pages = basename($_SERVER['PHP_SELF']);
 include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
+    $target = $_SESSION['id'];
+    $query = "SELECT * FROM accounts WHERE account_id = $target";
+    $result = mysqli_query($conn, $query);
 
+    if (isset($_POST['edit-profile'])) {
+
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $avatar = $_FILES['avatar']['name'];
+    $temp = explode(".", $avatar);
+    $storename = preg_replace('/\s+/', '_', $id . '_' . $name) . '.' . end($temp);
+    
+    $query = "UPDATE `accounts` SET `account_name` = '$name', `account_email` = '$email',  `account_phone` = '$phone', `account_avatar` = '$storename', 
+    WHERE `accounts`.`account_id` = $id";
+    
+    if (mysqli_query($conn, $query)) {
+        move_uploaded_file($_FILES["avatar"]["tmp_name"], "../assets/image/profile/" . $storename);
+        if (mysqli_query($conn, $query)) {
+            move_uploaded_file($_FILES["avatar"]["tmp_name"], "../assets/image/profile/" . $storename);
+            header('Location: ../pages/profile.php?account='. $id);
+    }
+    
+    }
+}
+    // if (isset($_POST['edit-profile'])) {
+
+    // $id_akun = $_POST['id'];
+    // $nama_akun = $_POST['name'];
+    // $email_akun = $_POST['email'];
+    // $Telephone = $_POST['phone'];
+    // $path = "../Assets/images/" . basename($_FILES['avatar']['name']);
+    // $image = $_FILES['avatar']['name'];
+    
+    // move_uploaded_file($_FILES['avatar']['name'], $path);
+    
+    // $query = "UPDATE accounts SET account_name = '$nama_akun', account_email = '$email_akun', account_phone = '$Telephone', account_avatar = '$image' WHERE account_id = '$id_akun'";
+    // if (mysqli_query($conn, $query)) {
+    //     $success = true;
+    // } else {
+    //     $success = false;
+    // }
+    // header("Location: profile.php?updated=$success");
+    // }
 ?>
 <!-- UI -->
+<link rel="stylesheet" href="../Assets/css/profile.css">
 <?php include('../components/header.php'); ?>
-<nav class="navbar navbar-expand-lg p-md-3 nav-scrolled fixed-top">
-    <img src="Assets/icon/typograph.png" class="ms-5" width="100px" alt="">
-</nav>
-
-<div class="side-bar">
-    <div class="side-text">
-        <ul>
-            <li>
-                <a href="">Profile</a>
-            </li>
-            <li>
-                <a href="riwayatDonasi.php">Riwayat Donasi</a>
-            </li>
-            <li>
-                <a href="campaign.php">Program Campaign</a>
-            </li>
-        </ul>
-
-        <div class="link-bottom">
-            <ul>
-                <li>
-                    <a href="index.php">Home</a>
-                </li>
-                <li>
-                    <a href="profilePage.php?logout=1">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+<!-- <?php include('../components/sidebar.php');?> -->
 
 <div class="container profile">
     <div class="profile-content d-flex">
-        <img src="Assets/image/profile/team-2.jpg" class="profile-img" width="120px" height="120px" alt="">
+        <div>
+        <img src="../Assets/image/profile/team-2.jpg" class="profile-img object-fit-cover" width="120px" height="120px" alt="">    
+        </div>
+        
         <div class="bio">
-            <h4>Fahri aqila putra</h4>
-            <h6>0859321324</h6>
+            <?php while ($row = mysqli_fetch_assoc($result)):?>
+            <h4><?php echo $row['account_name']?></h4>
+            <h6><?php echo $row['account_phone']?></h6>
+         
+
             <p>#temanbaik #BeMiracle</p>
         </div>
     </div>
-
-    <div class="container">
-        <form>
-            <div class="form-row my-3 ">
-                <div class="col-4">
-                    <label for="Email">Name</label>
-                    <input type="username" class="form-control" placeholder="Name">
+    
+    <!-- edit profile -->
+    <div class="form-profile">
+        <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?php echo $row['account_id']; ?>">
+            <div class="form-row">
+                <div class="d-flex px-3 col-5">
+                    <input type="username" class="form-control" name="name" value="<?php echo $row['account_name']; ?>" placeholder="Masukan Nama">
                 </div>
-                <div class="form-email col-4 ms-5">
-                    <label for="Email">Email</label>
-                    <input type="email" class="form-control" placeholder="Email">
-                </div>
-                <div class="form-tel col-4">
-                    <label for="tel">Telephone</label>
-                    <input type="tel" class="form-control" placeholder="Telephone">
-                </div>
-                <div class="form-photo col-4 ms-5">
-                    <label for="Email">Photo</label>
-                    <input type="file" class="form-control" placeholder="Email">
+                <div class="d-flex px-3 col-5">
+                    <input type="email" class="form-control"  name="email" value="<?php echo $row['account_email']; ?>" placeholder="Masukan Email">
                 </div>
             </div>
+            <div class="form-row mt-3">
+                <div class="d-flex px-3 col-5">
+                    <input type="tel" class="form-control" name="phone" value="<?php echo $row['account_phone']; ?>" placeholder="Masukan Telephone">
+                </div>
+                <div class="px-3 mt-2 col-5">
+                <input type="file" class="form-control" name="avatar" placeholder="Masukan Photo">
+                </div>
+            </div>
+            <?php endwhile;?>
+            <button class="edit-btn" name="edit-profile">Edit Profile</button>
         </form>
-        <button class="edit-btn btn-second">Edit Profile</button>
     </div>
+
+        <!-- alert -->
+        
+    <?php
+    if (isset($_GET["updated"]) && $_GET["updated"] == true) {
+    ?>
+    <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+        Berhasil mengubah profile kamu!
+        <a href="profile.php" class="btn-close"></a>
+    </div>
+    <?php } else if (isset($_GET["updated"]) && $_GET["updated"] == false) { ?>
+        <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+            Gagal mengubah profile kamu..
+            <a href="profile.php" class="btn-close"></a>
+        </div>
+    <?php }
+    ?>
+
 </div>
 
-
-<?php include('../components/footer.php'); ?>
 <?php include('../components/js.php'); ?>
 <?php include('../components/close.php'); ?>

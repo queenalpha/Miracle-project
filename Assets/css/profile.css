@@ -1,0 +1,195 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+.web-header-content{
+    box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e6e6e6;
+    height: 56px;
+    background: #ffffff;   
+}
+
+.web-sidebar{
+    position: fixed;
+    min-height: 100vh;
+    height: 100%;
+    left: 0;
+    top: 0;
+    font-size: 0.875rem;
+    border-right: 1px solid #e7e9ed;
+}
+
+.web-side-content{
+    position: relative;
+    z-index: 10;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 8px 15px;
+    width: 250px;
+    height: 100%;
+}
+
+.main-content{
+    overflow-y: auto;
+    margin-top: 20%;
+    color: #272727;
+   
+}
+
+.footer-content{
+    margin-top: 90%;
+    padding: 0;
+    width: 100%;
+    border-top: 2px solid #b3b3b3;
+}
+
+.list-unstyled{
+    margin-top: 10%;
+}
+
+.li-hov:hover, .a-style:hover{
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #e6b573;
+    color: #fff;
+}
+.a-style{
+    color: #272727;
+}
+
+.click{
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e6b573;
+    color: #fff;
+}
+.li-hov{
+    margin: 2px;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.list-unstyled{
+    font-size: 15px;
+}
+.profile .profile-img{
+    margin-left: 25em;
+    margin-top: 7em;
+    position: relative;
+    border-radius: 100%;
+    margin-bottom: 40px;
+}
+
+.bio{
+    margin: 20px;
+    margin-top: 8em;
+    margin-left: 3em;
+}
+
+
+.form-row
+input[type=username],
+input[type=email],
+input[type=password],
+input[type=tel],
+input[type=submit]{
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.link-bottom{
+    margin-top: 20em;
+}
+.form-row{
+    display: flex;
+    margin-left: 23%;
+}
+
+.form-photo{
+    margin-top: 12%;
+}
+
+.form-tel{
+    margin-top: 12%;
+    margin-left: -38rem;
+}
+
+.edit-btn{
+    border-radius: 8px;
+    width: 10%;
+    color: #fff;
+    background-color: #e6b573;
+    padding: 5px;
+    border: none;
+    margin-top: 16px;
+    margin-left: 25%;
+}
+
+.intro-judul {
+    margin-left: 20%;
+    margin-top: 10%;
+}
+
+.intro-judul-2 {
+    margin-left: 20%;
+    margin-top: 8%;
+}
+
+
+.a-edit{
+    border-radius: 5px;
+    color:#272727;
+    border: 1px solid #272727;
+    padding: 8px;
+    width: 30%;
+}
+
+.a-hapus{
+    border-radius: 5px;
+    background-color: #e6b573;
+    color:#ffffff;
+    padding: 8px;
+    width: 30%;
+}
+.table{
+    border: 1px solid #b9b7b7;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 3px;
+    width: 85% !important;
+    margin-left: 20%;
+    margin-top: 3%;
+}
+
+/* INI BUAT JAGA TEKS BUAT GA OVERLOAD TAPI BLM BISA */
+.table-campaign{
+    width: 30px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+
+.btn-campaign{
+    margin-left: 2%;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #e6b573;
+} 
+.nav-pag{
+    margin-left: 50%;
+}
+
+.nav-pag  .page-link{
+    color: #272727;
+}
+
+.alert{
+    z-index: 5px;
+    margin-top: 5%;
+    margin-left: 35%;
+    width: 50% !important;
+}
