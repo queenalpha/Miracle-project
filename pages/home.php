@@ -3,6 +3,8 @@
 $title = "Miracle - Home";
 $prevent = 'guest';
 include('../server/connection.php');
+var_dump($_SESSION);
+die();
 ?>
 <!-- Logic -->
 <?php
