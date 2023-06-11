@@ -28,32 +28,28 @@ if (isset($_POST['btn_regist'])) {
     <img src="../assets/image/Login form img.jpg" class="form-img" alt="">
     <div class="form-content">
         <div class="form-text register">
-            <form method="POST" action="Register.php" class="form-login row gy-3 w-50">
-                <h3>Register to Miracle</h3>
+            <h3>Register to Miracle</h3>
+            <form method="POST" action="Register.php" class="form-login">
                 <div>
-                    <input class="form-control" type="username" name="nama_akun" value="" placeholder="Masukan Nama"
-                        required>
+                    <input type="username" name="nama_akun" value="" placeholder="Masukan Nama" required>
                 </div>
                 <div>
-                    <input class="form-control" type="email" name="email_akun" value="" placeholder="Masukan Email"
-                        required>
+                    <input type="email" name="email_akun" value="" placeholder="Masukan Email" required>
                 </div>
                 <div>
-                    <input class="form-control" type="password" name="pass_akun" value="" placeholder="Masukan Password"
-                        required>
+                    <input type="password" name="pass_akun" value="" placeholder="Masukan Password" required>
                 </div>
                 <div>
-                    <input class="form-control" type="tel" name="Telephone" value="" placeholder="Masukan Telephone">
+                    <input type="tel" name="Telephone" value="" placeholder="Masukan Telephone">
                 </div>
                 <div>
                     <?php if (isset($_GET['alert'])) {
                         echo $_GET['alert'];
-                    } ?>
-                    <input class="form-control" type="submit" name="btn_regist" value="Register">
+                    }
+                    ?>
+                    <input type="submit" name="btn_regist" value="Register">
                 </div>
-                <div>
-                    Sudah punyak akun? <a href="login.php" class=""> Login</a>
-                </div>
+                Sudah punyak akun? <a href="login.php" class=""> Login</a>
             </form>
         </div>
     </div>
