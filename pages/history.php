@@ -52,7 +52,8 @@ $result3 = mysqli_query($conn, $query3);
                         <a class="me-3 text-decoration-none" target="_blank"
                             href="<?= "../assets/image/profile/" . $row['account_avatar'] ?>">
                             <img src="<?= "../assets/image/profile/" . $row['account_avatar'] ?>"
-                                class="img-thumbnail object-fit-cover dt-thumbnail" alt="<?= $row['account_name'] ?>">
+                                class="img-thumbnail object-fit-cover dt-thumbnail" alt="<?= $row['account_name'] ?>"
+                                style="width:42px;height:42px;">
                         </a>
                         <?= $row['account_name']; ?>
                     </td>
@@ -60,7 +61,8 @@ $result3 = mysqli_query($conn, $query3);
                         <a class="me-3 text-decoration-none" target="_blank"
                             href="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>">
                             <img src="<?= "../assets/image/campaign/" . $row['campaign_thumbnail'] ?>"
-                                class="img-thumbnail object-fit-cover dt-thumbnail" alt="<?= $row['campaign_name'] ?>">
+                                class="img-thumbnail object-fit-cover dt-thumbnail" alt="<?= $row['campaign_name'] ?>"
+                                style="width:42px;height:42px;">
                         </a>
                         <?= $row['campaign_name']; ?>
                     </td>
