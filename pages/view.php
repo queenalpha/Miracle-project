@@ -122,37 +122,21 @@ if (isset($_POST['edit-campaign'])) {
                                                         echo 'disabled';
                                                     } ?> value="<?= $row['account_phone'] ?>" required>
                                             </div>
-                                            <div class="col col-12 col-md-5">
-                                                <label for="f-1" class="form-label">Email</label>
-                                                <input name="email" type="text" id="f-1" class="form-control"
-                                                    placeholder="Enter data..." <?php if (!isset($_GET['editable'])) {
-                                                        echo 'disabled';
-                                                    } ?> value="<?= $row['account_email'] ?>" required>
-                                            </div>
-                                            <div class="col col-12 col-md-5">
-                                                <label for="f-2" class="form-label">Password</label>
-                                                <input name="password" type="password" id="f-2" class="form-control"
-                                                    placeholder="Enter data..." <?php if (!isset($_GET['editable'])) {
-                                                        echo 'disabled';
-                                                    } ?> value="<?= $row['account_password'] ?>" required>
-                                            </div>
-                                            <!-- ini yang lama masih disimpan buat jaga2 -->
-                                            <!-- <div class="col col-12 col-md-5">
-                                            <input type="hidden" name="id" value="<?= $row['account_id'] ?>">
+                                            <div class="col col-12 col-md-6">
+                                                <input type="hidden" name="id" value="<?= $row['account_id'] ?>">
                                                 <label for="f-3" class="form-label">Email</label>
                                                 <input name="email" type="email" id="f-3" class="form-control"
                                                     placeholder="Enter data..." <?php if (!isset($_GET['editable'])) {
                                                         echo 'disabled';
                                                     } ?> value="<?= $row['account_email'] ?>" required>
-                                            </div> -->
-                                            <!-- <div class="col col-12 col-sm-5">
+                                            </div>
+                                            <div class="col col-12 col-sm-6">
                                                 <label for="f-4" class="form-label">Password</label>
                                                 <input name="password" type="password" id="f-4" class="form-control"
                                                     placeholder="Enter data..." <?php if (!isset($_GET['editable'])) {
                                                         echo 'disabled';
                                                     } ?> value="<?= $row['account_password'] ?>" required>
-                                            </div> -->
-                                            <!-- --- -->
+                                            </div>
                                             <div class="col col-12" <?php if (!isset($_GET['editable'])) {
                                                 echo 'style="display:none;"';
                                             } ?>>

@@ -5,12 +5,113 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
-$from_campaign = "SELECT * FROM campaigns order by campaign_id LIMIT 9";
-$result_camp = mysqli_query($conn, $from_campaign);
-?>
+$query = "SELECT * FROM campaigns order by campaign_id LIMIT 9";
+$result = mysqli_query($conn, $query);
 
+if (isset($_POST['send-donate'])) {
+    $account = $_POST['account'];
+    $campaign = $_POST['campaign'];
+    $amount = $_POST['amount'];
+    $query = "INSERT INTO `donations` (`donation_account`, `donation_campaign`, `donation_date`, `donation_amount`) VALUES ('$account', '$campaign', now(), '$amount')";
+}
+
+?>
 <?php include('../components/header.php'); ?>
 <?php include('../components/js.php'); ?>
+<!-- Modal Data Donatur -->
+<div class="modal fade" id="modalDonasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Ayo
+                    berdonasi
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" action="#">
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama</label>
+                        <div class="col-sm-20">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="judul"
+                                placeholder="Masukan nama">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Email</label>
+                        <div class="col-sm-20">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="harga"
+                                placeholder="Masukan Email">
+                        </div>
+                        <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Telphone</label>
+                        <div class="col-sm-20 mb-2">
+                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm" name="harga"
+                                placeholder="Masukan Telephone">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#transaksi" data-bs-toggle="modal">
+                            <button type="submit" class="btn-donasi" name="add-donatur">Save</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Transaksi -->
+<div class="modal fade" id="transaksi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Ayo
+                    berdonasi
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" action="">
+                    <?php
+                    if (isset($_SESSION['logged_in'])) {
+                        ?>
+                        <div class="payment">
+                            <button class="btn-pay">15.000</button>
+                            <button class="btn-pay">20.000</button>
+                            <button class="btn-pay">25.000</button>
+                            <button class="btn-pay mb-3">30.000</button>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-20 mb-3">
+                                <input type="text" class="form-control form-control-sm pay-input" id="colFormLabelSm"
+                                    name="judul" placeholder="Masukan Donasi Anda">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn-donasi mt-3" data-bs-toggle="modal" data-bs-target="#transaksi"
+                                value="Donate">
+                        </div>
+                        <?php
+                    } else { ?>
+                        <div class="payment">
+                            <button class="btn-pay">15.000</button>
+                            <button class="btn-pay">20.000</button>
+                            <button class="btn-pay">25.000</button>
+                            <button class="btn-pay mb-3">30.000</button>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-20 mb-3">
+                                <input type="text" class="form-control form-control-sm pay-input" id="colFormLabelSm"
+                                    name="judul" placeholder="Masukan Donasi Anda">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn-donasi mt-3" data-bs-toggle="modal" data-bs-target="#transaksi"
+                                value="Donate">
+                        </div>
+                    <?php } ?>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <main>
     <!-- Home donation -->
     <section class="open-donation md-5">
@@ -129,7 +230,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
                 <!-- Campaigns Card -->
                 <div class="col col-12 col-md-9">
                     <div class="row g-4">
-                        <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
+                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
                             <div class=" col-12 col-md-6 col-lg-4">
                                 <div class="card">
                                     <img src="<?= '../assets/image/campaign/' . $row['campaign_thumbnail'] ?>"
@@ -148,8 +249,11 @@ $result_camp = mysqli_query($conn, $from_campaign);
                                         <div class="row mt-3">
                                             <div class="col">
                                                 <button type="button" class="btn-donasi" data-bs-toggle="modal"
-                                                    data-bs-target="#modalDonasi">
-                                                    Donate
+                                                    data-bs-target="#modalDonasi" data-id="<?= $row['campaign_id'] ?>" <?php
+                                                      if (!isset($_SESSION['logged_in'])) {
+                                                          ?>data-sender="guest" <?php
+                                                      } else { ?>data-sender="authenticated" <?php } ?>>
+                                                    Kirim Donasi
                                                 </button>
                                             </div>
                                         </div>
@@ -158,85 +262,6 @@ $result_camp = mysqli_query($conn, $from_campaign);
                                 </a>
                             </div>
                         <?php endwhile; ?>
-                    </div>
-                </div>
-                <!-- Modal Data Donatur -->
-                <div class="modal fade" id="modalDonasi" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Ayo
-                                    berdonasi
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="POST" enctype="multipart/form-data" action="#">
-                                    <div class="form-group row">
-                                        <label for="colFormLabelSm"
-                                            class="col-sm-20 col-form-label col-form-label-sm">Nama</label>
-                                        <div class="col-sm-20">
-                                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                                name="judul" placeholder="Masukan nama">
-                                        </div>
-                                        <label for="colFormLabelSm"
-                                            class="col-sm-20 col-form-label col-form-label-sm">Email</label>
-                                        <div class="col-sm-20">
-                                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                                name="harga" placeholder="Masukan Email">
-                                        </div>
-                                        <label for="colFormLabelSm"
-                                            class="col-sm-20 col-form-label col-form-label-sm">Telphone</label>
-                                        <div class="col-sm-20 mb-2">
-                                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                                                name="harga" placeholder="Masukan Telephone">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="#transaksi" data-bs-toggle="modal">
-                                            <button type="submit" class="btn-donasi" name="add-donatur">Save</button>
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Transaksi -->
-                <div class="modal fade" id="transaksi" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title text-center justify-content-center" id="exampleModalLabel">Ayo
-                                    berdonasi
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="POST" enctype="multipart/form-data" action="#">
-                                    <div class="payment">
-                                        <button class="btn-pay">15.000</button>
-                                        <button class="btn-pay">20.000</button>
-                                        <button class="btn-pay">25.000</button>
-                                        <button class="btn-pay mb-3">30.000</button>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-20 mb-3">
-                                            <input type="text" class="form-control form-control-sm pay-input"
-                                                id="colFormLabelSm" name="judul" placeholder="Masukan Donasi Anda">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="submit" class="btn-donasi mt-3" data-bs-toggle="modal"
-                                            data-bs-target="#transaksi" value="Donate">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                     </div>
                 </div>
     </section>
