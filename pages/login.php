@@ -18,7 +18,7 @@ if (isset($_POST['login'])) {
             $_SESSION['level'] = $row['account_level'];
             $_SESSION['logged_in'] = true;
         }
-        header('Location: ../pages/home.php');
+        header('Location: ../pages/admin.php');
         exit();
     } else {
         header('Location: ../pages/login.php?error=Akun salah atau tidak ditemukan!');
