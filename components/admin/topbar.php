@@ -14,6 +14,10 @@
             <li>
                 <hr class="dropdown-divider" />
             </li>
+            <li><a class="dropdown-item" href="home.php">Back to Home</a></li>
+            <li>
+                <hr class="dropdown-divider" />
+            </li>
             <li><a class="dropdown-item text-danger" href="../server/logout.php">Logout</a></li>
         </ul>
     </div>

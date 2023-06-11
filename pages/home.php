@@ -6,7 +6,7 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
-$query = "SELECT * FROM campaigns ORDER BY campaign_end desc LIMIT 3";
+$query = "SELECT * FROM campaigns WHERE campaign_approval IS NOT NULL ORDER BY campaign_end desc LIMIT 3";
 $result = mysqli_query($conn, $query);
 
 if (isset($_POST['donate'])) {
@@ -218,7 +218,7 @@ if (isset($_POST['donate'])) {
     <p>
       Create a miracle for someone who still wants to keep fighting
     </p>
-    <a href="donate.php" type="button" class="btn btn-outline-light">
+    <a href="campaigns.php" type="button" class="btn btn-outline-light">
       Donation
     </a>
     <a href="campaign.php" type="button" class="btn btn-outline-light">
