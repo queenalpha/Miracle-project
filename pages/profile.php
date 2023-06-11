@@ -11,7 +11,7 @@ $target = $_SESSION['id'];
 $query = "SELECT * FROM accounts WHERE account_id = $target";
 $result = mysqli_query($conn, $query);
 
-if (isset($_POST['edit-profile'])) {
+if (isset($_POST['edit'])) {
 
     $id = $_POST['id'];
     $name = $_POST['name'];
@@ -20,95 +20,68 @@ if (isset($_POST['edit-profile'])) {
     $avatar = $_FILES['avatar']['name'];
     $temp = explode(".", $avatar);
     $storename = preg_replace('/\s+/', '_', $id . '_' . $name) . '.' . end($temp);
-
-    $query = "UPDATE `accounts` SET `account_name` = '$name', `account_email` = '$email',  `account_phone` = '$phone', `account_avatar` = '$storename', 
-    WHERE `accounts`.`account_id` = $id";
-
+    $query = "UPDATE `accounts` SET `account_name` = '$name', `account_email` = '$email', `account_password` = '$password', `account_phone` = '$phone', `account_avatar` = '$storename', `account_level` = '$level' WHERE `accounts`.`account_id` = $id";
     if (mysqli_query($conn, $query)) {
         move_uploaded_file($_FILES["avatar"]["tmp_name"], "../assets/image/profile/" . $storename);
-        if (mysqli_query($conn, $query)) {
-            move_uploaded_file($_FILES["avatar"]["tmp_name"], "../assets/image/profile/" . $storename);
-            header('Location: ../pages/profile.php?account=' . $id);
-        }
-
+        header('Location: ../pages/profile.php?account=' . $id);
     }
 }
-// if (isset($_POST['edit-profile'])) {
-
-// $id_akun = $_POST['id'];
-// $nama_akun = $_POST['name'];
-// $email_akun = $_POST['email'];
-// $Telephone = $_POST['phone'];
-// $path = "../Assets/images/" . basename($_FILES['avatar']['name']);
-// $image = $_FILES['avatar']['name'];
-
-// move_uploaded_file($_FILES['avatar']['name'], $path);
-
-// $query = "UPDATE accounts SET account_name = '$nama_akun', account_email = '$email_akun', account_phone = '$Telephone', account_avatar = '$image' WHERE account_id = '$id_akun'";
-// if (mysqli_query($conn, $query)) {
-//     $success = true;
-// } else {
-//     $success = false;
-// }
-// header("Location: profile.php?updated=$success");
-// }
 ?>
 <!-- UI -->
-<link rel="stylesheet" href="../Assets/css/profile.css">
+<link rel="stylesheet" href="../assets/css/profile.css">
 <?php include('../components/header.php'); ?>
 <?php include('../components/sidebar.php'); ?>
 
 <div class="container profile">
-    <div class="profile-content d-flex">
-        <div>
-            <img src="../Assets/image/profile/team-2.jpg" class="profile-img object-fit-cover" width="120px"
-                height="120px" alt="">
-        </div>
-
-        <div class="bio">
-            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+        <div class="profile-content d-flex">
+            <div>
+                <img id="preview" src="<?php if (!empty($row['account_avatar'])) {
+                    echo "../assets/image/profile/" . $row['account_avatar'];
+                } else {
+                    echo "../assets/image/profile/placeholder.png";
+                }
+                ?>" class="profile-img object-fit-cover" width="120px" height="120px">
+            </div>
+            <div class="bio">
                 <h4>
-                    <?php echo $row['account_name'] ?>
+                    <?= $row['account_name'] ?>
                 </h4>
                 <h6>
-                    <?php echo $row['account_phone'] ?>
+                    <?= $row['account_phone'] ?>
                 </h6>
-
-
                 <p>#temanbaik #BeMiracle</p>
             </div>
         </div>
-
         <!-- edit profile -->
         <div class="form-profile">
             <form method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?php echo $row['account_id']; ?>">
+                <input required type="hidden" name="id" value="<?= $row['account_id']; ?>">
                 <div class="form-row">
                     <div class="d-flex px-3 col-5">
-                        <input type="username" class="form-control" name="name" value="<?php echo $row['account_name']; ?>"
+                        <input required type="text" class="form-control" name="name" value="<?= $row['account_name']; ?>"
                             placeholder="Masukan Nama">
                     </div>
                     <div class="d-flex px-3 col-5">
-                        <input type="email" class="form-control" name="email" value="<?php echo $row['account_email']; ?>"
+                        <input required type="email" class="form-control" name="email" value="<?= $row['account_email']; ?>"
                             placeholder="Masukan Email">
                     </div>
                 </div>
                 <div class="form-row mt-3">
                     <div class="d-flex px-3 col-5">
-                        <input type="tel" class="form-control" name="phone" value="<?php echo $row['account_phone']; ?>"
+                        <input required type="tel" class="form-control" name="phone" value="<?= $row['account_phone']; ?>"
                             placeholder="Masukan Telephone">
                     </div>
                     <div class="px-3 mt-2 col-5">
-                        <input type="file" class="form-control" name="avatar" placeholder="Masukan Photo">
+                        <input id="uploadPicture" required type="file" class="form-control" name="avatar"
+                            placeholder="Masukan Photo">
                     </div>
                 </div>
-            <?php endwhile; ?>
-            <button class="edit-btn" name="edit-profile">Edit Profile</button>
-        </form>
-    </div>
-
+                <button class="edit-btn" name="edit">Edit Profile</button>
+            </form>
+        </div>
+    <?php endwhile; ?>
     <!-- alert -->
-
     <?php
     if (isset($_GET["updated"]) && $_GET["updated"] == true) {
         ?>
@@ -127,4 +100,13 @@ if (isset($_POST['edit-profile'])) {
 </div>
 
 <?php include('../components/js.php'); ?>
+<script>
+    uploadPicture.onchange = evt => {
+        const [file] = uploadPicture.files
+        if (file) {
+            $("#preview").show();
+            preview.src = URL.createObjectURL(file)
+        }
+    }
+</script>
 <?php include('../components/close.php'); ?>

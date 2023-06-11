@@ -213,22 +213,6 @@ section .heart{
     border-bottom: 2px solid black;
 }
 
-/* ini buat di login form */
-input[type=username],
-input[type=email],
-input[type=password],
-input[type=tel],
-input[type=submit]{
-    width: 120%;
-    padding: 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
-
-input[type=submit]{
-    padding: 5px;
-}
-
 .register{
     margin-top: -35px;
 }

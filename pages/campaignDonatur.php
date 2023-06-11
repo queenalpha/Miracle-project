@@ -97,10 +97,5 @@ $result3 = mysqli_query($conn, $query3);
 
 </div>
 
-
-
-
-
-
 <?php include('../components/js.php'); ?>
 <?php include('../components/close.php'); ?>
