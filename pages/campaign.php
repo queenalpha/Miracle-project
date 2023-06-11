@@ -14,19 +14,19 @@ include('../server/connection.php');
 $daftar_campaign = "SELECT * FROM campaigns order by campaign_id desc LIMIT 4";
 $result_list = mysqli_query($conn, $daftar_campaign);
 if (isset($_POST['btn-campaign'])) {
+    $me = $_SESSION['id'];
     $campaign_name = $_POST['name'];
     $keterangan = $_POST['description'];
     $event_start = $_POST['start'];
     $event_end = $_POST['end'];
     $target_donasi = $_POST['target'];
-    $path = "../assets/image" . basename($_FILES['thumbnail']['name']);
-    $foto_campaign = $_FILES['thumbnail']['name'];
-    $me = $_SESSION['id'];
-    move_uploaded_file($_FILES['campaign_thumbnail']['tmp_name'], $path);
-
+    $thumbnail = $_FILES['thumbnail']['name'];
+    $temp = explode(".", $thumbnail);
+    $storename = preg_replace('/\s+/', '_', $me . '_' . $campaign_name) . '.' . end($temp);
     $buat_campaign = "INSERT INTO campaigns
-                    Values (null,'$campaign_name','$keterangan','$event_start','$event_end','$foto_campaign','$target_donasi','$me',null)";
+                    Values (null,'$campaign_name','$keterangan','$event_start','$event_end','$storename','$target_donasi','$me',null)";
     if (mysqli_query($conn, $buat_campaign)) {
+        move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "../assets/image/campaign/" . $storename);
         $success = true;
     } else {
         $success = false;
@@ -256,10 +256,12 @@ if (isset($_GET['campaign']) && isset($_GET['delete'])) {
                     <!-- <td>Approved</td> -->
                     <td colspan="2" class="col-2 text-center">
                         <div class="action">
-                            <a href="" class="a-edit text-decoration-none" data-bs-toggle="modal"
-                                data-bs-target="#updateModal" data-campaign="<?= $row['campaign_id']; ?>">
-                                Edit
-                            </a>
+                            <?php if (empty($row['campaign_approval'])) { ?>
+                                <a href="#" class="a-edit text-decoration-none" data-bs-toggle="modal"
+                                    data-bs-target="#updateModal" data-campaign="<?= $row['campaign_id']; ?>">
+                                    Edit
+                                </a>
+                            <?php } ?>
                             <a href="" class="a-hapus text-decoration-none" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal">
                                 Hapus
