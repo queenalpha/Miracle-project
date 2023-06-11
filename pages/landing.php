@@ -88,34 +88,35 @@ $result_camp = mysqli_query($conn, $from_campaign);
         <div class="text-center my-5">
             <h2>Open Donation</h2>
             <small class="text-muted fst-italic">Be a miracle foreach others</small>
-        </div>
-        <div class="row align-items-center" id="donasi">
-            <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
-                <div class="col-12 col-md-12 col-lg-4 mb-5">
-                    <div class="card p-1 h-100">
-                        <img src="<?= $row['campaign_thumbnail'] ?>" class="card-img-top object-fit-cover" width="100%"
-                            height="201px" alt="">
-                        <div class="card-body">
-                            <h5 class="card-tittle">
-                                <?= $row['campaign_name'] ?>
-                            </h5>
-                            <p class="card-text">
-                                <?= $row['campaign_description'] ?>
-                            </p>
-                            <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                                aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar" style="width: 15%"></div>
+            <div class="row align-items-center" id="donasi">
+                <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
+                    <div class="col-12 col-md-12 col-lg-4 mb-5">
+                        <div class="card p-1 h-100">
+                            <img src="<?= '../assets/image/campaign/' . $row['campaign_thumbnail'] ?>"
+                                class="card-img-top object-fit-cover" width="100%" height="201px" alt="">
+                            <div class="card-body">
+                                <h5 class="card-tittle">
+                                    <?= $row['campaign_name'] ?>
+                                </h5>
+                                <p class="card-text">
+                                    <?= $row['campaign_description'] ?>
+                                </p>
+                                <div class="progress my-2" role="progressbar">
+                                    <div class="progress-bar" style="width: 15%"></div>
+                                </div>
+                                <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
+                                        <?= number_format($row['campaign_target']) ?>
+                                    </small></p>
+                                <button type="button" class="btn-donasi" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Donate
+                                </button>
                             </div>
-                            <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
-                                    <?= number_format($row['campaign_target']) ?>
-                                </small></p>
-                            <button type="button" class="btn-donasi" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Donate
-                            </button>
                         </div>
                     </div>
-                </div>
-            <?php endwhile; ?>
+                <?php endwhile; ?>
+                <a class="btn btn-primary" href="../pages/campaigns.php" role="button">Tampilkan Semua</a>
+            </div>
         </div>
     </section>
     <section class="container">

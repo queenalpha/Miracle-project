@@ -93,8 +93,8 @@ $result_camp = mysqli_query($conn, $from_campaign);
       <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
         <div class="col-12 col-md-12 col-lg-4 mb-5">
           <div class="card p-1 h-100">
-            <img src="<?= $row['campaign_thumbnail'] ?>" class="card-img-top object-fit-cover" width="100%" height="201px"
-              alt="thumbnail campaign">
+            <img src="<?= '../assets/image/campaign/' . $row['campaign_thumbnail'] ?>"
+              class="card-img-top object-fit-cover" width="100%" height="201px" alt="thumbnail campaign">
             <div class="card-body">
               <h5 class="card-tittle">
                 <?= $row['campaign_name'] ?>
@@ -116,6 +116,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
           </div>
         </div>
       <?php endwhile; ?>
+      <a class="btn btn-primary" href="../pages/campaigns.php" role="button">Tampilkan Semua</a>
     </div>
   </section>
   <section class="container">
