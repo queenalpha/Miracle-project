@@ -88,7 +88,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
         <div class="text-center my-5">
             <h2>Open Donation</h2>
             <small class="text-muted fst-italic">Be a miracle foreach others</small>
-            <div class="row align-items-center" id="donasi">
+            <div class="row align-items-center mt-5" id="donasi">
                 <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
                     <div class="col-12 col-md-12 col-lg-4 mb-5">
                         <div class="card p-1 h-100">
@@ -109,7 +109,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
                                     </small></p>
                                 <button type="button" class="btn-donasi" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
-                                    Donate
+                                    Kirim Donasi
                                 </button>
                             </div>
                         </div>

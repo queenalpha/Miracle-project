@@ -240,6 +240,12 @@ footer {
     padding: 50px;
 }
 
+nav.nav-pag{
+    margin-top: 5%;
+    margin-left: 50% !important;
+    margin-bottom: 10%;
+}
+
 /* dt */
 
 .progress {

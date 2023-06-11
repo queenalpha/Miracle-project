@@ -110,7 +110,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
                 <?= number_format($row['campaign_target']) ?>
               </p>
               <button type="button" class="btn-donasi" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Donate
+                Kirim Donasi
               </button>
             </div>
           </div>
