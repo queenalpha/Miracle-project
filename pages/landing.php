@@ -201,11 +201,7 @@ if (isset($_POST['donate'])) {
                                     <strong>
                                         Rp.
                                         <?= number_format($row['campaign_target']) ?>
-                                    </small></p>
-                                <button type="button" class="btn-donasi" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    Donate
-                                </button>
+                                </small></p>
                             </div>
                             <button type="button" class="donate btn-donasi" data-bs-toggle="modal" data-bs-target="#modal"
                                 data-campaign="<?= $row['campaign_id'] ?>" data-account="<?php
