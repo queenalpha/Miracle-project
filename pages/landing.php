@@ -64,8 +64,8 @@ $result_camp = mysqli_query($conn, $from_campaign);
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-20 mb-3">
-                            <input type="text" class="form-control form-control-sm pay-input" id="colFormLabelSm" name="judul"
-                                placeholder="Masukan Donasi Anda">
+                            <input type="text" class="form-control form-control-sm pay-input" id="colFormLabelSm"
+                                name="judul" placeholder="Masukan Donasi Anda">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -109,7 +109,20 @@ $result_camp = mysqli_query($conn, $from_campaign);
                         </div>
                     </div>
                 </div>
-            <?php endwhile; ?>
+                <div class="progress my-2" role="progressbar" aria-label="Basic example" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: 15%"></div>
+                </div>
+                <p class="card-text font-size-20"><small>(angka terkumpul) dari Rp
+                        <?= number_format($row['campaign_target']) ?>
+                    </small></p>
+                <button type="button" class="btn-donasi" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Donate
+                </button>
+            </div>
+            </div>
+            </div>
+        <?php endwhile; ?>
         </div>
     </section>
     <section class="container">
@@ -189,6 +202,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 </main>
 <?php include('../components/footer.php'); ?>

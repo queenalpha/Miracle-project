@@ -5,7 +5,7 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
-$from_campaign = "SELECT * FROM campaigns";
+$from_campaign = "SELECT * FROM campaigns order by campaign_id LIMIT 9";
 $result_camp = mysqli_query($conn, $from_campaign);
 ?>
 
