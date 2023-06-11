@@ -19,13 +19,13 @@ if (isset($_POST['btn-campaign'])) {
     $event_start = $_POST['start'];
     $event_end = $_POST['end'];
     $target_donasi = $_POST['target'];
-    $path = "../Assets/image" . basename($_FILES['thumbnail']['name']);
+    $path = "../assets/image" . basename($_FILES['thumbnail']['name']);
     $foto_campaign = $_FILES['thumbnail']['name'];
-
+    $me = $_SESSION['id'];
     move_uploaded_file($_FILES['campaign_thumbnail']['tmp_name'], $path);
 
     $buat_campaign = "INSERT INTO campaigns
-                    Values (null,'$campaign_name','$keterangan','$event_start','$event_end','$foto_campaign','$target_donasi',null,null)";
+                    Values (null,'$campaign_name','$keterangan','$event_start','$event_end','$foto_campaign','$target_donasi','$me',null)";
     if (mysqli_query($conn, $buat_campaign)) {
         $success = true;
     } else {
@@ -110,7 +110,7 @@ if (isset($_POST['btn-campaign'])) {
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">#</th>
                 <th scope="col">Campaign</th>
                 <th scope="col">Tanggal Mulai</th>
                 <th scope="col">Tanggal Akhir</th>
@@ -122,25 +122,43 @@ if (isset($_POST['btn-campaign'])) {
         </thead>
         <tbody>
             <!-- TODO : LIMIT 4 BARIS AJA -->
-            <?php while ($row = mysqli_fetch_assoc($result_list)): ?>
+            <?php $i = 0;
+            while ($row = mysqli_fetch_assoc($result_list)):
+                $i++; ?>
                 <tr>
                     <th scope="row">
-                        <?php echo $row['campaign_id']; ?>
+                        <?= $i; ?>
                     </th>
                     <td class="table-campaign">
-                        <?php echo $row['campaign_name']; ?>
+                        <?= $row['campaign_name']; ?>
                     </td>
                     <td class="table-campaign">
-                        <?php echo $row['campaign_start']; ?>
+                        <?= $row['campaign_start']; ?>
                     </td>
                     <td class="table-campaign">
-                        <?php echo $row['campaign_end']; ?>
+                        <?= $row['campaign_end']; ?>
                     </td>
                     <td class="table-campaign">
-                        <?php echo number_format($row['campaign_target']); ?>
+                        <?= 'Rp. ' . number_format($row['campaign_target']) . ',-'; ?>
                     </td>
-                    <td class="table-campaign">///</td>
-                    <td class="table-campaign">Process</td>
+                    <td class="table-campaign">
+                        <?php
+                        $target = $row['campaign_id'];
+                        $sum = "SELECT sum(donation_amount) FROM `donations` WHERE donations.donation_campaign = $target";
+                        $terkumpul = mysqli_fetch_array(mysqli_query($conn, $sum));
+                        echo 'Rp. ' . number_format($terkumpul[0]) . ',-';
+                        ?>
+                    </td>
+                    <td class="table-campaign">
+                        <?php
+                        if ($row['campaign_approval'] == 2) {
+                            echo "Diselesaikan";
+                        } else if ($row['campaign_approval'] == 1) {
+                            echo "Disetujui";
+                        } else {
+                            echo "Belum Disetujui";
+                        } ?>
+                    </td>
                     <!-- <td>Approved</td> -->
                     <td colspan="2" class="col-2 text-center">
                         <div class="action">
@@ -255,46 +273,46 @@ if (isset($_POST['btn-campaign'])) {
     </ul>
 </nav>
 
-    <!-- alert -->
-    <?php
-    if (isset($_GET["created"]) && $_GET["created"] == true) {
+<!-- alert -->
+<?php
+if (isset($_GET["created"]) && $_GET["created"] == true) {
     ?>
     <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
         Yeay! Campaign kamu berhasil dibuat!
         <a href="campaign.php" class="btn-close"></a>
     </div>
-    <?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
+<?php } else if (isset($_GET["created"]) && $_GET["created"] == false) { ?>
         <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
             Yah, Campaign kamu gagal ditambahkan..
             <a href="campaign.php" class="btn-close"></a>
         </div>
-    <?php }
+<?php }
 
-    if (isset($_GET["updated"]) && $_GET["updated"] == true) {
+if (isset($_GET["updated"]) && $_GET["updated"] == true) {
     ?>
-        <div id="alert" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            Campaign kamu berhasil di update!
-            <a href="index.php" class="btn-close"></a>
-        </div>
-    <?php } else if (isset($_GET["updated"]) && $_GET["updated"] == false) { ?>
+    <div id="alert" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        Campaign kamu berhasil di update!
+        <a href="index.php" class="btn-close"></a>
+    </div>
+<?php } else if (isset($_GET["updated"]) && $_GET["updated"] == false) { ?>
         <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
             Gagal memperbarui campaign kamu..
             <a href="index.php" class="btn-close"></a>
         </div>
-    <?php }
-    if (isset($_GET["deleted"]) && $_GET["deleted"] == true) {
+<?php }
+if (isset($_GET["deleted"]) && $_GET["deleted"] == true) {
     ?>
-        <div id="alert" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            Campaign berhasil dihapus!!
-            <a href="index.php" class="btn-close"></a>
-        </div>
-    <?php } else if (isset($_GET["deleted"]) && $_GET["deleted"] == false) { ?>
+    <div id="alert" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        Campaign berhasil dihapus!!
+        <a href="index.php" class="btn-close"></a>
+    </div>
+<?php } else if (isset($_GET["deleted"]) && $_GET["deleted"] == false) { ?>
         <div id="alert" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
             Campaign kamu gagal dihapus...
             <a href="index.php" class="btn-close"></a>
         </div>
-    <?php } 
-    ?>
+<?php }
+?>
 
 
 </div>
