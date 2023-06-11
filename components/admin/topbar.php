@@ -8,8 +8,9 @@
                 height="42px" />
         </button>
         <ul class="dropdown-menu" style="z-index:10000;">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="manage.php?manage=accounts">Manage Accounts</a></li>
+            <li><a class="dropdown-item" href="manage.php?manage=campaigns">Manage Campaigns</a></li>
+            <li><a class="dropdown-item" href="manage.php?manage=donations">Donations Transactions</a></li>
             <li>
                 <hr class="dropdown-divider" />
             </li>
