@@ -34,27 +34,27 @@ if (isset($_POST['btn-campaign'])) {
 
     header("Location: campaign.php?created=$success");
 }
-if (isset($_POST['edit-campaign'])) {
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $start = $_POST['start'];
-    $end = $_POST['end'];
-    $target = $_POST['target'];
+if (isset($_POST['edit'])) {
+    $id = $_POST['edit'];
+    $campaign_name = $_POST['name'];
+    $keterangan = $_POST['description'];
+    $event_start = $_POST['start'];
+    $event_end = $_POST['end'];
+    $target_donasi = $_POST['target'];
     $thumbnail = $_FILES['thumbnail']['name'];
     $temp = explode(".", $thumbnail);
-    $storename = preg_replace('/\s+/', '_', $id . '_' . $name) . '.' . end($temp);
-    $query = "UPDATE `campaigns` SET `campaign_name` = '$name', `campaign_description` = '$description', `campaign_start` = '$start', `campaign_end` = '$end', `campaign_thumbnail` = '$storename', `campaign_target` = '$target' WHERE `campaigns`.`campaign_id` = $id";
+    $storename = preg_replace('/\s+/', '_', $me . '_' . $campaign_name) . '.' . end($temp);
+    $query = "UPDATE `campaigns` SET `campaign_name` = '$campaign_name', `campaign_description` = '$keterangan', `campaign_start` = '$event_start', `campaign_end` = '$event_end', `campaign_thumbnail` = '$storename', `campaign_target` = '$target_donasi' WHERE `campaigns`.`campaign_id` = $id";
     if (mysqli_query($conn, $query)) {
         move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "../assets/image/campaign/" . $storename);
         header('Location: ../pages/view.php?campaign=' . $id);
     }
 }
-if (isset($_GET['campaign']) && isset($_GET['delete'])) {
-    $target = $_GET['campaign'];
+if (isset($_GET['finish'])) {
+    $target = $_GET['finish'];
     $query = "UPDATE `campaigns` SET `campaign_approval` = '2' WHERE `campaigns`.`campaign_id` = $target";
     if (mysqli_query($conn, $query)) {
-        header('Location: ../pages/manage.php?manage=campaigns');
+        header('Location: ../pages/campaign.php');
         exit();
     }
 }
@@ -129,6 +129,7 @@ if (isset($_GET['campaign']) && isset($_GET['delete'])) {
             </div>
             <div class="modal-body">
                 <form method="POST" enctype="multipart/form-data" action="">
+                    <input id="campaignEditID" type="hidden" name="id" value="">
                     <div class="form-group row">
                         <label for="colFormLabelSm" class="col-sm-20 col-form-label col-form-label-sm">Nama
                             Campaign</label>
@@ -176,18 +177,17 @@ if (isset($_GET['campaign']) && isset($_GET['delete'])) {
 </div>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="finishCampaign" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Mau hapus campaign ini?</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Selesaikan campaign ini?</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a type="submit" class="btn btn-danger" href="#">Delete</a>
+                <a id="finishBtn" type="submit" class="btn btn-primary" href="#">Selesaikan</a>
             </div>
         </div>
     </div>
@@ -227,10 +227,10 @@ if (isset($_GET['campaign']) && isset($_GET['delete'])) {
                         <?= $row['campaign_name']; ?>
                     </td>
                     <td class="table-campaign">
-                        <?= $row['campaign_start']; ?>
+                        <?= date("d F Y", strtotime($row['campaign_start'])); ?>
                     </td>
                     <td class="table-campaign">
-                        <?= $row['campaign_end']; ?>
+                        <?= date("d F Y", strtotime($row['campaign_end'])); ?>
                     </td>
                     <td class="table-campaign">
                         <?= 'Rp. ' . number_format($row['campaign_target']) . ',-'; ?>
@@ -261,11 +261,13 @@ if (isset($_GET['campaign']) && isset($_GET['delete'])) {
                                     data-bs-target="#updateModal" data-campaign="<?= $row['campaign_id']; ?>">
                                     Edit
                                 </a>
+                            <?php } else if ($row['campaign_approval'] != '2') { ?>
+                                    <a href="#" class="a-hapus text-decoration-none" data-bs-toggle="modal"
+                                        data-bs-target="#finishCampaign" data-campaign="<?= $row['campaign_id']; ?>">
+                                        Selesaikan
+                                    </a>
                             <?php } ?>
-                            <a href="" class="a-hapus text-decoration-none" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal">
-                                Hapus
-                            </a>
+
                         </div>
                     </td>
                 </tr>
@@ -338,4 +340,12 @@ if (isset($_GET['campaign']) && isset($_GET['delete'])) {
 </div>
 
 <?php include('../components/js.php'); ?>
+<script>
+    $(".a-hapus").on("click", function () {
+        $("#finishBtn").attr("href", "../pages/campaign.php?finish=" + $(this).data('campaign'));
+    });
+    $(".a-edit").on("click", function () {
+        $("#campaignEditID").val($(this).data('campaign'));
+    });
+</script>
 <?php include('../components/close.php'); ?>
