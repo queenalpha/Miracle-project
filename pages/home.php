@@ -5,7 +5,7 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
-$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 3";
+$from_campaign = "SELECT * FROM campaigns ORDER BY campaign_id desc LIMIT 16";
 $result_camp = mysqli_query($conn, $from_campaign);
 ?>
 
@@ -169,7 +169,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
   </div>
 
   <!-- quantity of user and donatur -->
-  <div class="container my-5">
+  <section class="container my-5">
     <div class="row">
       <div class="col">
         <div class="card py-4">
@@ -227,7 +227,7 @@ $result_camp = mysqli_query($conn, $from_campaign);
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
 </main>
 <?php include('../components/footer.php'); ?>

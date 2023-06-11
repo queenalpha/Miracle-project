@@ -38,7 +38,7 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
     ORDER BY donations.donation_date DESC";
     $result3 = mysqli_query($conn, $query3);
 } else {
-    $query3 = "SELECT donations.donation_date, accounts.account_name, accounts.account_avatar, campaigns.campaign_name, campaigns.campaign_thumbnail, donations.donation_amount
+    $query3 = "SELECT donations.donation_id, donations.donation_date, accounts.account_name, accounts.account_avatar, campaigns.campaign_name, campaigns.campaign_thumbnail, donations.donation_amount
     FROM donations
     JOIN accounts ON accounts.account_id=donations.donation_account
     JOIN campaigns ON campaigns.campaign_id=donations.donation_campaign
@@ -112,7 +112,8 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                         <?= $row['account_phone'] ?>
                                     </td>
                                     <td class="col align-item-center pe-5">
-                                        <a class="btn btn-secondary w-100" href="#">
+                                        <a class="btn btn-secondary w-100"
+                                            href="../pages/view.php?account=<?= $row['account_id'] ?>">
                                             Edit
                                         </a>
                                     </td>
@@ -197,12 +198,20 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                             . ",-" ?>
                                     </td>
                                     <td class="col align-item-center pe-5">
-                                        <a class="my-2 btn btn-primary" href="#">
-                                            Approve
-                                        </a>
-                                        <a class="my-2 btn btn-danger" href="#">
-                                            Hapus
-                                        </a>
+                                        <div class="row">
+                                            <div class="col col-12 col-xl-6">
+                                                <a class="btn btn-primary my-1 w-100"
+                                                    href="../pages/view.php?campaign=<?= $row['campaign_id'] ?>&approve=true">
+                                                    Approve
+                                                </a>
+                                            </div>
+                                            <div class="col col-12 col-xl-6">
+                                                <a class="btn btn-secondary my-1 w-100"
+                                                    href="../pages/view.php?campaign=<?= $row['campaign_id'] ?>">
+                                                    Detail
+                                                </a>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -276,8 +285,9 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                         ,-
                                     </td>
                                     <td class="col align-item-center pe-5">
-                                        <a class="btn btn-secondary w-100" href="#">
-                                            Detail Donasi
+                                        <a class="btn btn-primary my-1 w-100"
+                                            href="../pages/view.php?donation=<?= $row['donation_id'] ?>">
+                                            Detail
                                         </a>
                                     </td>
                                 </tr>
