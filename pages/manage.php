@@ -10,9 +10,10 @@ if (!isset($_GET['manage'])) {
     header('Location: ../pages/admin.php');
     exit();
 }
+
 if (isset($_GET['manage']) && isset($_POST['campaign'])) {
     $target = $_POST['campaign'];
-    $query1 = "SELECT *  FROM `campaigns` WHERE `campaign_name` LIKE '%$target%' OR `campaign_description` LIKE '%$target%' OR `campaign_start` LIKE '%$target%' OR `campaign_end` LIKE '%$target%' ORDER BY campaign_id desc";
+    $query1 = "SELECT *  FROM `campaigns` WHERE (`campaign_name` LIKE '%$target%' OR `campaign_description` LIKE '%$target%' OR `campaign_start` LIKE '%$target%' OR `campaign_end` LIKE '%$target%') ORDER BY campaign_id desc";
     $result1 = mysqli_query($conn, $query1);
 } else {
     $query1 = "SELECT * FROM campaigns ORDER BY campaign_id desc";
@@ -21,10 +22,10 @@ if (isset($_GET['manage']) && isset($_POST['campaign'])) {
 
 if (isset($_GET['manage']) && isset($_POST['account'])) {
     $target = $_POST['account'];
-    $query2 = "SELECT *  FROM `accounts` WHERE `account_id` != 1 AND `account_id` != 2 AND (`account_name` LIKE '%$target%' OR `account_email` LIKE '%$target%' OR `account_phone` LIKE '%$target%') ORDER BY account_id desc";
+    $query2 = "SELECT *  FROM `accounts` WHERE `account_level` != 'deactive' AND (`account_id` != 1 AND `account_id` != 2) AND (`account_name` LIKE '%$target%' OR `account_email` LIKE '%$target%' OR `account_phone` LIKE '%$target%') ORDER BY account_id desc";
     $result2 = mysqli_query($conn, $query2);
 } else {
-    $query2 = "SELECT * FROM accounts WHERE `account_id` != 1 AND `account_id` != 2 ORDER BY account_name asc";
+    $query2 = "SELECT * FROM accounts WHERE `account_level` != 'deactive' AND (`account_id` != 1 AND `account_id` != 2) ORDER BY account_name asc";
     $result2 = mysqli_query($conn, $query2);
 }
 
@@ -166,10 +167,12 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                     </th>
                                     <td class="col align-item-center">
                                         <?php
-                                        if (empty($row['campaign_approval'])) {
-                                            echo "Belum Disetujui";
-                                        } else {
+                                        if ($row['campaign_approval'] == 2) {
+                                            echo "Diselesaikan";
+                                        } else if ($row['campaign_approval'] == 1) {
                                             echo "Disetujui";
+                                        } else {
+                                            echo "Belum Disetujui";
                                         } ?>
                                     </td>
                                     <td class="col align-item-center">
@@ -208,14 +211,20 @@ if (isset($_GET['manage']) && isset($_POST['donation'])) {
                                     </td>
                                     <td class="col align-item-center pe-5">
                                         <div class="row">
-                                            <div class="col col-12 col-xl-6">
-                                                <a class="approve btn btn-primary my-1 w-100"
-                                                    data-id="<?= $row['campaign_id'] ?>"
-                                                    data-name="<?= $row['campaign_name'] ?>">
-                                                    Approve
-                                                </a>
-                                            </div>
-                                            <div class="col col-12 col-xl-6">
+                                            <?php
+                                            if ($row['campaign_approval'] != 1) {
+                                                ?>
+                                                <div class="col">
+                                                    <a class="approve btn btn-primary my-1 w-100"
+                                                        data-id="<?= $row['campaign_id'] ?>"
+                                                        data-name="<?= $row['campaign_name'] ?>">
+                                                        Approve
+                                                    </a>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            <div class="col">
                                                 <a class="btn btn-secondary my-1 w-100"
                                                     href="../pages/view.php?campaign=<?= $row['campaign_id'] ?>">
                                                     Detail

@@ -11,6 +11,14 @@ if (isset($_GET['account']) && !empty($_GET['account'])) {
     $query = "SELECT * FROM accounts WHERE account_id = $target";
     $result = mysqli_query($conn, $query);
 }
+if (isset($_GET['account']) && isset($_GET['delete'])) {
+    $target = $_GET['account'];
+    $query = "UPDATE `accounts` SET `account_level` = 'deactive' WHERE `accounts`.`account_id` = $target";
+    if (mysqli_query($conn, $query)) {
+        header('Location: ../pages/manage.php?manage=accounts');
+        exit();
+    }
+}
 if (isset($_GET['campaign']) && !empty($_GET['campaign'])) {
     $target = $_GET['campaign'];
     $query = "SELECT * FROM campaigns WHERE campaign_id = $target";
@@ -21,6 +29,14 @@ if (isset($_GET['campaign']) && isset($_GET['approve'])) {
     $query = "UPDATE `campaigns` SET `campaign_approval` = '1' WHERE `campaigns`.`campaign_id` = $target";
     if (mysqli_query($conn, $query)) {
         header('Location: ../pages/view.php?campaign=' . $target);
+        exit();
+    }
+}
+if (isset($_GET['campaign']) && isset($_GET['delete'])) {
+    $target = $_GET['campaign'];
+    $query = "UPDATE `campaigns` SET `campaign_approval` = '2' WHERE `campaigns`.`campaign_id` = $target";
+    if (mysqli_query($conn, $query)) {
+        header('Location: ../pages/manage.php?manage=campaigns');
         exit();
     }
 }
@@ -138,7 +154,7 @@ if (isset($_POST['edit-campaign'])) {
                                                 if (isset($_GET['editable']) && $_GET['editable'] == true) {
                                                     ?>
                                                     <input name="edit-account" type="submit" class="btn btn-primary w-100"
-                                                        value="Save">
+                                                        value="Simpan Edit">
                                                     <?php
                                                 } else {
                                                     ?>
@@ -161,9 +177,11 @@ if (isset($_POST['edit-campaign'])) {
                                                     <?php
                                                 } else {
                                                     ?>
-                                                    <a class="btn btn-danger w-100"
-                                                        href="../pages/view.php?account=<?= $row['account_id'] ?>&editable=true">
-                                                        Hapus
+                                                    <a class="delete btn btn-danger w-100" data-type="account"
+                                                        data-title="Hapus Akun <?= $row['account_name'] ?>?"
+                                                        data-description="Apakah anda yakin untuk mendeaktivasi akun ini?"
+                                                        data-id="<?= $row['account_id'] ?>">
+                                                        Hapus Akun
                                                     </a>
                                                     <?php
                                                 }
@@ -240,12 +258,12 @@ if (isset($_POST['edit-campaign'])) {
                                                     type="file" name="thumbnail" accept="image/*" required>
                                             </div>
                                             <?php
-                                            if (!isset($_GET['editable'])) {
+                                            if (!isset($_GET['editable']) && empty($row['campaign_id'])) {
                                                 ?>
                                                 <div class="col col-12 col-md-4">
                                                     <a class="btn btn-primary w-100"
                                                         href="../pages/view.php?campaign=<?= $row['campaign_id'] ?>&approve=true">
-                                                        Approve
+                                                        Setujui Campaign
                                                     </a>
                                                 </div>
                                                 <?php
@@ -255,7 +273,7 @@ if (isset($_POST['edit-campaign'])) {
                                                 if (isset($_GET['editable']) && $_GET['editable'] == true) {
                                                     ?>
                                                     <input name="edit-campaign" type="submit" class="btn btn-primary w-100"
-                                                        value="Save">
+                                                        value="Simpan Edit">
                                                     <?php
                                                 } else {
                                                     ?>
@@ -278,9 +296,11 @@ if (isset($_POST['edit-campaign'])) {
                                                     <?php
                                                 } else {
                                                     ?>
-                                                    <a class="btn btn-danger w-100"
-                                                        href="../pages/view.php?campaign=<?= $row['campaign_id'] ?>&editable=true">
-                                                        Hapus
+                                                    <a class="delete btn btn-primary w-100" data-type="campaign"
+                                                        data-title="Selesaikan Campaign <?= $row['campaign_name'] ?>?"
+                                                        data-description="Apakah anda yakin untuk menyelesaikan campaign ini?"
+                                                        data-id="<?= $row['campaign_id'] ?>">
+                                                        Selesaikan Campaign
                                                     </a>
                                                     <?php
                                                 }
@@ -316,5 +336,19 @@ if (isset($_POST['edit-campaign'])) {
             preview.src = URL.createObjectURL(file)
         }
     }
+    $(".delete").click(function () {
+        Swal.fire({
+            title: $(this).data("title"),
+            text: $(this).data("description"),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Ya, lakukan!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../pages/view.php?" + $(this).data("type") + "=" + $(this).data("id") + " & delete=true";
+            }
+        });
+    })
 </script>
 <?php include('../components/close.php'); ?>
