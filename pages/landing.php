@@ -170,7 +170,7 @@ if (isset($_POST['donate'])) {
             <h2>Open Donation</h2>
             <small class="text-muted fst-italic">Be a miracle foreach others</small>
         </div>
-        <div class="row align-items-center" id="donasi">
+        <div class="row align-items-center mt-5" id="donasi">
             <?php while ($row = mysqli_fetch_assoc($result_camp)): ?>
                 <div class="col-12 col-md-12 col-lg-4 mb-5">
                     <div class="card p-1 h-100">
@@ -201,9 +201,11 @@ if (isset($_POST['donate'])) {
                                     <strong>
                                         Rp.
                                         <?= number_format($row['campaign_target']) ?>
-                                        ,-
-                                    </strong>
-                                </small>
+                                    </small></p>
+                                <button type="button" class="btn-donasi" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Donate
+                                </button>
                             </div>
                             <button type="button" class="donate btn-donasi" data-bs-toggle="modal" data-bs-target="#modal"
                                 data-campaign="<?= $row['campaign_id'] ?>" data-account="<?php

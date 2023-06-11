@@ -38,7 +38,8 @@
 }
 
 .footer-content{
-    margin-top: 90%;
+    flex-direction: row;
+    align-items: self-end;
     padding: 0;
     width: 100%;
     border-top: 2px solid #b3b3b3;

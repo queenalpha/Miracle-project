@@ -5,7 +5,7 @@ include('../server/connection.php');
 ?>
 <!-- Logic -->
 <?php
-$query = "SELECT * FROM campaigns order by campaign_id";
+$query = "SELECT * FROM campaigns order by campaign_id LIMIT 12";
 $result = mysqli_query($conn, $query);
 
 if (isset($_POST['donate'])) {
@@ -339,8 +339,29 @@ if (isset($_POST['donate'])) {
                 </div>
             </div>
         </div>
-    </section>
 
+    </section>
+    <nav aria-label="Page navigation example" class="nav-pag">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     <?php include('../components/footer.php'); ?>
     <script>
         $('#custom').on('input', function (e) {
